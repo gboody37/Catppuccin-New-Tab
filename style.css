@@ -735,41 +735,23 @@ body[data-theme="latte"] .bg-overlay {
     gap: 1rem;
 }
 
-.shortcut-item {
-    position: relative;
+.shortcut-item,
+a.shortcut-item,
+a.shortcut-item:visited,
+a.shortcut-item:link {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    width: 82px;
-    text-decoration: none;
-    transition: all 0.25s ease;
-}
-
-.shortcut-icon {
-    width: 60px;
-    height: 60px;
-    background: var(--bg-glass-card);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--border-glass);
-    border-radius: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.6rem;
-    color: var(--cat-mauve);
+    gap: 0.6rem;
+    background: var(--cat-surface0);
+    border: 1px solid var(--cat-surface1);
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    color: var(--cat-text) !important;
+    text-decoration: none !important;
     font-size: 0.9rem;
     font-weight: 500;
     position: relative;
     transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.shortcut-item:hover {
-    transform: translateY(-2px);
-    background: var(--cat-surface1);
-    border-color: var(--cat-mauve);
-    box-shadow: 0 4px 14px var(--accent-glow);
 }
 
 .shortcut-icon {
@@ -782,6 +764,16 @@ body[data-theme="latte"] .bg-overlay {
 .shortcut-icon .svg-icon {
     width: 18px;
     height: 18px;
+}
+
+.shortcut-title {
+    color: var(--cat-subtext1) !important;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.shortcut-item:hover .shortcut-title {
+    color: var(--cat-text) !important;
 }
 
 .shortcut-actions {
@@ -818,6 +810,25 @@ body[data-theme="latte"] .bg-overlay {
 
 .action-shortcut-btn.delete:hover {
     color: var(--cat-red);
+}
+
+.icon-preview-box {
+    width: 44px;
+    height: 44px;
+    background: var(--cat-surface0);
+    border: 1px solid var(--cat-mauve);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cat-mauve);
+    box-shadow: 0 0 12px var(--accent-glow);
+    flex-shrink: 0;
+}
+
+.icon-preview-box .svg-icon {
+    width: 22px;
+    height: 22px;
 }
 
 .add-shortcut-btn {

@@ -232,30 +232,32 @@
                     <input type="url" id="shortcutUrl" placeholder="https://github.com" required>
                 </div>
                 <div class="form-group">
-                    <label for="shortcutIcon">Icon Type</label>
-                    <select id="shortcutIcon" style="background: var(--cat-base); color: var(--cat-text); border: 1px solid var(--cat-surface0); padding: 0.6rem; border-radius: 10px; width: 100%;">
-                        <option value="youtube">📺 YouTube</option>
-                        <option value="github">🐱 GitHub</option>
-                        <option value="reddit">🤖 Reddit</option>
-                        <option value="chatgpt">🤖 ChatGPT / AI</option>
-                        <option value="twitter">🐦 Twitter / X</option>
-                        <option value="twitch">💜 Twitch</option>
-                        <option value="spotify">🎵 Spotify</option>
-                        <option value="google">🔍 Google Search</option>
-                        <option value="discord">💬 Discord</option>
-                        <option value="netflix">🍿 Netflix</option>
-                        <option value="instagram">📷 Instagram</option>
-                        <option value="steam">🎮 Steam</option>
-                        <option value="amazon">🛒 Amazon</option>
-                        <option value="wikipedia">📚 Wikipedia</option>
-                        <option value="mail">✉️ Gmail / Email</option>
-                        <option value="code">💻 Developer / Code</option>
-                        <option value="anime">🌸 Anime / AniList</option>
-                        <option value="music">🎧 Music & Audio</option>
-                        <option value="news">📰 News & Blogs</option>
-                        <option value="terminal">⚡ Terminal / Shell</option>
-                        <option value="link">🔗 Generic Bookmark</option>
-                    </select>
+                    <label for="shortcutIcon">Icon Selection & Live Preview</label>
+                    <div class="icon-select-row" style="display: flex; gap: 0.8rem; align-items: center;">
+                        <select id="shortcutIcon" style="flex: 1; background: var(--cat-base); color: var(--cat-text); border: 1px solid var(--cat-surface0); padding: 0.65rem; border-radius: 10px;">
+                            <option value="youtube">YouTube</option>
+                            <option value="github">GitHub</option>
+                            <option value="reddit">Reddit</option>
+                            <option value="gemini">Gemini AI</option>
+                            <option value="twitter">Twitter / X</option>
+                            <option value="kick">Kick</option>
+                            <option value="google">Google Search</option>
+                            <option value="discord">Discord</option>
+                            <option value="netflix">Netflix</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="steam">Steam</option>
+                            <option value="amazon">Amazon</option>
+                            <option value="wikipedia">Wikipedia</option>
+                            <option value="mail">Gmail / Email</option>
+                            <option value="code">Developer / Code</option>
+                            <option value="anime">Anime / AniList</option>
+                            <option value="music">Music & Audio</option>
+                            <option value="news">News & Blogs</option>
+                            <option value="terminal">Terminal / Shell</option>
+                            <option value="link">Generic Link</option>
+                        </select>
+                        <div id="iconPreviewBox" class="icon-preview-box" title="Selected Icon Preview"></div>
+                    </div>
                 </div>
                 <div class="modal-actions">
                     <button type="button" class="btn-cancel" id="closeModalBtn">Cancel</button>
