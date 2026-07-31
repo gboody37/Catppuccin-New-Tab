@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; background: #1e1e2e; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        canvas { border: 1px solid #333; }
+    </style>
+</head>
+<body>
+    <canvas id="c" width="600" height="400"></canvas>
+    <script>
+        const lines = [
+            '  /\\_/\\',
+            ' ( . . )',
+            '  | ~ |',
+            'じしf_,)ノ'
+        ];
+
+        document.fonts.ready.then(() => {
+            const c = document.getElementById('c');
+            const ctx = c.getContext('2d');
+
+            // Fill background
+            ctx.fillStyle = '#1e1e2e';
+            ctx.fillRect(0, 0, c.width, c.height);
+
+            // Glow pass
+            ctx.font = '700 48px "JetBrains Mono", monospace';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = '#cba6f7';
+            ctx.shadowBlur = 30;
+            ctx.fillStyle = '#cdd6f4';
+
+            const lineH = 60;
+            const startY = (c.height - lines.length * lineH) / 2 + lineH / 2;
+
+            for (let i = 0; i < lines.length; i++) {
+                const y = startY + i * lineH;
+                ctx.fillText(lines[i], c.width / 2, y);
+                ctx.fillText(lines[i], c.width / 2, y);
+            }
+
+            // Download as PNG
+            const link = document.createElement('a');
+            link.download = 'zei-cat.png';
+            link.href = c.toDataURL('image/png');
+            link.click();
+
+            document.body.innerHTML = '<p style="color:#cdd6f4;font-family:sans-serif;text-align:center;margin-top:40px;">PNG downloaded! Copy zei-cat.png to e:\\Catppuccin-New-Tab\\</p>' + document.body.innerHTML;
+        });
+    </script>
+</body>
+</html>

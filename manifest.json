@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Catppuccin Bongo New Tab",
+  "version": "1.0.0",
+  "description": "A sleek, minimal Catppuccin-themed New Tab page featuring an interactive typing Bongo Cat, multi-engine search, widgets, and scratchpad.",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_title": "Catppuccin Bongo New Tab"
+  }
+}

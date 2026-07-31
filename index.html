@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="mocha" data-mode="ascii">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab | Catppuccin</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="has-bg-image">
+    <!-- Animated Video / Wallpaper / Canvas & Overlay -->
+    <video id="bgVideo" class="bg-video hidden" autoplay loop muted playsinline></video>
+    <div class="bg-wallpaper" id="bgWallpaper"></div>
+    <canvas id="bgCanvas"></canvas>
+    <div class="bg-overlay"></div>
+
+    <div class="app-container">
+        <!-- Top Bar Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <!-- Theme Flavor Selector -->
+                <div class="theme-selector">
+                    <button class="theme-btn active" data-flavor="mocha" title="Catppuccin Mocha (Dark)">
+                        <span class="dot mocha-dot"></span> Mocha
+                    </button>
+                    <button class="theme-btn" data-flavor="macchiato" title="Catppuccin Macchiato">
+                        <span class="dot macchiato-dot"></span> Macchiato
+                    </button>
+                    <button class="theme-btn" data-flavor="frappe" title="Catppuccin Frappé">
+                        <span class="dot frappe-dot"></span> Frappé
+                    </button>
+                    <button class="theme-btn" data-flavor="latte" title="Catppuccin Latte (Light)">
+                        <span class="dot latte-dot"></span> Latte
+                    </button>
+                </div>
+            </div>
+
+            <div class="header-right">
+                <!-- Mode Toggle (Zei ASCII Cat vs Bongo Cat) -->
+                <div class="mode-selector">
+                    <button class="mode-btn active" id="modeAsciiBtn" title="Zei's ASCII Cat Mode">
+                        <span class="mode-tag">ASCII Cat</span>
+                    </button>
+                    <button class="mode-btn" id="modeBongoBtn" title="Bongo Cat Mode">
+                        <span class="mode-tag">Bongo Cat</span>
+                    </button>
+                </div>
+
+                <!-- Weather Widget -->
+                <div class="weather-widget" id="weatherWidget">
+                    <span class="weather-icon-box" id="weatherIcon">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.02-.39-1.41 0zm-12.37 12.37l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0z"/></svg>
+                    </span>
+                    <div class="weather-info">
+                        <span class="weather-temp" id="weatherTemp">--°C</span>
+                        <span class="weather-city" id="weatherCity">Loading...</span>
+                    </div>
+                </div>
+
+                <!-- Header Tools Controls -->
+                <div class="header-tools">
+                    <button class="tool-btn" id="toggleSoundBtn" title="Toggle Typing Sound">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                    </button>
+                    <button class="tool-btn" id="toggleWallpaperBtn" title="Toggle Wallpaper Image">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </button>
+                    <button class="tool-btn" id="toggleNotesBtn" title="Quick Notes">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    </button>
+                    <button class="tool-btn" id="openSettingsBtn" title="Settings">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Center -->
+        <main class="main-content">
+            <!-- Zei's Exact Cat Picture -->
+            <div class="ascii-cat-container" id="asciiCatContainer">
+                <img id="catImage" class="cat-image" alt="ASCII Cat" src="zei_cat_exact.png">
+            </div>
+
+            <!-- Bongo Cat SVG Animation -->
+            <div class="bongo-container hidden" id="bongoCatContainer">
+                <svg id="bongoCat" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="30" y="240" width="440" height="20" rx="6" class="desk-top" />
+                    <rect x="50" y="260" width="16" height="50" class="desk-leg" />
+                    <rect x="434" y="260" width="16" height="50" class="desk-leg" />
+                    <g class="laptop-group">
+                        <polygon points="170,238 330,238 350,248 150,248" class="laptop-base" />
+                        <rect x="220" y="242" width="60" height="3" rx="1" class="trackpad" />
+                        <rect x="180" y="239" width="140" height="3" class="keyboard-glow" />
+                        <polygon points="180,238 320,238 310,150 190,150" class="laptop-screen" />
+                        <polygon points="185,235 315,235 306,155 194,155" class="laptop-display" />
+                        <circle cx="250" cy="195" r="7" class="laptop-logo" />
+                        <path d="M 246,195 A 4,4 0 0,1 254,195" fill="none" stroke="var(--cat-base)" stroke-width="2" />
+                    </g>
+                    <g class="cat-body-group">
+                        <path id="catTail" d="M 120,220 Q 90,200 85,170 Q 80,140 95,150 Q 100,165 110,210 Z" class="cat-tail" />
+                        <path d="M 130,240 C 120,180 140,120 250,110 C 360,120 380,180 370,240 Z" class="cat-body" />
+                        <polygon points="160,135 140,75 195,115" class="cat-ear" />
+                        <polygon points="163,130 148,85 188,115" class="cat-ear-inner" />
+                        <polygon points="340,135 360,75 305,115" class="cat-ear" />
+                        <polygon points="337,130 352,85 312,115" class="cat-ear-inner" />
+                        <g id="catHeadGroup" class="cat-head">
+                            <ellipse cx="190" cy="165" rx="12" ry="7" class="cat-blush" />
+                            <ellipse cx="310" cy="165" rx="12" ry="7" class="cat-blush" />
+                            <g id="eyesOpen">
+                                <circle id="eyeLeft" cx="205" cy="150" r="10" class="cat-eye" />
+                                <circle id="pupilLeft" cx="205" cy="150" r="4" class="cat-pupil" />
+                                <circle cx="202" cy="147" r="2.5" class="cat-eye-shine" />
+                                <circle id="eyeRight" cx="295" cy="150" r="10" class="cat-eye" />
+                                <circle id="pupilRight" cx="295" cy="150" r="4" class="cat-pupil" />
+                                <circle cx="292" cy="147" r="2.5" class="cat-eye-shine" />
+                            </g>
+                            <g id="eyesHappy" class="hidden">
+                                <path d="M 195,152 Q 205,140 215,152" fill="none" stroke="var(--cat-crust)" stroke-width="4.5" stroke-linecap="round" />
+                                <path d="M 285,152 Q 295,140 305,152" fill="none" stroke="var(--cat-crust)" stroke-width="4.5" stroke-linecap="round" />
+                            </g>
+                            <g id="eyesSleepy" class="hidden">
+                                <path d="M 195,148 Q 205,158 215,148" fill="none" stroke="var(--cat-subtext0)" stroke-width="4" stroke-linecap="round" />
+                                <path d="M 285,148 Q 295,158 305,148" fill="none" stroke="var(--cat-subtext0)" stroke-width="4" stroke-linecap="round" />
+                                <text x="330" y="120" class="zzz-text">z Z Z</text>
+                            </g>
+                            <path id="catMouth" d="M 240,162 Q 250,172 250,162 Q 250,172 260,162" fill="none" stroke="var(--cat-crust)" stroke-width="3.5" stroke-linecap="round" />
+                            <path id="catMouthOpen" d="M 240,160 Q 250,180 260,160 Z" class="cat-mouth-fill hidden" />
+                            <line x1="165" y1="155" x2="135" y2="150" class="cat-whisker" />
+                            <line x1="165" y1="163" x2="130" y2="165" class="cat-whisker" />
+                            <line x1="335" y1="155" x2="365" y2="150" class="cat-whisker" />
+                            <line x1="335" y1="163" x2="370" y2="165" class="cat-whisker" />
+                        </g>
+                        <g id="pawLeftGroup" class="paw-group paw-up">
+                            <path id="pawLeftUp" d="M 155,200 C 145,185 160,170 175,180 C 185,190 175,225 155,200 Z" class="cat-paw" />
+                            <path id="pawLeftDown" d="M 175,238 C 160,225 185,215 205,230 C 215,238 195,242 175,238 Z" class="cat-paw hidden" />
+                        </g>
+                        <g id="pawRightGroup" class="paw-group paw-up">
+                            <path id="pawRightUp" d="M 345,200 C 355,185 340,170 325,180 C 315,190 325,225 345,200 Z" class="cat-paw" />
+                            <path id="pawRightDown" d="M 325,238 C 340,225 315,215 295,230 C 285,238 305,242 325,238 Z" class="cat-paw hidden" />
+                        </g>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Time & Greeting -->
+            <div class="clock-section">
+                <div class="time-display" id="timeDisplay">00:00</div>
+                <div class="date-display" id="dateDisplay">Loading date...</div>
+                <div class="greeting-display" id="greetingDisplay">Welcome back</div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <form id="searchForm" class="search-form">
+                    <div class="engine-dropdown">
+                        <button type="button" class="engine-current" id="engineBtn" title="Switch Search Engine">
+                            <span id="engineIcon"></span>
+                            <svg class="svg-icon arrow-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                        </button>
+                        <div class="engine-menu" id="engineMenu">
+                            <div class="engine-option active" data-engine="google">
+                                <span class="opt-icon" data-icon="google"></span> Google
+                            </div>
+                            <div class="engine-option" data-engine="duckduckgo">
+                                <span class="opt-icon" data-icon="duckduckgo"></span> DuckDuckGo
+                            </div>
+                            <div class="engine-option" data-engine="youtube">
+                                <span class="opt-icon" data-icon="youtube"></span> YouTube
+                            </div>
+                            <div class="engine-option" data-engine="github">
+                                <span class="opt-icon" data-icon="github"></span> GitHub
+                            </div>
+                            <div class="engine-option" data-engine="reddit">
+                                <span class="opt-icon" data-icon="reddit"></span> Reddit
+                            </div>
+                            <div class="engine-option" data-engine="perplexity">
+                                <span class="opt-icon" data-icon="perplexity"></span> Perplexity AI
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search or type a URL..." autocomplete="off" autofocus>
+                    <button type="submit" class="search-submit-btn" title="Search">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Quick Links / Shortcuts Grid -->
+            <div class="shortcuts-section">
+                <div class="shortcuts-grid" id="shortcutsGrid"></div>
+                <button class="add-shortcut-btn" id="addShortcutBtn" title="Add New Shortcut">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                </button>
+            </div>
+        </main>
+
+        <footer class="bottom-footer">
+            <div class="quote-container" id="quoteContainer">
+                <span class="quote-text" id="quoteText">"Simplicity is the soul of efficiency."</span>
+                <span class="quote-author" id="quoteAuthor">- Austin Freeman</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Quick Notes Sidebar Drawer -->
+    <div class="notes-drawer" id="notesDrawer">
+        <div class="notes-header">
+            <h3><svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg> Scratchpad</h3>
+            <button class="close-notes-btn" id="closeNotesBtn">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
+        </div>
+        <textarea id="notesTextarea" placeholder="Jot down quick thoughts... Saved automatically!"></textarea>
+    </div>
+
+    <!-- Modal for Adding Shortcut -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-card">
+            <h3>Add Shortcut</h3>
+            <form id="addShortcutForm">
+                <div class="form-group">
+                    <label for="shortcutTitle">Title</label>
+                    <input type="text" id="shortcutTitle" placeholder="e.g. GitHub" required>
+                </div>
+                <div class="form-group">
+                    <label for="shortcutUrl">URL</label>
+                    <input type="url" id="shortcutUrl" placeholder="https://github.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="shortcutIcon">Icon Type</label>
+                    <select id="shortcutIcon" style="background: var(--cat-base); color: var(--cat-text); border: 1px solid var(--cat-surface0); padding: 0.6rem; border-radius: 10px; width: 100%;">
+                        <option value="youtube">YouTube</option>
+                        <option value="github">GitHub</option>
+                        <option value="reddit">Reddit</option>
+                        <option value="chatgpt">ChatGPT / AI</option>
+                        <option value="twitter">Twitter / X</option>
+                        <option value="twitch">Twitch</option>
+                        <option value="spotify">Spotify</option>
+                        <option value="google">Google</option>
+                        <option value="link">Generic Bookmark</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" id="closeModalBtn">Cancel</button>
+                    <button type="submit" class="btn-save">Save Shortcut</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Full Settings Modal Overlay -->
+    <div class="modal-overlay" id="settingsModalOverlay">
+        <div class="modal-card settings-card">
+            <div class="modal-header">
+                <h3><svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> Settings</h3>
+                <button class="close-modal-btn" id="closeSettingsModalBtn">&times;</button>
+            </div>
+            <div class="settings-body">
+                <!-- Custom Image/Video Background Section -->
+                <div class="setting-item flex-col align-start">
+                    <div class="setting-info w-full">
+                        <label>Custom Background Wallpaper / Video</label>
+                        <span class="setting-desc">Upload a custom image, GIF, or MP4/WebM video from your PC (Star particles will stay floating on top!)</span>
+                    </div>
+                    <div class="setting-action-row">
+                        <input type="file" id="settingBgFileInput" accept="image/*,video/*" class="hidden">
+                        <button type="button" class="btn-secondary" id="triggerBgUploadBtn">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg> Upload Image / Video File
+                        </button>
+                        <button type="button" class="btn-cancel" id="clearBgBtn">Reset to Default</button>
+                    </div>
+                    <input type="url" id="settingBgUrlInput" class="setting-input w-full" placeholder="Or paste image / video web URL (https://...)">
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="settingCatMode">Cat Companion Mode</label>
+                        <span class="setting-desc">Switch between Zei's ASCII Cat and Bongo Cat</span>
+                    </div>
+                    <select id="settingCatMode" class="setting-select">
+                        <option value="ascii">Zei's ASCII Cat</option>
+                        <option value="bongo">Bongo Cat</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="settingTheme">Catppuccin Palette</label>
+                        <span class="setting-desc">Select your preferred color theme</span>
+                    </div>
+                    <select id="settingTheme" class="setting-select">
+                        <option value="mocha">Mocha (Dark)</option>
+                        <option value="macchiato">Macchiato (Medium Dark)</option>
+                        <option value="frappe">Frappé (Soft Dark)</option>
+                        <option value="latte">Latte (Light)</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="settingClockFormat">Clock Format</label>
+                        <span class="setting-desc">Display time in 24-hour or 12-hour (AM/PM)</span>
+                    </div>
+                    <select id="settingClockFormat" class="setting-select">
+                        <option value="24">24-Hour (15:30)</option>
+                        <option value="12">12-Hour (3:30 PM)</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="settingSoundToggle">Keyboard Sound Effects</label>
+                        <span class="setting-desc">Synthesized mechanical switch audio on keypress</span>
+                    </div>
+                    <label class="switch-toggle">
+                        <input type="checkbox" id="settingSoundToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="settingBgToggle">Enable Background Media Layer</label>
+                        <span class="setting-desc">Show background wallpaper/video image layer</span>
+                    </div>
+                    <label class="switch-toggle">
+                        <input type="checkbox" id="settingBgToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="settingWeatherCity">Weather Location</label>
+                        <span class="setting-desc">Enter manual city name or leave blank for auto-detect</span>
+                    </div>
+                    <input type="text" id="settingWeatherCity" class="setting-input" placeholder="e.g. Tokyo or London">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-save" id="saveSettingsBtn">Save & Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
