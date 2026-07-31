@@ -217,11 +217,12 @@
         <textarea id="notesTextarea" placeholder="Jot down quick thoughts... Saved automatically!"></textarea>
     </div>
 
-    <!-- Modal for Adding Shortcut -->
+    <!-- Modal for Adding / Editing Shortcut -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-card">
-            <h3>Add Shortcut</h3>
+            <h3 id="shortcutModalTitle">Add Shortcut</h3>
             <form id="addShortcutForm">
+                <input type="hidden" id="shortcutEditId" value="">
                 <div class="form-group">
                     <label for="shortcutTitle">Title</label>
                     <input type="text" id="shortcutTitle" placeholder="e.g. GitHub" required>
@@ -233,20 +234,32 @@
                 <div class="form-group">
                     <label for="shortcutIcon">Icon Type</label>
                     <select id="shortcutIcon" style="background: var(--cat-base); color: var(--cat-text); border: 1px solid var(--cat-surface0); padding: 0.6rem; border-radius: 10px; width: 100%;">
-                        <option value="youtube">YouTube</option>
-                        <option value="github">GitHub</option>
-                        <option value="reddit">Reddit</option>
-                        <option value="chatgpt">ChatGPT / AI</option>
-                        <option value="twitter">Twitter / X</option>
-                        <option value="twitch">Twitch</option>
-                        <option value="spotify">Spotify</option>
-                        <option value="google">Google</option>
-                        <option value="link">Generic Bookmark</option>
+                        <option value="youtube">📺 YouTube</option>
+                        <option value="github">🐱 GitHub</option>
+                        <option value="reddit">🤖 Reddit</option>
+                        <option value="chatgpt">🤖 ChatGPT / AI</option>
+                        <option value="twitter">🐦 Twitter / X</option>
+                        <option value="twitch">💜 Twitch</option>
+                        <option value="spotify">🎵 Spotify</option>
+                        <option value="google">🔍 Google Search</option>
+                        <option value="discord">💬 Discord</option>
+                        <option value="netflix">🍿 Netflix</option>
+                        <option value="instagram">📷 Instagram</option>
+                        <option value="steam">🎮 Steam</option>
+                        <option value="amazon">🛒 Amazon</option>
+                        <option value="wikipedia">📚 Wikipedia</option>
+                        <option value="mail">✉️ Gmail / Email</option>
+                        <option value="code">💻 Developer / Code</option>
+                        <option value="anime">🌸 Anime / AniList</option>
+                        <option value="music">🎧 Music & Audio</option>
+                        <option value="news">📰 News & Blogs</option>
+                        <option value="terminal">⚡ Terminal / Shell</option>
+                        <option value="link">🔗 Generic Bookmark</option>
                     </select>
                 </div>
                 <div class="modal-actions">
                     <button type="button" class="btn-cancel" id="closeModalBtn">Cancel</button>
-                    <button type="submit" class="btn-save">Save Shortcut</button>
+                    <button type="submit" class="btn-save" id="saveShortcutBtn">Save Shortcut</button>
                 </div>
             </form>
         </div>

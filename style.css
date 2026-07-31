@@ -759,50 +759,65 @@ body[data-theme="latte"] .bg-overlay {
     align-items: center;
     font-size: 1.6rem;
     color: var(--cat-mauve);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    transition: all 0.25s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    position: relative;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.shortcut-item:hover .shortcut-icon {
-    transform: translateY(-5px);
+.shortcut-item:hover {
+    transform: translateY(-2px);
     background: var(--cat-surface1);
     border-color: var(--cat-mauve);
-    box-shadow: 0 10px 25px var(--accent-glow);
-    color: var(--cat-pink);
+    box-shadow: 0 4px 14px var(--accent-glow);
 }
 
-.shortcut-title {
-    font-size: 0.8rem;
-    color: var(--cat-subtext1);
-    font-weight: 500;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-}
-
-.delete-shortcut-btn {
-    position: absolute;
-    top: -4px;
-    right: 4px;
-    width: 20px;
-    height: 20px;
-    background: var(--cat-red);
-    color: var(--cat-crust);
-    border: none;
-    border-radius: 50%;
-    font-size: 0.65rem;
+.shortcut-icon {
     display: flex;
-    justify-content: center;
     align-items: center;
-    cursor: pointer;
+    justify-content: center;
+    color: var(--cat-mauve);
+}
+
+.shortcut-icon .svg-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.shortcut-actions {
+    display: flex;
+    gap: 0.25rem;
     opacity: 0;
     transition: opacity 0.2s ease;
+    margin-left: 0.3rem;
 }
 
-.shortcut-item:hover .delete-shortcut-btn {
+.shortcut-item:hover .shortcut-actions {
     opacity: 1;
+}
+
+.action-shortcut-btn {
+    background: var(--cat-surface1);
+    border: none;
+    color: var(--cat-subtext0);
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.action-shortcut-btn:hover {
+    background: var(--cat-surface2);
+    color: var(--cat-mauve);
+}
+
+.action-shortcut-btn.delete:hover {
+    color: var(--cat-red);
 }
 
 .add-shortcut-btn {
