@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Catppuccin Bongo New Tab",
-  "version": "1.0.0",
-  "description": "A sleek, minimal Catppuccin-themed New Tab page featuring an interactive typing Bongo Cat, multi-engine search, widgets, and scratchpad.",
+  "version": "1.1.0",
+  "description": "A sleek, minimal Catppuccin-themed New Tab page featuring Zei's ASCII Cat, Bongo Cat, 9 aesthetic color themes, multi-engine search, Gemini AI integration, and ambient audio.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
