@@ -617,12 +617,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const engines = {
         google: { name: 'Google', iconKey: 'google', url: 'https://www.google.com/search?q=' },
+        gemini: { name: 'Gemini AI', iconKey: 'gemini', url: 'https://gemini.google.com/?mode=temporary&text=' },
         duckduckgo: { name: 'DuckDuckGo', iconKey: 'duckduckgo', url: 'https://duckduckgo.com/?q=' },
         youtube: { name: 'YouTube', iconKey: 'youtube', url: 'https://www.youtube.com/results?search_query=' },
         github: { name: 'GitHub', iconKey: 'github', url: 'https://github.com/search?q=' },
         reddit: { name: 'Reddit', iconKey: 'reddit', url: 'https://www.reddit.com/search/?q=' },
-        perplexity: { name: 'Perplexity', iconKey: 'perplexity', url: 'https://www.perplexity.ai/search?q=' },
-        gemini: { name: 'Gemini AI', iconKey: 'gemini', url: 'https://gemini.google.com/?mode=temporary&text=' }
+        perplexity: { name: 'Perplexity', iconKey: 'perplexity', url: 'https://www.perplexity.ai/search?q=' }
     };
 
     function setEngine(engineKey) {
