@@ -1445,6 +1445,46 @@ a.shortcut-item:link {
 
 .gemini-bubble .chat-sender {
     color: var(--cat-mauve);
+}
+
+.gemini-chat-form {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.6rem;
+}
+
+.gemini-chat-input {
+    flex: 1;
+    background: var(--cat-surface0);
+    border: 1px solid var(--cat-surface1);
+    color: var(--cat-text);
+    padding: 0.65rem 0.9rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.gemini-chat-input:focus {
+    border-color: var(--cat-mauve);
+}
+
+.gemini-chat-send-btn {
+    background: var(--cat-mauve);
+    color: var(--cat-crust);
+    border: none;
+    padding: 0.65rem 1.1rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gemini-chat-send-btn:hover {
+    background: var(--cat-pink);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--accent-glow);
 }    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     transform: scale(0.9);
     transition: transform 0.3s ease;

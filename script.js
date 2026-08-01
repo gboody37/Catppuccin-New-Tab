@@ -654,22 +654,57 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gemini Temporary Chat Controller
     const geminiModalOverlay = document.getElementById('geminiModalOverlay');
     const closeGeminiModalBtn = document.getElementById('closeGeminiModalBtn');
-    const geminiUserPromptText = document.getElementById('geminiUserPromptText');
-    const geminiResponseText = document.getElementById('geminiResponseText');
+    const geminiChatMessagesList = document.getElementById('geminiChatMessagesList');
+    const geminiChatForm = document.getElementById('geminiChatForm');
+    const geminiChatInput = document.getElementById('geminiChatInput');
     const openGeminiWebBtn = document.getElementById('openGeminiWebBtn');
 
     let currentGeminiQuery = '';
 
+    function appendChatMessage(sender, text, isUser = false) {
+        if (!geminiChatMessagesList) return;
+        const bubble = document.createElement('div');
+        bubble.className = `chat-bubble ${isUser ? 'user-bubble' : 'gemini-bubble'}`;
+        bubble.innerHTML = `
+            <span class="chat-sender">${sender}</span>
+            <p>${text}</p>
+        `;
+        geminiChatMessagesList.appendChild(bubble);
+        geminiChatMessagesList.scrollTop = geminiChatMessagesList.scrollHeight;
+    }
+
+    function handleGeminiPrompt(userPrompt) {
+        currentGeminiQuery = userPrompt;
+        if (geminiChatMessagesList) geminiChatMessagesList.innerHTML = '';
+        
+        appendChatMessage('You', userPrompt, true);
+        
+        const smartReply = `✨ **Gemini:** Prompt received: "${userPrompt}". Click below to launch direct chat on Gemini Web!`;
+        setTimeout(() => {
+            appendChatMessage('✨ Gemini Assistant', smartReply, false);
+        }, 200);
+    }
+
     if (aiLauncherBtn) {
         aiLauncherBtn.addEventListener('click', () => {
-            const query = searchInput.value.trim();
-            currentGeminiQuery = query || 'Hello Gemini!';
-            
-            if (geminiUserPromptText) geminiUserPromptText.textContent = currentGeminiQuery;
-            if (geminiResponseText) {
-                geminiResponseText.textContent = `✨ Gemini is ready to process: "${currentGeminiQuery}". Launch below to chat live on Gemini!`;
-            }
+            const query = searchInput.value.trim() || 'Hello Gemini!';
+            handleGeminiPrompt(query);
             if (geminiModalOverlay) geminiModalOverlay.classList.add('open');
+        });
+    }
+
+    if (geminiChatForm) {
+        geminiChatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = geminiChatInput.value.trim();
+            if (!text) return;
+            appendChatMessage('You', text, true);
+            currentGeminiQuery = text;
+            geminiChatInput.value = '';
+            
+            setTimeout(() => {
+                appendChatMessage('✨ Gemini Assistant', `✨ Query updated: "${text}". Launch below to open in Google Gemini.`, false);
+            }, 250);
         });
     }
 
