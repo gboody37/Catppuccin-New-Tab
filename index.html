@@ -196,7 +196,7 @@
                 <div class="greeting-display" id="greetingDisplay">Welcome back</div>
             </div>
 
-            <!-- Search Bar with 1-Click Gemini AI Launcher -->
+            <!-- Search Bar with 1-Click Gemini AI Temporary Chat Launcher -->
             <div class="search-container">
                 <form id="searchForm" class="search-form">
                     <div class="engine-dropdown">
@@ -227,8 +227,8 @@
                     </div>
                     <input type="text" id="searchInput" class="search-input" placeholder="Search or type a URL..." autocomplete="off" autofocus>
                     
-                    <!-- 1-Click AI Query Launcher Button -->
-                    <button type="button" class="ai-launcher-btn" id="aiLauncherBtn" title="Ask Gemini AI directly ✨">
+                    <!-- 1-Click AI Query Temporary Chat Button -->
+                    <button type="button" class="ai-launcher-btn" id="aiLauncherBtn" title="Open in Gemini Temporary Chat ✨">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24Z"/></svg>
                     </button>
                     
@@ -253,6 +253,31 @@
                 <span class="quote-author" id="quoteAuthor">- Austin Freeman</span>
             </div>
         </footer>
+    </div>
+
+    <!-- Gemini Temporary Chat Modal Popup -->
+    <div class="modal-overlay" id="geminiModalOverlay">
+        <div class="modal-card gemini-chat-card">
+            <div class="modal-header">
+                <h3><svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24Z"/></svg> Gemini Temporary Chat</h3>
+                <button class="close-modal-btn" id="closeGeminiModalBtn">&times;</button>
+            </div>
+            <div class="gemini-chat-body">
+                <div class="chat-bubble user-bubble">
+                    <span class="chat-sender">You</span>
+                    <p id="geminiUserPromptText">Type your prompt in the search bar above...</p>
+                </div>
+                <div class="chat-bubble gemini-bubble">
+                    <span class="chat-sender">✨ Gemini Assistant</span>
+                    <p id="geminiResponseText">Ready to send your query to Gemini AI temporary chat!</p>
+                </div>
+            </div>
+            <div class="modal-actions flex-between" style="gap: 0.8rem;">
+                <button type="button" class="btn-secondary w-full" id="openGeminiWebBtn">
+                    🚀 Launch Direct in Gemini Web (gemini.google.com)
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- Quick Notes Sidebar Drawer -->

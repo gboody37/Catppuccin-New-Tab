@@ -651,14 +651,45 @@ document.addEventListener('DOMContentLoaded', () => {
         opt.addEventListener('click', () => setEngine(opt.dataset.engine));
     });
 
+    // Gemini Temporary Chat Controller
+    const geminiModalOverlay = document.getElementById('geminiModalOverlay');
+    const closeGeminiModalBtn = document.getElementById('closeGeminiModalBtn');
+    const geminiUserPromptText = document.getElementById('geminiUserPromptText');
+    const geminiResponseText = document.getElementById('geminiResponseText');
+    const openGeminiWebBtn = document.getElementById('openGeminiWebBtn');
+
+    let currentGeminiQuery = '';
+
     if (aiLauncherBtn) {
         aiLauncherBtn.addEventListener('click', () => {
             const query = searchInput.value.trim();
-            if (query) {
-                window.location.href = `https://gemini.google.com/app?q=${encodeURIComponent(query)}`;
-            } else {
-                window.location.href = `https://gemini.google.com/app`;
+            currentGeminiQuery = query || 'Hello Gemini!';
+            
+            if (geminiUserPromptText) geminiUserPromptText.textContent = currentGeminiQuery;
+            if (geminiResponseText) {
+                geminiResponseText.textContent = `✨ Gemini is ready to process: "${currentGeminiQuery}". Launch below to chat live on Gemini!`;
             }
+            if (geminiModalOverlay) geminiModalOverlay.classList.add('open');
+        });
+    }
+
+    if (closeGeminiModalBtn) {
+        closeGeminiModalBtn.addEventListener('click', () => {
+            if (geminiModalOverlay) geminiModalOverlay.classList.remove('open');
+        });
+    }
+
+    if (geminiModalOverlay) {
+        geminiModalOverlay.addEventListener('click', (e) => {
+            if (e.target === geminiModalOverlay) geminiModalOverlay.classList.remove('open');
+        });
+    }
+
+    if (openGeminiWebBtn) {
+        openGeminiWebBtn.addEventListener('click', () => {
+            const url = `https://gemini.google.com/app?prompt=${encodeURIComponent(currentGeminiQuery)}`;
+            window.open(url, '_blank');
+            if (geminiModalOverlay) geminiModalOverlay.classList.remove('open');
         });
     }
 

@@ -1388,7 +1388,64 @@ a.shortcut-item:link {
     padding: 1.8rem;
     width: 100%;
     max-width: 420px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* Gemini Temporary Chat Modal */
+.gemini-chat-card {
+    max-width: 520px !important;
+}
+
+.gemini-chat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.2rem 0;
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 0.4rem;
+}
+
+.chat-bubble {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.chat-sender {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.user-bubble {
+    background: var(--cat-surface1);
+    border: 1px solid var(--cat-surface2);
+    color: var(--cat-text);
+    align-self: flex-end;
+    width: 90%;
+}
+
+.user-bubble .chat-sender {
+    color: var(--cat-subtext0);
+}
+
+.gemini-bubble {
+    background: var(--cat-surface0);
+    border: 1px solid var(--cat-mauve);
+    color: var(--cat-text);
+    align-self: flex-start;
+    width: 100%;
+    box-shadow: 0 0 14px var(--accent-glow);
+}
+
+.gemini-bubble .chat-sender {
+    color: var(--cat-mauve);
+}    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     transform: scale(0.9);
     transition: transform 0.3s ease;
 }
