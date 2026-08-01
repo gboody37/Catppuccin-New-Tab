@@ -117,11 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
         'macchiato': 'Macchiato',
         'frappe': 'Frappé',
         'latte': 'Latte',
-        'forest-green': '🌲 Forest Green',
-        'cozy-orange': '🍊 Cozy Orange',
-        'samurai-red': '⚔️ Samurai Red',
-        'sky-blue': '☁️ Sky Blue',
-        'dark-blue': '🌌 Dark Blue'
+        'forest-green': 'Forest Green',
+        'cozy-orange': 'Cozy Orange',
+        'samurai-red': 'Samurai Red',
+        'sky-blue': 'Sky Blue',
+        'dark-blue': 'Dark Blue'
     };
 
     function applyTheme(themeName) {
