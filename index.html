@@ -227,8 +227,8 @@
                     </div>
                     <input type="text" id="searchInput" class="search-input" placeholder="Search or type a URL..." autocomplete="off" autofocus>
                     
-                    <!-- 1-Click AI Query Temporary Chat Button -->
-                    <button type="button" class="ai-launcher-btn" id="aiLauncherBtn" title="Open in Gemini Temporary Chat ✨">
+                    <!-- 1-Press Direct Gemini AI Launcher Button -->
+                    <button type="button" class="ai-launcher-btn" id="aiLauncherBtn" title="Ask Gemini AI Directly ✨">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24Z"/></svg>
                     </button>
                     
@@ -255,37 +255,7 @@
         </footer>
     </div>
 
-    <!-- Interactive Gemini Temporary Chat Modal -->
-    <div class="modal-overlay" id="geminiModalOverlay">
-        <div class="modal-card gemini-chat-card">
-            <div class="modal-header">
-                <h3><svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24Z"/></svg> Gemini Temporary Chat</h3>
-                <button class="close-modal-btn" id="closeGeminiModalBtn">&times;</button>
-            </div>
-            <div class="gemini-chat-body" id="geminiChatMessagesList">
-                <div class="chat-bubble user-bubble">
-                    <span class="chat-sender">You</span>
-                    <p id="geminiUserPromptText">Type your prompt in the search bar above...</p>
-                </div>
-                <div class="chat-bubble gemini-bubble">
-                    <span class="chat-sender">✨ Gemini Assistant</span>
-                    <p id="geminiResponseText">Ready to assist!</p>
-                </div>
-            </div>
-            
-            <!-- In-Modal Follow-Up Input Form -->
-            <form id="geminiChatForm" class="gemini-chat-form">
-                <input type="text" id="geminiChatInput" class="gemini-chat-input" placeholder="Type a follow-up query to Gemini..." autocomplete="off">
-                <button type="submit" class="gemini-chat-send-btn">Send ✨</button>
-            </form>
-            
-            <div class="modal-actions flex-between" style="gap: 0.8rem; margin-top: 0.8rem;">
-                <button type="button" class="btn-secondary w-full" id="openGeminiWebBtn">
-                    🚀 Launch Prompt Directly on Gemini Web (gemini.google.com)
-                </button>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Quick Notes Sidebar Drawer -->
     <div class="notes-drawer" id="notesDrawer">
