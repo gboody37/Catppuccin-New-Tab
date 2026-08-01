@@ -621,7 +621,8 @@ document.addEventListener('DOMContentLoaded', () => {
         youtube: { name: 'YouTube', iconKey: 'youtube', url: 'https://www.youtube.com/results?search_query=' },
         github: { name: 'GitHub', iconKey: 'github', url: 'https://github.com/search?q=' },
         reddit: { name: 'Reddit', iconKey: 'reddit', url: 'https://www.reddit.com/search/?q=' },
-        perplexity: { name: 'Perplexity', iconKey: 'perplexity', url: 'https://www.perplexity.ai/search?q=' }
+        perplexity: { name: 'Perplexity', iconKey: 'perplexity', url: 'https://www.perplexity.ai/search?q=' },
+        gemini: { name: 'Gemini AI', iconKey: 'gemini', url: 'https://gemini.google.com/?mode=temporary&text=' }
     };
 
     function setEngine(engineKey) {
@@ -651,14 +652,14 @@ document.addEventListener('DOMContentLoaded', () => {
         opt.addEventListener('click', () => setEngine(opt.dataset.engine));
     });
 
-    // 1-Press Direct Gemini AI Launcher
+    // 1-Press Direct Gemini AI Temporary Chat Launcher
     if (aiLauncherBtn) {
         aiLauncherBtn.addEventListener('click', () => {
             const query = searchInput.value.trim();
             if (query) {
-                window.location.href = `https://gemini.google.com/app?prompt=${encodeURIComponent(query)}`;
+                window.location.href = `https://gemini.google.com/?mode=temporary&text=${encodeURIComponent(query)}`;
             } else {
-                window.location.href = `https://gemini.google.com/app`;
+                window.location.href = `https://gemini.google.com/?mode=temporary`;
             }
         });
     }
