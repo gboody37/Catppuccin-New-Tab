@@ -653,16 +653,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 1-Press Direct Gemini AI Temporary Chat Launcher
-    if (aiLauncherBtn) {
-        aiLauncherBtn.addEventListener('click', () => {
-            const query = searchInput.value.trim();
-            if (query) {
-                window.location.href = `https://gemini.google.com/?mode=temporary&text=${encodeURIComponent(query)}`;
-            } else {
-                window.location.href = `https://gemini.google.com/?mode=temporary`;
-            }
-        });
+    function launchGeminiAI() {
+        const query = searchInput.value.trim();
+        if (query) {
+            window.location.href = `https://gemini.google.com/?mode=temporary&text=${encodeURIComponent(query)}`;
+        } else {
+            window.location.href = `https://gemini.google.com/?mode=temporary`;
+        }
     }
+
+    if (aiLauncherBtn) {
+        aiLauncherBtn.addEventListener('click', launchGeminiAI);
+    }
+
+    // Ctrl + G or Cmd + G Shortcut to Open Gemini AI
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'g') {
+            e.preventDefault();
+            launchGeminiAI();
+        }
+    });
 
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
