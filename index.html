@@ -21,20 +21,27 @@
         <!-- Top Bar Header -->
         <header class="top-header">
             <div class="header-left">
-                <!-- Theme Flavor Selector -->
-                <div class="theme-selector">
-                    <button class="theme-btn active" data-flavor="mocha" title="Catppuccin Mocha (Dark)">
-                        <span class="dot mocha-dot"></span> Mocha
+                <!-- Theme Palette Dropdown Switcher (9 Themes) -->
+                <div class="theme-selector-dropdown">
+                    <button class="theme-dropdown-btn" id="themeDropdownBtn" title="Change Theme Palette">
+                        <span class="theme-active-dot" id="themeActiveDot"></span>
+                        <span class="theme-active-label" id="themeActiveLabel">Mocha</span>
+                        <svg class="svg-icon arrow-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                     </button>
-                    <button class="theme-btn" data-flavor="macchiato" title="Catppuccin Macchiato">
-                        <span class="dot macchiato-dot"></span> Macchiato
-                    </button>
-                    <button class="theme-btn" data-flavor="frappe" title="Catppuccin Frappé">
-                        <span class="dot frappe-dot"></span> Frappé
-                    </button>
-                    <button class="theme-btn" data-flavor="latte" title="Catppuccin Latte (Light)">
-                        <span class="dot latte-dot"></span> Latte
-                    </button>
+                    <div class="theme-menu" id="themeMenu">
+                        <div class="theme-menu-group-title">Catppuccin Palettes</div>
+                        <div class="theme-option active" data-flavor="mocha"><span class="dot mocha-dot"></span> Mocha (Dark)</div>
+                        <div class="theme-option" data-flavor="macchiato"><span class="dot macchiato-dot"></span> Macchiato</div>
+                        <div class="theme-option" data-flavor="frappe"><span class="dot frappe-dot"></span> Frappé</div>
+                        <div class="theme-option" data-flavor="latte"><span class="dot latte-dot"></span> Latte (Light)</div>
+                        
+                        <div class="theme-menu-group-title">Custom Aesthetic Themes</div>
+                        <div class="theme-option" data-flavor="forest-green"><span class="dot forest-dot"></span> 🌲 Forest Green</div>
+                        <div class="theme-option" data-flavor="cozy-orange"><span class="dot orange-dot"></span> 🍊 Cozy Orange</div>
+                        <div class="theme-option" data-flavor="samurai-red"><span class="dot samurai-dot"></span> ⚔️ Samurai Red</div>
+                        <div class="theme-option" data-flavor="sky-blue"><span class="dot sky-dot"></span> ☁️ Sky Blue</div>
+                        <div class="theme-option" data-flavor="dark-blue"><span class="dot darkblue-dot"></span> 🌌 Dark Blue</div>
+                    </div>
                 </div>
             </div>
 
@@ -49,19 +56,55 @@
                     </button>
                 </div>
 
-                <!-- Weather Widget -->
-                <div class="weather-widget" id="weatherWidget">
-                    <span class="weather-icon-box" id="weatherIcon">
-                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.02-.39-1.41 0zm-12.37 12.37l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0z"/></svg>
-                    </span>
-                    <div class="weather-info">
-                        <span class="weather-temp" id="weatherTemp">--°C</span>
-                        <span class="weather-city" id="weatherCity">Loading...</span>
+                <!-- Weather Widget & Detailed Popup Card -->
+                <div class="weather-widget-container">
+                    <div class="weather-widget" id="weatherWidget" title="Click for detailed forecast">
+                        <span class="weather-icon-box" id="weatherIcon">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.02-.39-1.41 0zm-12.37 12.37l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0z"/></svg>
+                        </span>
+                        <div class="weather-info">
+                            <span class="weather-temp" id="weatherTemp">--°C</span>
+                            <span class="weather-city" id="weatherCity">Loading...</span>
+                        </div>
+                    </div>
+                    <!-- Detailed Weather Forecast Popup Card -->
+                    <div class="weather-popup-card" id="weatherPopupCard">
+                        <div class="weather-popup-header">
+                            <h4 id="weatherPopupCity">Weather Details</h4>
+                            <span class="weather-condition-tag" id="weatherCondition">Clear Sky</span>
+                        </div>
+                        <div class="weather-details-grid">
+                            <div class="weather-detail-item">
+                                <span class="detail-label">Humidity</span>
+                                <span class="detail-val" id="weatherHumidity">--%</span>
+                            </div>
+                            <div class="weather-detail-item">
+                                <span class="detail-label">Wind Speed</span>
+                                <span class="detail-val" id="weatherWind">-- km/h</span>
+                            </div>
+                            <div class="weather-detail-item">
+                                <span class="detail-label">Precipitation</span>
+                                <span class="detail-val" id="weatherRain">-- mm</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Header Tools Controls -->
                 <div class="header-tools">
+                    <!-- Ambient Sound Generator Tool -->
+                    <div class="ambient-tool-wrapper">
+                        <button class="tool-btn" id="toggleAmbientAudioBtn" title="Ambient Focus Sound Generator (Rain/Campfire/Wind)">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        </button>
+                        <div class="ambient-menu" id="ambientMenu">
+                            <div class="ambient-option active" data-sound="none">🔇 Off</div>
+                            <div class="ambient-option" data-sound="rain">🌧️ Cozy Rain</div>
+                            <div class="ambient-option" data-sound="campfire">🪵 Crackling Campfire</div>
+                            <div class="ambient-option" data-sound="wind">🍃 Soft Breeze</div>
+                        </div>
+                    </div>
+
                     <button class="tool-btn" id="toggleSoundBtn" title="Toggle Typing Sound">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
                     </button>
@@ -153,7 +196,7 @@
                 <div class="greeting-display" id="greetingDisplay">Welcome back</div>
             </div>
 
-            <!-- Search Bar -->
+            <!-- Search Bar with 1-Click Gemini AI Launcher -->
             <div class="search-container">
                 <form id="searchForm" class="search-form">
                     <div class="engine-dropdown">
@@ -183,13 +226,19 @@
                         </div>
                     </div>
                     <input type="text" id="searchInput" class="search-input" placeholder="Search or type a URL..." autocomplete="off" autofocus>
+                    
+                    <!-- 1-Click AI Query Launcher Button -->
+                    <button type="button" class="ai-launcher-btn" id="aiLauncherBtn" title="Ask Gemini AI directly ✨">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24Z"/></svg>
+                    </button>
+                    
                     <button type="submit" class="search-submit-btn" title="Search">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                     </button>
                 </form>
             </div>
 
-            <!-- Quick Links / Shortcuts Grid -->
+            <!-- Quick Links / Shortcuts Grid with Drag-and-Drop -->
             <div class="shortcuts-section">
                 <div class="shortcuts-grid" id="shortcutsGrid"></div>
                 <button class="add-shortcut-btn" id="addShortcutBtn" title="Add New Shortcut">
@@ -304,14 +353,19 @@
 
                 <div class="setting-item">
                     <div class="setting-info">
-                        <label for="settingTheme">Catppuccin Palette</label>
-                        <span class="setting-desc">Select your preferred color theme</span>
+                        <label for="settingTheme">Color Palette Theme</label>
+                        <span class="setting-desc">Select your preferred aesthetic theme</span>
                     </div>
                     <select id="settingTheme" class="setting-select">
-                        <option value="mocha">Mocha (Dark)</option>
+                        <option value="mocha">Mocha (Dark Catppuccin)</option>
                         <option value="macchiato">Macchiato (Medium Dark)</option>
                         <option value="frappe">Frappé (Soft Dark)</option>
                         <option value="latte">Latte (Light)</option>
+                        <option value="forest-green">🌲 Forest Green</option>
+                        <option value="cozy-orange">🍊 Cozy Orange</option>
+                        <option value="samurai-red">⚔️ Samurai Red</option>
+                        <option value="sky-blue">☁️ Sky Blue</option>
+                        <option value="dark-blue">🌌 Dark Blue</option>
                     </select>
                 </div>
 

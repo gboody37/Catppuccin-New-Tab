@@ -142,6 +142,136 @@
     --accent-glow: rgba(136, 57, 239, 0.3);
 }
 
+/* Theme: Forest Green 🌲 */
+[data-theme="forest-green"] {
+    --cat-rosewater: #a8d5ba;
+    --cat-mauve:     #50fa7b;
+    --cat-red:       #ff5555;
+    --cat-peach:     #ffb86c;
+    --cat-yellow:    #f1fa8c;
+    --cat-green:     #50fa7b;
+    --cat-teal:      #8be9fd;
+    --cat-sky:       #80c090;
+    --cat-text:      #e0f2e9;
+    --cat-subtext1:  #b2d8c3;
+    --cat-subtext0:  #87b39a;
+    --cat-surface2:  #2f4838;
+    --cat-surface1:  #22392b;
+    --cat-surface0:  #182a1f;
+    --cat-base:      #0e1b13;
+    --cat-mantle:    #0a140e;
+    --cat-crust:     #050a07;
+
+    --bg-glass: rgba(14, 27, 19, 0.8);
+    --bg-glass-card: rgba(34, 57, 43, 0.6);
+    --border-glass: rgba(80, 250, 123, 0.3);
+    --accent-glow: rgba(80, 250, 123, 0.4);
+}
+
+/* Theme: Cozy Orange 🍊 */
+[data-theme="cozy-orange"] {
+    --cat-rosewater: #ffe8d6;
+    --cat-mauve:     #ff9e64;
+    --cat-red:       #ff5370;
+    --cat-peach:     #ff9e64;
+    --cat-yellow:    #ffc777;
+    --cat-green:     #c3e88d;
+    --cat-teal:      #4fd6be;
+    --cat-sky:       #7dcfff;
+    --cat-text:      #fdf0e7;
+    --cat-subtext1:  #e0cbbd;
+    --cat-subtext0:  #bda595;
+    --cat-surface2:  #4a3328;
+    --cat-surface1:  #38241b;
+    --cat-surface0:  #291811;
+    --cat-base:      #1c100b;
+    --cat-mantle:    #150b07;
+    --cat-crust:     #0c0604;
+
+    --bg-glass: rgba(28, 16, 11, 0.8);
+    --bg-glass-card: rgba(56, 36, 27, 0.6);
+    --border-glass: rgba(255, 158, 100, 0.3);
+    --accent-glow: rgba(255, 158, 100, 0.4);
+}
+
+/* Theme: Samurai Red ⚔️ */
+[data-theme="samurai-red"] {
+    --cat-rosewater: #fcd5ce;
+    --cat-mauve:     #ff4d6d;
+    --cat-red:       #ff758f;
+    --cat-peach:     #ffb3c1;
+    --cat-yellow:    #ffe5ec;
+    --cat-green:     #80ed99;
+    --cat-teal:      #72efdd;
+    --cat-sky:       #64dfdf;
+    --cat-text:      #fff0f3;
+    --cat-subtext1:  #ffccd5;
+    --cat-subtext0:  #c9184a;
+    --cat-surface2:  #4a121a;
+    --cat-surface1:  #360c12;
+    --cat-surface0:  #24070b;
+    --cat-base:      #170306;
+    --cat-mantle:    #100204;
+    --cat-crust:     #080102;
+
+    --bg-glass: rgba(23, 3, 6, 0.82);
+    --bg-glass-card: rgba(54, 12, 18, 0.6);
+    --border-glass: rgba(255, 77, 109, 0.35);
+    --accent-glow: rgba(255, 77, 109, 0.45);
+}
+
+/* Theme: Sky Blue ☁️ */
+[data-theme="sky-blue"] {
+    --cat-rosewater: #e0f2fe;
+    --cat-mauve:     #38bdf8;
+    --cat-red:       #f43f5e;
+    --cat-peach:     #fb923c;
+    --cat-yellow:    #facc15;
+    --cat-green:     #4ade80;
+    --cat-teal:      #2dd4bf;
+    --cat-sky:       #38bdf8;
+    --cat-text:      #f0f9ff;
+    --cat-subtext1:  #bae6fd;
+    --cat-subtext0:  #7dd3fc;
+    --cat-surface2:  #1e3a8a;
+    --cat-surface1:  #1e293b;
+    --cat-surface0:  #0f172a;
+    --cat-base:      #0b132b;
+    --cat-mantle:    #070d1e;
+    --cat-crust:     #040711;
+
+    --bg-glass: rgba(11, 19, 43, 0.8);
+    --bg-glass-card: rgba(30, 41, 59, 0.6);
+    --border-glass: rgba(56, 189, 248, 0.35);
+    --accent-glow: rgba(56, 189, 248, 0.45);
+}
+
+/* Theme: Dark Blue 🌌 */
+[data-theme="dark-blue"] {
+    --cat-rosewater: #e2e8f0;
+    --cat-mauve:     #6366f1;
+    --cat-red:       #ef4444;
+    --cat-peach:     #f97316;
+    --cat-yellow:    #eab308;
+    --cat-green:     #22c55e;
+    --cat-teal:      #14b8a6;
+    --cat-sky:       #06b6d4;
+    --cat-text:      #f8fafc;
+    --cat-subtext1:  #cbd5e1;
+    --cat-subtext0:  #94a3b8;
+    --cat-surface2:  #334155;
+    --cat-surface1:  #1e293b;
+    --cat-surface0:  #0f172a;
+    --cat-base:      #030712;
+    --cat-mantle:    #020617;
+    --cat-crust:     #000000;
+
+    --bg-glass: rgba(3, 7, 18, 0.85);
+    --bg-glass-card: rgba(30, 41, 59, 0.65);
+    --border-glass: rgba(99, 102, 241, 0.35);
+    --accent-glow: rgba(99, 102, 241, 0.45);
+}
+
 /* ==========================================
    GLOBAL BASE STYLES
    ========================================== */
@@ -291,6 +421,273 @@ body[data-theme="latte"] .bg-overlay {
     align-items: center;
     gap: 1rem;
 }
+
+/* Theme Selector Dropdown */
+.theme-selector-dropdown {
+    position: relative;
+}
+
+.theme-dropdown-btn {
+    background: var(--cat-surface0);
+    border: 1px solid var(--cat-surface1);
+    color: var(--cat-text);
+    padding: 0.45rem 0.85rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.theme-dropdown-btn:hover {
+    background: var(--cat-surface1);
+    border-color: var(--cat-mauve);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.theme-active-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--cat-mauve);
+    box-shadow: 0 0 6px var(--cat-mauve);
+}
+
+.theme-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 210px;
+    background: var(--cat-surface0);
+    border: 1px solid var(--cat-surface1);
+    border-radius: 14px;
+    padding: 0.4rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(16px);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+}
+
+.theme-selector-dropdown.open .theme-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.theme-menu-group-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--cat-subtext0);
+    padding: 0.4rem 0.6rem 0.2rem;
+    font-weight: 700;
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.6rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--cat-subtext1);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.theme-option:hover, .theme-option.active {
+    background: var(--cat-surface1);
+    color: var(--cat-mauve);
+}
+
+.dot.forest-dot { background: #50fa7b; }
+.dot.orange-dot { background: #ff9e64; }
+.dot.samurai-dot { background: #ff4d6d; }
+.dot.sky-dot { background: #38bdf8; }
+.dot.darkblue-dot { background: #6366f1; }
+
+/* AI Launcher Button inside Search Bar */
+.ai-launcher-btn {
+    background: transparent;
+    border: none;
+    color: var(--cat-mauve);
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.ai-launcher-btn:hover {
+    color: var(--cat-teal);
+    transform: scale(1.15) rotate(10deg);
+    filter: drop-shadow(0 0 8px var(--cat-teal));
+}
+
+/* Detailed Weather Popup Card */
+.weather-widget-container {
+    position: relative;
+}
+
+.weather-widget {
+    cursor: pointer;
+}
+
+.weather-popup-card {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 220px;
+    background: var(--cat-surface0);
+    border: 1px solid var(--cat-surface1);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(16px);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.25s ease;
+}
+
+.weather-widget-container.open .weather-popup-card {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.weather-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.weather-popup-header h4 {
+    font-size: 0.9rem;
+    color: var(--cat-text);
+}
+
+.weather-condition-tag {
+    font-size: 0.75rem;
+    color: var(--cat-mauve);
+    background: var(--cat-surface1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+}
+
+.weather-details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.weather-detail-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+}
+
+.detail-label {
+    color: var(--cat-subtext0);
+}
+
+.detail-val {
+    color: var(--cat-text);
+    font-weight: 600;
+}
+
+/* Ambient Focus Sound Tool */
+.ambient-tool-wrapper {
+    position: relative;
+}
+
+.ambient-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 170px;
+    background: var(--cat-surface0);
+    border: 1px solid var(--cat-surface1);
+    border-radius: 12px;
+    padding: 0.4rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(16px);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: all 0.2s ease;
+}
+
+.ambient-tool-wrapper.open .ambient-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.ambient-option {
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    color: var(--cat-subtext1);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.ambient-option:hover, .ambient-option.active {
+    background: var(--cat-surface1);
+    color: var(--cat-mauve);
+}
+
+/* Shortcut Drag and Drop Styling */
+.shortcut-item.dragging {
+    opacity: 0.4;
+    transform: scale(0.95);
+    border-color: var(--cat-mauve);
+}
+
+.shortcut-item.drag-over {
+    border-color: var(--cat-teal);
+    box-shadow: 0 0 14px var(--cat-teal);
+}
+
+/* Brand Color Glow Accents on Shortcuts */
+.shortcut-item[data-icon="youtube"]:hover { border-color: #ff0000; box-shadow: 0 4px 18px rgba(255, 0, 0, 0.4); }
+.shortcut-item[data-icon="youtube"]:hover .shortcut-icon { color: #ff0000; }
+
+.shortcut-item[data-icon="kick"]:hover { border-color: #53fc18; box-shadow: 0 4px 18px rgba(83, 252, 24, 0.4); }
+.shortcut-item[data-icon="kick"]:hover .shortcut-icon { color: #53fc18; }
+
+.shortcut-item[data-icon="github"]:hover { border-color: #cdd6f4; box-shadow: 0 4px 18px rgba(205, 214, 244, 0.35); }
+.shortcut-item[data-icon="github"]:hover .shortcut-icon { color: #ffffff; }
+
+.shortcut-item[data-icon="reddit"]:hover { border-color: #ff4500; box-shadow: 0 4px 18px rgba(255, 69, 0, 0.4); }
+.shortcut-item[data-icon="reddit"]:hover .shortcut-icon { color: #ff4500; }
+
+.shortcut-item[data-icon="gemini"]:hover { border-color: #8ab4f8; box-shadow: 0 4px 18px rgba(138, 180, 248, 0.45); }
+.shortcut-item[data-icon="gemini"]:hover .shortcut-icon { color: #8ab4f8; }
+
+.shortcut-item[data-icon="twitter"]:hover { border-color: #1da1f2; box-shadow: 0 4px 18px rgba(29, 161, 242, 0.4); }
+.shortcut-item[data-icon="twitter"]:hover .shortcut-icon { color: #1da1f2; }
+
+.shortcut-item[data-icon="discord"]:hover { border-color: #5865f2; box-shadow: 0 4px 18px rgba(88, 101, 242, 0.4); }
+.shortcut-item[data-icon="discord"]:hover .shortcut-icon { color: #5865f2; }
+
+.shortcut-item[data-icon="netflix"]:hover { border-color: #e50914; box-shadow: 0 4px 18px rgba(229, 9, 20, 0.4); }
+.shortcut-item[data-icon="netflix"]:hover .shortcut-icon { color: #e50914; }
+
+.shortcut-item[data-icon="instagram"]:hover { border-color: #e1306c; box-shadow: 0 4px 18px rgba(225, 48, 108, 0.4); }
+.shortcut-item[data-icon="instagram"]:hover .shortcut-icon { color: #e1306c; }
 
 /* Theme Flavor Selector */
 .theme-selector {

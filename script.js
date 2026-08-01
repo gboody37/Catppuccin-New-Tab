@@ -104,22 +104,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // THEME & BACKGROUND CONTROLLER
+    // THEME CONTROLLER (9 Aesthetic Themes)
     // ==========================================
+    const themeDropdownBtn = document.getElementById('themeDropdownBtn');
+    const themeSelectorDropdown = document.querySelector('.theme-selector-dropdown');
+    const themeActiveDot = document.getElementById('themeActiveDot');
+    const themeActiveLabel = document.getElementById('themeActiveLabel');
+    const themeMenu = document.getElementById('themeMenu');
+
+    const themeNamesMap = {
+        'mocha': 'Mocha',
+        'macchiato': 'Macchiato',
+        'frappe': 'Frappé',
+        'latte': 'Latte',
+        'forest-green': '🌲 Forest Green',
+        'cozy-orange': '🍊 Cozy Orange',
+        'samurai-red': '⚔️ Samurai Red',
+        'sky-blue': '☁️ Sky Blue',
+        'dark-blue': '🌌 Dark Blue'
+    };
+
     function applyTheme(themeName) {
         document.documentElement.setAttribute('data-theme', themeName);
         state.theme = themeName;
         localStorage.setItem('catTheme', themeName);
 
-        document.querySelectorAll('.theme-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.flavor === themeName);
+        if (themeActiveLabel) {
+            themeActiveLabel.textContent = themeNamesMap[themeName] || themeName;
+        }
+
+        document.querySelectorAll('.theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.flavor === themeName);
         });
+
+        const settingThemeSelect = document.getElementById('settingTheme');
+        if (settingThemeSelect) settingThemeSelect.value = themeName;
     }
 
     applyTheme(state.theme);
 
-    document.querySelectorAll('.theme-btn').forEach(btn => {
-        btn.addEventListener('click', () => applyTheme(btn.dataset.flavor));
+    if (themeDropdownBtn) {
+        themeDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            themeSelectorDropdown.classList.toggle('open');
+        });
+    }
+
+    document.querySelectorAll('.theme-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+            applyTheme(opt.dataset.flavor);
+            themeSelectorDropdown.classList.remove('open');
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (themeSelectorDropdown && !themeSelectorDropdown.contains(e.target)) {
+            themeSelectorDropdown.classList.remove('open');
+        }
     });
 
     const toggleWallpaperBtn = document.getElementById('toggleWallpaperBtn');
@@ -356,19 +397,60 @@ document.addEventListener('DOMContentLoaded', () => {
         weatherCity.textContent = 'Catppuccin City';
     }
 
+    // Detailed Weather Card Popup Controller
+    const weatherWidgetContainer = document.querySelector('.weather-widget-container');
+    const weatherWidget = document.getElementById('weatherWidget');
+    const weatherPopupCity = document.getElementById('weatherPopupCity');
+    const weatherCondition = document.getElementById('weatherCondition');
+    const weatherHumidity = document.getElementById('weatherHumidity');
+    const weatherWind = document.getElementById('weatherWind');
+    const weatherRain = document.getElementById('weatherRain');
+
+    if (weatherWidget) {
+        weatherWidget.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (weatherWidgetContainer) weatherWidgetContainer.classList.toggle('open');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (weatherWidgetContainer && !weatherWidgetContainer.contains(e.target)) {
+                weatherWidgetContainer.classList.remove('open');
+            }
+        });
+    }
+
+    const weatherCodeMap = {
+        0: 'Clear Sky', 1: 'Mainly Clear', 2: 'Partly Cloudy', 3: 'Overcast',
+        45: 'Foggy', 48: 'Depositing Rime Fog', 51: 'Light Drizzle', 53: 'Moderate Drizzle',
+        61: 'Slight Rain', 63: 'Moderate Rain', 65: 'Heavy Rain', 71: 'Slight Snow',
+        80: 'Rain Showers', 95: 'Thunderstorm'
+    };
+
     async function fetchWeatherByCity(cityName) {
         try {
             const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1`);
             const geoData = await geoRes.json();
             if (geoData.results && geoData.results.length > 0) {
                 const loc = geoData.results[0];
-                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&current_weather=true`);
+                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&current_weather=true&hourly=relativehumidity_2m,precipitation`);
                 const data = await res.json();
                 if (data.current_weather) {
                     const temp = `${Math.round(data.current_weather.temperature)}°C`;
                     const city = loc.name;
                     weatherTemp.textContent = temp;
                     weatherCity.textContent = city;
+                    if (weatherPopupCity) weatherPopupCity.textContent = city;
+
+                    const code = data.current_weather.weathercode;
+                    if (weatherCondition) weatherCondition.textContent = weatherCodeMap[code] || 'Clear Sky';
+                    if (weatherWind) weatherWind.textContent = `${data.current_weather.windspeed} km/h`;
+                    if (weatherHumidity && data.hourly && data.hourly.relativehumidity_2m) {
+                        weatherHumidity.textContent = `${data.hourly.relativehumidity_2m[0]}%`;
+                    }
+                    if (weatherRain && data.hourly && data.hourly.precipitation) {
+                        weatherRain.textContent = `${data.hourly.precipitation[0]} mm`;
+                    }
+
                     localStorage.setItem('catWeather', JSON.stringify({ temp, city }));
                 }
             }
@@ -389,13 +471,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     try {
                         const lat = pos.coords.latitude;
                         const lon = pos.coords.longitude;
-                        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+                        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m,precipitation`);
                         const data = await res.json();
                         if (data.current_weather) {
                             const temp = `${Math.round(data.current_weather.temperature)}°C`;
                             const city = 'Local Weather';
                             weatherTemp.textContent = temp;
                             weatherCity.textContent = city;
+                            if (weatherPopupCity) weatherPopupCity.textContent = city;
+
+                            const code = data.current_weather.weathercode;
+                            if (weatherCondition) weatherCondition.textContent = weatherCodeMap[code] || 'Clear Sky';
+                            if (weatherWind) weatherWind.textContent = `${data.current_weather.windspeed} km/h`;
+                            if (weatherHumidity && data.hourly && data.hourly.relativehumidity_2m) {
+                                weatherHumidity.textContent = `${data.hourly.relativehumidity_2m[0]}%`;
+                            }
+                            if (weatherRain && data.hourly && data.hourly.precipitation) {
+                                weatherRain.textContent = `${data.hourly.precipitation[0]} mm`;
+                            }
+
                             localStorage.setItem('catWeather', JSON.stringify({ temp, city }));
                         }
                     } catch (e) {}
@@ -408,13 +502,118 @@ document.addEventListener('DOMContentLoaded', () => {
     initWeather();
 
     // ==========================================
-    // SEARCH ENGINE SELECTOR & SUBMIT
+    // AMBIENT FOCUS AUDIO GENERATOR (Rain / Campfire / Wind)
+    // ==========================================
+    const toggleAmbientAudioBtn = document.getElementById('toggleAmbientAudioBtn');
+    const ambientToolWrapper = document.querySelector('.ambient-tool-wrapper');
+    const ambientMenu = document.getElementById('ambientMenu');
+
+    let ambientAudioCtx = null;
+    let ambientSourceNode = null;
+    let currentAmbientSound = 'none';
+
+    function stopAmbientAudio() {
+        if (ambientSourceNode) {
+            try { ambientSourceNode.stop(); } catch (e) {}
+            ambientSourceNode = null;
+        }
+    }
+
+    function playAmbientSound(soundType) {
+        stopAmbientAudio();
+        currentAmbientSound = soundType;
+
+        document.querySelectorAll('.ambient-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.sound === soundType);
+        });
+
+        if (soundType === 'none') {
+            if (toggleAmbientAudioBtn) toggleAmbientAudioBtn.classList.remove('active-sound');
+            return;
+        }
+
+        if (toggleAmbientAudioBtn) toggleAmbientAudioBtn.classList.add('active-sound');
+
+        try {
+            if (!ambientAudioCtx) {
+                ambientAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (ambientAudioCtx.state === 'suspended') {
+                ambientAudioCtx.resume();
+            }
+
+            const bufferSize = ambientAudioCtx.sampleRate * 2;
+            const buffer = ambientAudioCtx.createBuffer(1, bufferSize, ambientAudioCtx.sampleRate);
+            const output = buffer.getChannelData(0);
+
+            if (soundType === 'rain') {
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = (Math.random() * 2 - 1) * 0.15;
+                }
+            } else if (soundType === 'campfire') {
+                for (let i = 0; i < bufferSize; i++) {
+                    const crackle = Math.random() > 0.997 ? (Math.random() * 2 - 1) * 0.7 : 0;
+                    output[i] = (Math.random() * 2 - 1) * 0.08 + crackle;
+                }
+            } else if (soundType === 'wind') {
+                let lastOut = 0.0;
+                for (let i = 0; i < bufferSize; i++) {
+                    const white = Math.random() * 2 - 1;
+                    output[i] = (lastOut + (0.02 * white)) / 1.02;
+                    lastOut = output[i];
+                    output[i] *= 0.2;
+                }
+            }
+
+            const whiteNoise = ambientAudioCtx.createBufferSource();
+            whiteNoise.buffer = buffer;
+            whiteNoise.loop = true;
+
+            const filter = ambientAudioCtx.createBiquadFilter();
+            filter.type = soundType === 'rain' ? 'lowpass' : (soundType === 'wind' ? 'bandpass' : 'lowpass');
+            filter.frequency.setValueAtTime(soundType === 'rain' ? 800 : (soundType === 'wind' ? 350 : 600), ambientAudioCtx.currentTime);
+
+            const gain = ambientAudioCtx.createGain();
+            gain.gain.setValueAtTime(0.25, ambientAudioCtx.currentTime);
+
+            whiteNoise.connect(filter);
+            filter.connect(gain);
+            gain.connect(ambientAudioCtx.destination);
+
+            whiteNoise.start();
+            ambientSourceNode = whiteNoise;
+        } catch (e) {}
+    }
+
+    if (toggleAmbientAudioBtn) {
+        toggleAmbientAudioBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (ambientToolWrapper) ambientToolWrapper.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.ambient-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                playAmbientSound(opt.dataset.sound);
+                if (ambientToolWrapper) ambientToolWrapper.classList.remove('open');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (ambientToolWrapper && !ambientToolWrapper.contains(e.target)) {
+                ambientToolWrapper.classList.remove('open');
+            }
+        });
+    }
+
+    // ==========================================
+    // SEARCH ENGINE SELECTOR & AI LAUNCHER
     // ==========================================
     const searchForm = document.getElementById('searchForm');
     const searchInput = document.getElementById('searchInput');
     const engineBtn = document.getElementById('engineBtn');
     const engineIcon = document.getElementById('engineIcon');
     const engineMenu = document.getElementById('engineMenu');
+    const aiLauncherBtn = document.getElementById('aiLauncherBtn');
 
     const engines = {
         google: { name: 'Google', iconKey: 'google', url: 'https://www.google.com/search?q=' },
@@ -452,6 +651,17 @@ document.addEventListener('DOMContentLoaded', () => {
         opt.addEventListener('click', () => setEngine(opt.dataset.engine));
     });
 
+    if (aiLauncherBtn) {
+        aiLauncherBtn.addEventListener('click', () => {
+            const query = searchInput.value.trim();
+            if (query) {
+                window.location.href = `https://gemini.google.com/app?q=${encodeURIComponent(query)}`;
+            } else {
+                window.location.href = `https://gemini.google.com/app`;
+            }
+        });
+    }
+
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const query = searchInput.value.trim();
@@ -467,7 +677,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // SHORTCUTS MANAGER (Add, Edit, Remove, 20+ Icons)
+    // SHORTCUTS MANAGER (Drag & Drop Reordering)
     // ==========================================
     const shortcutsGrid = document.getElementById('shortcutsGrid');
     const addShortcutBtn = document.getElementById('addShortcutBtn');
@@ -480,13 +690,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const shortcutUrl = document.getElementById('shortcutUrl');
     const shortcutIcon = document.getElementById('shortcutIcon');
 
+    let draggedItemIndex = null;
+
     function renderShortcuts() {
         shortcutsGrid.innerHTML = '';
-        state.shortcuts.forEach((sc) => {
+        state.shortcuts.forEach((sc, index) => {
             const item = document.createElement('a');
             item.className = 'shortcut-item';
             item.href = sc.url;
             item.title = sc.title;
+            item.dataset.icon = sc.icon;
+            item.draggable = true;
+
+            // Drag and Drop Event Handlers
+            item.addEventListener('dragstart', (e) => {
+                draggedItemIndex = index;
+                item.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+            });
+
+            item.addEventListener('dragend', () => {
+                item.classList.remove('dragging');
+                document.querySelectorAll('.shortcut-item').forEach(el => el.classList.remove('drag-over'));
+            });
+
+            item.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                item.classList.add('drag-over');
+            });
+
+            item.addEventListener('dragleave', () => {
+                item.classList.remove('drag-over');
+            });
+
+            item.addEventListener('drop', (e) => {
+                e.preventDefault();
+                item.classList.remove('drag-over');
+                if (draggedItemIndex !== null && draggedItemIndex !== index) {
+                    const draggedItem = state.shortcuts.splice(draggedItemIndex, 1)[0];
+                    state.shortcuts.splice(index, 0, draggedItem);
+                    localStorage.setItem('shortcuts', JSON.stringify(state.shortcuts));
+                    renderShortcuts();
+                }
+            });
 
             const iconDiv = document.createElement('div');
             iconDiv.className = 'shortcut-icon';
