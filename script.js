@@ -440,6 +440,38 @@ document.addEventListener('DOMContentLoaded', () => {
         80: 'Rain Showers', 95: 'Thunderstorm'
     };
 
+    async function fetchWeatherByCoords(lat, lon, cityName, countryName = '') {
+        try {
+            const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m,precipitation`);
+            const data = await res.json();
+
+            if (data.current_weather) {
+                const temp = `${Math.round(data.current_weather.temperature)}°C`;
+                const displayName = cityName;
+                const fullLocation = countryName ? `${cityName}, ${countryName}` : cityName;
+
+                if (weatherTemp) weatherTemp.textContent = temp;
+                if (weatherCity) weatherCity.textContent = displayName;
+                if (weatherPopupCity) weatherPopupCity.textContent = fullLocation;
+
+                const code = data.current_weather.weathercode;
+                if (weatherCondition) weatherCondition.textContent = weatherCodeMap[code] || 'Clear Sky';
+                if (weatherWind) weatherWind.textContent = `${data.current_weather.windspeed} km/h`;
+                if (weatherHumidity && data.hourly && data.hourly.relativehumidity_2m) {
+                    weatherHumidity.textContent = `${data.hourly.relativehumidity_2m[0]}%`;
+                }
+                if (weatherRain && data.hourly && data.hourly.precipitation) {
+                    weatherRain.textContent = `${data.hourly.precipitation[0]} mm`;
+                }
+
+                localStorage.setItem('catWeather', JSON.stringify({ temp, city: displayName, fullLocation }));
+                localStorage.setItem('catWeatherCoords', JSON.stringify({ lat, lon, cityName, countryName }));
+            }
+        } catch (e) {
+            console.error('Weather fetch error:', e);
+        }
+    }
+
     async function fetchWeatherByCity(cityName) {
         if (!cityName) return;
         try {
@@ -449,31 +481,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (geoData.results && geoData.results.length > 0) {
                 const loc = geoData.results[0];
-                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&current_weather=true&hourly=relativehumidity_2m,precipitation`);
-                const data = await res.json();
-                
-                if (data.current_weather) {
-                    const temp = `${Math.round(data.current_weather.temperature)}°C`;
-                    const displayName = loc.name;
-                    const fullLocation = loc.country ? `${loc.name}, ${loc.country}` : loc.name;
-                    
-                    if (weatherTemp) weatherTemp.textContent = temp;
-                    if (weatherCity) weatherCity.textContent = displayName;
-                    if (weatherPopupCity) weatherPopupCity.textContent = fullLocation;
-
-                    const code = data.current_weather.weathercode;
-                    if (weatherCondition) weatherCondition.textContent = weatherCodeMap[code] || 'Clear Sky';
-                    if (weatherWind) weatherWind.textContent = `${data.current_weather.windspeed} km/h`;
-                    if (weatherHumidity && data.hourly && data.hourly.relativehumidity_2m) {
-                        weatherHumidity.textContent = `${data.hourly.relativehumidity_2m[0]}%`;
-                    }
-                    if (weatherRain && data.hourly && data.hourly.precipitation) {
-                        weatherRain.textContent = `${data.hourly.precipitation[0]} mm`;
-                    }
-
-                    localStorage.setItem('catWeather', JSON.stringify({ temp, city: displayName }));
-                    return;
-                }
+                await fetchWeatherByCoords(loc.latitude, loc.longitude, loc.name, loc.country || '');
+                return;
             }
 
             // 2. Fallback to wttr.in API if Open-Meteo finds no result
@@ -540,10 +549,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             `;
                             
                             choice.addEventListener('click', () => {
-                                const selectedName = subText ? `${loc.name}, ${loc.country}` : loc.name;
                                 settingWeatherCity.value = loc.name;
                                 localStorage.setItem('catWeatherCity', loc.name);
-                                fetchWeatherByCity(loc.name);
+                                fetchWeatherByCoords(loc.latitude, loc.longitude, loc.name, loc.country || '');
                                 weatherSearchResults.classList.remove('open');
                             });
                             
