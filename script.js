@@ -441,19 +441,25 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     async function fetchWeatherByCity(cityName) {
+        if (!cityName) return;
         try {
-            const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1`);
+            // 1. Try Open-Meteo Geocoding
+            const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=5&language=en`);
             const geoData = await geoRes.json();
+            
             if (geoData.results && geoData.results.length > 0) {
                 const loc = geoData.results[0];
                 const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&current_weather=true&hourly=relativehumidity_2m,precipitation`);
                 const data = await res.json();
+                
                 if (data.current_weather) {
                     const temp = `${Math.round(data.current_weather.temperature)}°C`;
-                    const city = loc.name;
-                    weatherTemp.textContent = temp;
-                    weatherCity.textContent = city;
-                    if (weatherPopupCity) weatherPopupCity.textContent = city;
+                    const displayName = loc.name;
+                    const fullLocation = loc.country ? `${loc.name}, ${loc.country}` : loc.name;
+                    
+                    if (weatherTemp) weatherTemp.textContent = temp;
+                    if (weatherCity) weatherCity.textContent = displayName;
+                    if (weatherPopupCity) weatherPopupCity.textContent = fullLocation;
 
                     const code = data.current_weather.weathercode;
                     if (weatherCondition) weatherCondition.textContent = weatherCodeMap[code] || 'Clear Sky';
@@ -465,10 +471,33 @@ document.addEventListener('DOMContentLoaded', () => {
                         weatherRain.textContent = `${data.hourly.precipitation[0]} mm`;
                     }
 
-                    localStorage.setItem('catWeather', JSON.stringify({ temp, city }));
+                    localStorage.setItem('catWeather', JSON.stringify({ temp, city: displayName }));
+                    return;
                 }
             }
-        } catch (e) {}
+
+            // 2. Fallback to wttr.in API if Open-Meteo finds no result
+            const wttrRes = await fetch(`https://wttr.in/${encodeURIComponent(cityName)}?format=j1`);
+            const wttrData = await wttrRes.json();
+            if (wttrData && wttrData.current_condition && wttrData.current_condition.length > 0) {
+                const cond = wttrData.current_condition[0];
+                const temp = `${cond.temp_C}°C`;
+                const displayName = cityName;
+                if (weatherTemp) weatherTemp.textContent = temp;
+                if (weatherCity) weatherCity.textContent = displayName;
+                if (weatherPopupCity) weatherPopupCity.textContent = displayName;
+                if (weatherCondition && cond.weatherDesc && cond.weatherDesc[0]) {
+                    weatherCondition.textContent = cond.weatherDesc[0].value;
+                }
+                if (weatherWind) weatherWind.textContent = `${cond.windspeedKmph} km/h`;
+                if (weatherHumidity) weatherHumidity.textContent = `${cond.humidity}%`;
+                if (weatherRain) weatherRain.textContent = `${cond.precipMM} mm`;
+
+                localStorage.setItem('catWeather', JSON.stringify({ temp, city: displayName }));
+            }
+        } catch (e) {
+            console.error('Weather fetch error:', e);
+        }
     }
 
     function initWeather() {
@@ -1065,6 +1094,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (saveSettingsBtn) {
         saveSettingsBtn.addEventListener('click', async () => {
+            // Close Settings modal immediately for responsive UX
+            closeSettingsModal();
+
             // 1. If file uploaded, save Blob to IndexedDB
             if (pendingFileBlob && pendingFileType) {
                 await saveBgToIDB(pendingFileBlob, pendingFileType);
@@ -1114,8 +1146,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.removeItem('catWeatherCity');
                 initWeather();
             }
-
-            closeSettingsModal();
         });
     }
 
