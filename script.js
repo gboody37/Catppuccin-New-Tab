@@ -56,34 +56,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // MODE CONTROLLER (ASCII vs Bongo)
+    // MODE CONTROLLER (ASCII vs Bongo vs No Cat)
     // ==========================================
     const asciiCatContainer = document.getElementById('asciiCatContainer');
     const bongoCatContainer = document.getElementById('bongoCatContainer');
     const modeAsciiBtn = document.getElementById('modeAsciiBtn');
     const modeBongoBtn = document.getElementById('modeBongoBtn');
+    const modeNoneBtn = document.getElementById('modeNoneBtn');
 
     function applyMode(modeName) {
         state.mode = modeName;
         localStorage.setItem('catMode', modeName);
 
         if (modeName === 'ascii') {
-            asciiCatContainer.classList.remove('hidden');
-            bongoCatContainer.classList.add('hidden');
-            modeAsciiBtn.classList.add('active');
-            modeBongoBtn.classList.remove('active');
+            if (asciiCatContainer) asciiCatContainer.classList.remove('hidden');
+            if (bongoCatContainer) bongoCatContainer.classList.add('hidden');
+            if (modeAsciiBtn) modeAsciiBtn.classList.add('active');
+            if (modeBongoBtn) modeBongoBtn.classList.remove('active');
+            if (modeNoneBtn) modeNoneBtn.classList.remove('active');
+        } else if (modeName === 'bongo') {
+            if (asciiCatContainer) asciiCatContainer.classList.add('hidden');
+            if (bongoCatContainer) bongoCatContainer.classList.remove('hidden');
+            if (modeBongoBtn) modeBongoBtn.classList.add('active');
+            if (modeAsciiBtn) modeAsciiBtn.classList.remove('active');
+            if (modeNoneBtn) modeNoneBtn.classList.remove('active');
         } else {
-            asciiCatContainer.classList.add('hidden');
-            bongoCatContainer.classList.remove('hidden');
-            modeBongoBtn.classList.add('active');
-            modeAsciiBtn.classList.remove('active');
+            // 'none' mode: hide both cats!
+            if (asciiCatContainer) asciiCatContainer.classList.add('hidden');
+            if (bongoCatContainer) bongoCatContainer.classList.add('hidden');
+            if (modeNoneBtn) modeNoneBtn.classList.add('active');
+            if (modeAsciiBtn) modeAsciiBtn.classList.remove('active');
+            if (modeBongoBtn) modeBongoBtn.classList.remove('active');
         }
+
+        const settingCatModeSelect = document.getElementById('settingCatMode');
+        if (settingCatModeSelect) settingCatModeSelect.value = modeName;
     }
 
     applyMode(state.mode);
 
-    modeAsciiBtn.addEventListener('click', () => applyMode('ascii'));
-    modeBongoBtn.addEventListener('click', () => applyMode('bongo'));
+    if (modeAsciiBtn) modeAsciiBtn.addEventListener('click', () => applyMode('ascii'));
+    if (modeBongoBtn) modeBongoBtn.addEventListener('click', () => applyMode('bongo'));
+    if (modeNoneBtn) modeNoneBtn.addEventListener('click', () => applyMode('none'));
 
     // ==========================================
     // ZEI EXACT CAT PICTURE CONTROLLER

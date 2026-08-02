@@ -46,13 +46,16 @@
             </div>
 
             <div class="header-right">
-                <!-- Mode Toggle (Zei ASCII Cat vs Bongo Cat) -->
+                <!-- Mode Toggle (Zei ASCII Cat, Bongo Cat, or No Cat) -->
                 <div class="mode-selector">
-                    <button class="mode-btn active" id="modeAsciiBtn" title="Zei's ASCII Cat Mode">
+                    <button class="mode-btn active" id="modeAsciiBtn" title="Zei's Cat Mode">
                         <span class="mode-tag">ASCII Cat</span>
                     </button>
                     <button class="mode-btn" id="modeBongoBtn" title="Bongo Cat Mode">
                         <span class="mode-tag">Bongo Cat</span>
+                    </button>
+                    <button class="mode-btn" id="modeNoneBtn" title="Hide Cat Companion">
+                        <span class="mode-tag">No Cat</span>
                     </button>
                 </div>
 
@@ -348,6 +351,7 @@
                     <select id="settingCatMode" class="setting-select">
                         <option value="ascii">Zei's ASCII Cat</option>
                         <option value="bongo">Bongo Cat</option>
+                        <option value="none">No Cat (Hidden)</option>
                     </select>
                 </div>
 
