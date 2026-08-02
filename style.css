@@ -1648,7 +1648,68 @@ a.shortcut-item:link {
     border-radius: 10px;
     font-family: inherit;
     font-size: 0.85rem;
-    outline: none;
+}
+
+/* Multiple Choice Weather Search Dropdown */
+.weather-search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.weather-search-results {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    background: var(--cat-mantle);
+    border: 1px solid var(--cat-mauve);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    max-height: 220px;
+    overflow-y: auto;
+    display: none;
+}
+
+.weather-search-results.open {
+    display: flex;
+    flex-direction: column;
+}
+
+.weather-choice-option {
+    padding: 0.65rem 0.9rem;
+    font-size: 0.88rem;
+    color: var(--cat-text);
+    cursor: pointer;
+    border-bottom: 1px solid var(--cat-surface0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.15s ease;
+}
+
+.weather-choice-option:last-child {
+    border-bottom: none;
+}
+
+.weather-choice-option:hover {
+    background: var(--cat-surface0);
+    color: var(--cat-mauve);
+}
+
+.weather-choice-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.weather-choice-name {
+    font-weight: 600;
+}
+
+.weather-choice-sub {
+    font-size: 0.75rem;
+    color: var(--cat-subtext0);
+}    outline: none;
     transition: all 0.2s ease;
 }
 

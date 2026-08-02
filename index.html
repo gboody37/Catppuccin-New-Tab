@@ -406,12 +406,15 @@
                     </label>
                 </div>
 
-                <div class="setting-item">
-                    <div class="setting-info">
+                <div class="setting-item flex-col align-start">
+                    <div class="setting-info w-full">
                         <label for="settingWeatherCity">Weather Location</label>
-                        <span class="setting-desc">Enter manual city name or leave blank for auto-detect</span>
+                        <span class="setting-desc">Type to pick from multiple choice location results, or leave blank for auto-detect</span>
                     </div>
-                    <input type="text" id="settingWeatherCity" class="setting-input" placeholder="e.g. Tokyo or London">
+                    <div class="weather-search-wrapper w-full">
+                        <input type="text" id="settingWeatherCity" class="setting-input w-full" placeholder="Type city or country (e.g. Riyadh, Jordan, London)..." autocomplete="off">
+                        <div class="weather-search-results" id="weatherSearchResults"></div>
+                    </div>
                 </div>
             </div>
             <div class="modal-actions">

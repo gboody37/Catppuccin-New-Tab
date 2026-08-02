@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Catppuccin Bongo New Tab",
-  "version": "1.4.0",
-  "description": "A sleek, minimal Catppuccin-themed New Tab page featuring Zei's Cat, Bongo Cat, No Cat mode, 9 aesthetic color themes, multi-engine search, Gemini AI integration, real-time global weather, and focus audio.",
+  "version": "1.5.0",
+  "description": "A sleek, minimal Catppuccin-themed New Tab page featuring Zei's Cat, Bongo Cat, No Cat mode, 9 aesthetic color themes, multi-engine search, Gemini AI integration, real-time multiple choice weather search, and focus audio.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

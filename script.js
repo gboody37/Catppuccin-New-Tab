@@ -500,6 +500,70 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Multiple Choice Location Weather Controller
+    const settingWeatherCity = document.getElementById('settingWeatherCity');
+    const weatherSearchResults = document.getElementById('weatherSearchResults');
+
+    let weatherDebounceTimer = null;
+
+    if (settingWeatherCity && weatherSearchResults) {
+        settingWeatherCity.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            clearTimeout(weatherDebounceTimer);
+
+            if (query.length < 2) {
+                weatherSearchResults.classList.remove('open');
+                weatherSearchResults.innerHTML = '';
+                return;
+            }
+
+            weatherDebounceTimer = setTimeout(async () => {
+                try {
+                    const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=6&language=en`);
+                    const data = await res.json();
+                    
+                    weatherSearchResults.innerHTML = '';
+                    if (data.results && data.results.length > 0) {
+                        data.results.forEach(loc => {
+                            const choice = document.createElement('div');
+                            choice.className = 'weather-choice-option';
+                            
+                            const nameText = loc.name;
+                            const subText = [loc.admin1, loc.country].filter(Boolean).join(', ');
+                            
+                            choice.innerHTML = `
+                                <div class="weather-choice-details">
+                                    <span class="weather-choice-name">${nameText}</span>
+                                    <span class="weather-choice-sub">${subText}</span>
+                                </div>
+                                <span class="weather-choice-country">${loc.country_code || ''}</span>
+                            `;
+                            
+                            choice.addEventListener('click', () => {
+                                const selectedName = subText ? `${loc.name}, ${loc.country}` : loc.name;
+                                settingWeatherCity.value = loc.name;
+                                localStorage.setItem('catWeatherCity', loc.name);
+                                fetchWeatherByCity(loc.name);
+                                weatherSearchResults.classList.remove('open');
+                            });
+                            
+                            weatherSearchResults.appendChild(choice);
+                        });
+                        weatherSearchResults.classList.add('open');
+                    } else {
+                        weatherSearchResults.classList.remove('open');
+                    }
+                } catch (err) {}
+            }, 250);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!weatherSearchResults.contains(e.target) && e.target !== settingWeatherCity) {
+                weatherSearchResults.classList.remove('open');
+            }
+        });
+    }
+
     function initWeather() {
         const savedCity = localStorage.getItem('catWeatherCity');
         if (savedCity) {
@@ -519,8 +583,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (data.current_weather) {
                             const temp = `${Math.round(data.current_weather.temperature)}°C`;
                             const city = 'Local Weather';
-                            weatherTemp.textContent = temp;
-                            weatherCity.textContent = city;
+                            if (weatherTemp) weatherTemp.textContent = temp;
+                            if (weatherCity) weatherCity.textContent = city;
                             if (weatherPopupCity) weatherPopupCity.textContent = city;
 
                             const code = data.current_weather.weathercode;
