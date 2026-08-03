@@ -113,7 +113,7 @@ function mainInit() {
     const bongoCatContainer = document.getElementById('bongoCatContainer');
 
     function applyCompanion(companionKey) {
-        if (!animalGraphics[companionKey] && companionKey !== 'bongo') companionKey = 'cat';
+        if (!(companionKey in animalGraphics) && companionKey !== 'bongo') companionKey = 'cat';
         state.companion = companionKey;
         syncStateSave('catCompanion', companionKey);
 
