@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const state = {
         theme: localStorage.getItem('catTheme') || 'mocha',
         mode: localStorage.getItem('catMode') || 'ascii', // Default to Zei ASCII Mode!
-        hasBgImage: localStorage.getItem('hasBgImage') !== 'false',
+        hasBgImage: localStorage.getItem('hasBgImage') === 'true',
         soundEnabled: localStorage.getItem('soundEnabled') === 'true',
         searchEngine: localStorage.getItem('searchEngine') || 'google',
         shortcuts: JSON.parse(localStorage.getItem('shortcuts')) || [
