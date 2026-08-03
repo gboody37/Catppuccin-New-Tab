@@ -190,25 +190,28 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyWallpaperState() {
         if (state.hasBgImage) {
             document.body.classList.add('has-bg-image');
-            toggleWallpaperBtn.style.color = 'var(--cat-mauve)';
+            if (toggleWallpaperBtn) toggleWallpaperBtn.style.color = 'var(--cat-mauve)';
         } else {
             document.body.classList.remove('has-bg-image');
-            toggleWallpaperBtn.style.color = 'var(--cat-subtext0)';
+            if (toggleWallpaperBtn) toggleWallpaperBtn.style.color = 'var(--cat-subtext0)';
         }
     }
     applyWallpaperState();
 
-    toggleWallpaperBtn.addEventListener('click', () => {
-        state.hasBgImage = !state.hasBgImage;
-        localStorage.setItem('hasBgImage', state.hasBgImage);
-        applyWallpaperState();
-    });
+    if (toggleWallpaperBtn) {
+        toggleWallpaperBtn.addEventListener('click', () => {
+            state.hasBgImage = !state.hasBgImage;
+            localStorage.setItem('hasBgImage', state.hasBgImage);
+            applyWallpaperState();
+        });
+    }
 
     // ==========================================
     // AUDIO SYNTHESIZER
     // ==========================================
     const toggleSoundBtn = document.getElementById('toggleSoundBtn');
     const updateSoundBtnUI = () => {
+        if (!toggleSoundBtn) return;
         if (state.soundEnabled) {
             toggleSoundBtn.classList.add('active-sound');
             toggleSoundBtn.innerHTML = svgIcons.soundOn;
@@ -221,11 +224,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     updateSoundBtnUI();
 
-    toggleSoundBtn.addEventListener('click', () => {
-        state.soundEnabled = !state.soundEnabled;
-        localStorage.setItem('soundEnabled', state.soundEnabled);
-        updateSoundBtnUI();
-    });
+    if (toggleSoundBtn) {
+        toggleSoundBtn.addEventListener('click', () => {
+            state.soundEnabled = !state.soundEnabled;
+            localStorage.setItem('soundEnabled', state.soundEnabled);
+            updateSoundBtnUI();
+        });
+    }
 
     let audioCtx = null;
     function playTypeSound() {
@@ -274,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let idleTimeout = null;
 
     function tapPaw() {
-        if (state.mode === 'ascii') {
+        if (state.companion !== 'bongo') {
             reactAsciiCat();
             return;
         }
@@ -283,47 +288,47 @@ document.addEventListener('DOMContentLoaded', () => {
         wakeCatUp();
 
         if (currentPaw === 'left') {
-            pawLeftUp.classList.add('hidden');
-            pawLeftDown.classList.remove('hidden');
-            pawRightUp.classList.remove('hidden');
-            pawRightDown.classList.add('hidden');
+            if (pawLeftUp) pawLeftUp.classList.add('hidden');
+            if (pawLeftDown) pawLeftDown.classList.remove('hidden');
+            if (pawRightUp) pawRightUp.classList.remove('hidden');
+            if (pawRightDown) pawRightDown.classList.add('hidden');
             currentPaw = 'right';
         } else {
-            pawRightUp.classList.add('hidden');
-            pawRightDown.classList.remove('hidden');
-            pawLeftUp.classList.remove('hidden');
-            pawLeftDown.classList.add('hidden');
+            if (pawRightUp) pawRightUp.classList.add('hidden');
+            if (pawRightDown) pawRightDown.classList.remove('hidden');
+            if (pawLeftUp) pawLeftUp.classList.remove('hidden');
+            if (pawLeftDown) pawLeftDown.classList.add('hidden');
             currentPaw = 'left';
         }
 
         clearTimeout(pawResetTimeout);
         pawResetTimeout = setTimeout(() => {
-            pawLeftUp.classList.remove('hidden');
-            pawLeftDown.classList.add('hidden');
-            pawRightUp.classList.remove('hidden');
-            pawRightDown.classList.add('hidden');
+            if (pawLeftUp) pawLeftUp.classList.remove('hidden');
+            if (pawLeftDown) pawLeftDown.classList.add('hidden');
+            if (pawRightUp) pawRightUp.classList.remove('hidden');
+            if (pawRightDown) pawRightDown.classList.add('hidden');
         }, 150);
     }
 
     function wakeCatUp() {
-        eyesSleepy.classList.add('hidden');
-        eyesOpen.classList.remove('hidden');
+        if (eyesSleepy) eyesSleepy.classList.add('hidden');
+        if (eyesOpen) eyesOpen.classList.remove('hidden');
         resetIdleTimer();
     }
 
     function resetIdleTimer() {
         clearTimeout(idleTimeout);
         idleTimeout = setTimeout(() => {
-            eyesOpen.classList.add('hidden');
-            eyesHappy.classList.add('hidden');
-            eyesSleepy.classList.remove('hidden');
+            if (eyesOpen) eyesOpen.classList.add('hidden');
+            if (eyesHappy) eyesHappy.classList.add('hidden');
+            if (eyesSleepy) eyesSleepy.classList.remove('hidden');
         }, 20000);
     }
     resetIdleTimer();
 
     // Mouse Tracking Pupils
     document.addEventListener('mousemove', (e) => {
-        if (state.mode !== 'bongo') return;
+        if (!bongoCat || state.companion !== 'bongo') return;
         wakeCatUp();
         const rect = bongoCat.getBoundingClientRect();
         const catCenterX = rect.left + rect.width / 2;
@@ -336,10 +341,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const pupilX = deltaX * maxOffset;
         const pupilY = deltaY * maxOffset;
 
-        pupilLeft.setAttribute('cx', 205 + pupilX);
-        pupilLeft.setAttribute('cy', 150 + pupilY);
-        pupilRight.setAttribute('cx', 295 + pupilX);
-        pupilRight.setAttribute('cy', 150 + pupilY);
+        if (pupilLeft) {
+            pupilLeft.setAttribute('cx', 205 + pupilX);
+            pupilLeft.setAttribute('cy', 150 + pupilY);
+        }
+        if (pupilRight) {
+            pupilRight.setAttribute('cx', 295 + pupilX);
+            pupilRight.setAttribute('cy', 150 + pupilY);
+        }
     });
 
     // Keypress Event Handler
@@ -348,25 +357,28 @@ document.addEventListener('DOMContentLoaded', () => {
             tapPaw();
         } else if (e.key === '/') {
             e.preventDefault();
-            document.getElementById('searchInput').focus();
+            const sInput = document.getElementById('searchInput');
+            if (sInput) sInput.focus();
         }
     });
 
-    bongoCat.addEventListener('click', () => {
-        eyesOpen.classList.add('hidden');
-        eyesSleepy.classList.add('hidden');
-        eyesHappy.classList.remove('hidden');
-        catMouth.classList.add('hidden');
-        catMouthOpen.classList.remove('hidden');
-        playTypeSound();
+    if (bongoCat) {
+        bongoCat.addEventListener('click', () => {
+            if (eyesOpen) eyesOpen.classList.add('hidden');
+            if (eyesSleepy) eyesSleepy.classList.add('hidden');
+            if (eyesHappy) eyesHappy.classList.remove('hidden');
+            if (catMouth) catMouth.classList.add('hidden');
+            if (catMouthOpen) catMouthOpen.classList.remove('hidden');
+            playTypeSound();
 
-        setTimeout(() => {
-            eyesHappy.classList.add('hidden');
-            catMouthOpen.classList.add('hidden');
-            eyesOpen.classList.remove('hidden');
-            catMouth.classList.remove('hidden');
-        }, 1500);
-    });
+            setTimeout(() => {
+                if (eyesHappy) eyesHappy.classList.add('hidden');
+                if (catMouthOpen) catMouthOpen.classList.add('hidden');
+                if (eyesOpen) eyesOpen.classList.remove('hidden');
+                if (catMouth) catMouth.classList.remove('hidden');
+            }, 1500);
+        });
+    }
 
     // ==========================================
     // CLOCK & GREETING
@@ -813,19 +825,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    searchForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const query = searchInput.value.trim();
-        if (!query) return;
+    if (searchForm) {
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!searchInput) return;
+            const query = searchInput.value.trim();
+            if (!query) return;
 
-        const isUrl = /^https?:\/\//i.test(query) || (query.includes('.') && !query.includes(' '));
-        if (isUrl) {
-            window.location.href = query.startsWith('http') ? query : `https://${query}`;
-        } else {
-            const searchUrl = engines[state.searchEngine].url + encodeURIComponent(query);
-            window.location.href = searchUrl;
-        }
-    });
+            const isUrl = /^https?:\/\//i.test(query) || (query.includes('.') && !query.includes(' '));
+            if (isUrl) {
+                window.location.href = query.startsWith('http') ? query : `https://${query}`;
+            } else {
+                const engineObj = engines[state.searchEngine] || engines.google;
+                const searchUrl = engineObj.url + encodeURIComponent(query);
+                window.location.href = searchUrl;
+            }
+        });
+    }
 
     // ==========================================
     // SHORTCUTS MANAGER (Drag & Drop Reordering)
@@ -1028,18 +1044,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderShortcuts();
 
-    addShortcutBtn.addEventListener('click', openAddShortcutModal);
-    closeModalBtn.addEventListener('click', () => modalOverlay.classList.remove('open'));
-    modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) modalOverlay.classList.remove('open');
-    });
+    if (addShortcutBtn) addShortcutBtn.addEventListener('click', openAddShortcutModal);
+    if (closeModalBtn && modalOverlay) closeModalBtn.addEventListener('click', () => modalOverlay.classList.remove('open'));
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) modalOverlay.classList.remove('open');
+        });
+    }
 
-    addShortcutForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const editId = shortcutEditId.value;
-        const title = shortcutTitle.value.trim();
-        let url = shortcutUrl.value.trim();
-        const iconKey = shortcutIcon.value || 'link';
+    if (addShortcutForm) {
+        addShortcutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const editId = shortcutEditId ? shortcutEditId.value : '';
+            const title = shortcutTitle ? shortcutTitle.value.trim() : '';
+            let url = shortcutUrl ? shortcutUrl.value.trim() : '';
+            const iconKey = shortcutIcon ? shortcutIcon.value || 'link' : 'link';
 
         if (!url.startsWith('http://') && !url.startsWith('https://')) {
             url = 'https://' + url;
