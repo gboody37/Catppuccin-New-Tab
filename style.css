@@ -350,34 +350,43 @@
     --accent-glow: rgba(136, 192, 208, 0.45);
 }
 
-/* Theme: Sakura Rose Gold 🌸 */
+/* Theme: Sakura Cherry Blossom 🌸 */
 [data-theme="sakura"] {
-    --cat-rosewater: #f2cdcd;
-    --cat-mauve:     #f4b8e4;
-    --cat-red:       #e8a2af;
-    --cat-peach:     #f5a97f;
-    --cat-yellow:    #f9e2af;
-    --cat-green:     #a6da95;
-    --cat-teal:      #8bd5ca;
-    --cat-sky:       #91d7e3;
-    --cat-text:      #fff0f5;
-    --cat-subtext1:  #e6c8da;
-    --cat-subtext0:  #c29bb3;
-    --cat-surface2:  #4f2b45;
-    --cat-surface1:  #3d2135;
-    --cat-surface0:  #2e1828;
-    --cat-base:      #23121e;
-    --cat-mantle:    #1b0d17;
-    --cat-crust:     #140810;
+    --cat-rosewater: #ffb3c1;
+    --cat-flamingo:  #ff85a1;
+    --cat-pink:      #ff758f;
+    --cat-mauve:     #ff4d6d;
+    --cat-red:       #c9184a;
+    --cat-maroon:    #ff5c8a;
+    --cat-peach:     #ff7b00;
+    --cat-yellow:    #e5c158;
+    --cat-green:     #70e000;
+    --cat-teal:      #00c49f;
+    --cat-sky:       #4ea8de;
+    --cat-sapphire:  #3a0ca3;
+    --cat-blue:      #4361ee;
+    --cat-lavender:  #b5179e;
+    --cat-text:      #590d22;
+    --cat-subtext1:  #800f2f;
+    --cat-subtext0:  #a4133c;
+    --cat-overlay2:  #ff85a1;
+    --cat-overlay1:  #ffb3c1;
+    --cat-overlay0:  #ffccd5;
+    --cat-surface2:  #ffe5ec;
+    --cat-surface1:  #fff0f5;
+    --cat-surface0:  #ffffff;
+    --cat-base:      #fff0f5;
+    --cat-mantle:    #ffe5ec;
+    --cat-crust:     #ffccd5;
 
-    --bg-glass: rgba(35, 18, 30, 0.88);
-    --bg-glass-card: rgba(61, 33, 53, 0.65);
-    --border-glass: rgba(244, 184, 228, 0.35);
-    --accent-glow: rgba(244, 184, 228, 0.45);
+    --bg-glass: rgba(255, 240, 245, 0.85);
+    --bg-glass-card: rgba(255, 229, 236, 0.7);
+    --border-glass: rgba(255, 117, 143, 0.4);
+    --accent-glow: rgba(255, 117, 143, 0.35);
 }
 
-/* Theme: Hot Sakura 🌺 */
-[data-theme="hot-sakura"] {
+/* Theme: Hot Pink 🌺 */
+[data-theme="hot-pink"] {
     --cat-rosewater: #ffd9ec;
     --cat-flamingo:  #ffb3d9;
     --cat-pink:      #ff007f;
@@ -983,7 +992,7 @@ body[data-theme="latte"] .bg-overlay {
 .dracula-dot { background: #bd93f9; }
 .nord-dot { background: #88c0d0; }
 .sakura-dot { background: #f4b8e4; }
-.hot-sakura-dot { background: #ff007f; }
+.hot-pink-dot { background: #ff007f; }
 .toxic-dot { background: #39ff14; }
 .lavender-dot { background: #ddb6f2; }
 

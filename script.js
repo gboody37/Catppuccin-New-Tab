@@ -162,7 +162,7 @@ function mainInit() {
         'dracula': 'Dracula Dark',
         'nord': 'Nordic Frost',
         'sakura': 'Sakura Rose Gold',
-        'hot-sakura': 'Hot Sakura',
+        'hot-pink': 'Hot Pink',
         'toxic': 'Toxic Poison Green',
         'midnight-lavender': 'Midnight Lavender'
     };
