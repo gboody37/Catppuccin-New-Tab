@@ -740,28 +740,37 @@ document.addEventListener('DOMContentLoaded', () => {
         perplexity: { name: 'Perplexity', iconKey: 'perplexity', url: 'https://www.perplexity.ai/search?q=' }
     };
 
+    const headerEngineDropdown = document.querySelector('.header-engine-dropdown');
+
     function setEngine(engineKey) {
         if (!engines[engineKey]) engineKey = 'google';
         state.searchEngine = engineKey;
         localStorage.setItem('searchEngine', engineKey);
 
-        engineIcon.innerHTML = svgIcons[engines[engineKey].iconKey] || svgIcons.google;
+        if (engineIcon) engineIcon.innerHTML = svgIcons[engines[engineKey].iconKey] || svgIcons.google;
 
         document.querySelectorAll('.engine-option').forEach(opt => {
             opt.classList.toggle('active', opt.dataset.engine === engineKey);
         });
 
-        engineMenu.classList.remove('open');
+        if (headerEngineDropdown) headerEngineDropdown.classList.remove('open');
+        if (engineMenu) engineMenu.classList.remove('open');
     }
 
     setEngine(state.searchEngine);
 
-    engineBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        engineMenu.classList.toggle('open');
-    });
+    if (engineBtn) {
+        engineBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (headerEngineDropdown) headerEngineDropdown.classList.toggle('open');
+        });
+    }
 
-    document.addEventListener('click', () => engineMenu.classList.remove('open'));
+    document.addEventListener('click', (e) => {
+        if (headerEngineDropdown && !headerEngineDropdown.contains(e.target)) {
+            headerEngineDropdown.classList.remove('open');
+        }
+    });
 
     document.querySelectorAll('.engine-option').forEach(opt => {
         opt.addEventListener('click', () => setEngine(opt.dataset.engine));

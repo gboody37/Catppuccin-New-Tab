@@ -649,6 +649,36 @@ body[data-theme="latte"] .bg-overlay {
     color: var(--cat-mauve);
 }
 
+/* Header Engine Selector Dropdown */
+.header-engine-dropdown {
+    position: relative;
+}
+
+.header-engine-dropdown .engine-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    left: auto;
+    width: 170px;
+    background: var(--cat-surface0);
+    border: 1px solid var(--cat-surface1);
+    border-radius: 12px;
+    padding: 0.4rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(16px);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: all 0.2s ease;
+}
+
+.header-engine-dropdown.open .engine-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
 /* Shortcut Drag and Drop Styling */
 .shortcut-item.dragging {
     opacity: 0.4;
