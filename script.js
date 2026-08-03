@@ -162,6 +162,7 @@ function mainInit() {
         'dracula': 'Dracula Dark',
         'nord': 'Nordic Frost',
         'sakura': 'Sakura Rose Gold',
+        'hot-sakura': 'Hot Sakura',
         'toxic': 'Toxic Poison Green',
         'midnight-lavender': 'Midnight Lavender'
     };
@@ -1494,12 +1495,12 @@ function mainInit() {
 
             // Apply Sound
             state.soundEnabled = settingSoundToggle.checked;
-            localStorage.setItem('catSoundEnabled', state.soundEnabled);
+            localStorage.setItem('soundEnabled', state.soundEnabled);
             updateSoundIcon();
 
             // Apply Wallpaper Layer
             state.hasBgImage = settingBgToggle.checked;
-            localStorage.setItem('catHasBgImage', state.hasBgImage);
+            localStorage.setItem('hasBgImage', state.hasBgImage);
             applyWallpaperState();
 
             // Apply Custom Weather City

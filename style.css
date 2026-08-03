@@ -376,6 +376,42 @@
     --accent-glow: rgba(244, 184, 228, 0.45);
 }
 
+/* Theme: Hot Sakura 🌺 */
+[data-theme="hot-sakura"] {
+    --cat-rosewater: #ffd9ec;
+    --cat-flamingo:  #ffb3d9;
+    --cat-pink:      #ff007f;
+    --cat-mauve:     #ff3399;
+    --cat-red:       #ff1744;
+    --cat-maroon:    #ff4081;
+    --cat-peach:     #ff6d00;
+    --cat-yellow:    #ffd600;
+    --cat-green:     #00e676;
+    --cat-teal:      #00e5ff;
+    --cat-sky:       #00b0ff;
+    --cat-sapphire:  #2979ff;
+    --cat-blue:      #3d5afe;
+    --cat-lavender:  #d580ff;
+    --cat-text:      #fff5fa;
+    --cat-subtext1:  #ffccfa;
+    --cat-subtext0:  #ff99f0;
+    --cat-overlay2:  #d670b8;
+    --cat-overlay1:  #b35398;
+    --cat-overlay0:  #903b77;
+    --cat-surface2:  #6c1c54;
+    --cat-surface1:  #4f103c;
+    --cat-surface0:  #340525;
+    --cat-base:      #1e0414;
+    --cat-mantle:    #16020e;
+    --cat-crust:     #0f0009;
+
+    --bg-glass: rgba(30, 4, 20, 0.82);
+    --bg-glass-card: rgba(79, 16, 60, 0.6);
+    --border-glass: rgba(255, 0, 127, 0.45);
+    --accent-glow: rgba(255, 0, 127, 0.55);
+}
+
+
 /* Theme: Toxic Poison */
 [data-theme="toxic"] {
     --cat-rosewater: #d7fcb0;
@@ -470,6 +506,7 @@
 }
 
 body {
+    position: relative;
     background-color: var(--cat-base);
     color: var(--cat-text);
     min-height: 100vh;
@@ -553,12 +590,13 @@ body[data-theme="latte"] .bg-overlay {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
+    z-index: 1;
     pointer-events: none;
     transition: opacity 0.5s ease;
 }
 
 .app-container {
+    position: relative;
     width: 100%;
     max-width: 1100px;
     min-height: 100vh;
@@ -567,7 +605,7 @@ body[data-theme="latte"] .bg-overlay {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    z-index: 1;
+    z-index: 2;
 }
 
 /* ==========================================
@@ -945,6 +983,7 @@ body[data-theme="latte"] .bg-overlay {
 .dracula-dot { background: #bd93f9; }
 .nord-dot { background: #88c0d0; }
 .sakura-dot { background: #f4b8e4; }
+.hot-sakura-dot { background: #ff007f; }
 .toxic-dot { background: #39ff14; }
 .lavender-dot { background: #ddb6f2; }
 
@@ -1012,7 +1051,7 @@ body[data-theme="latte"] .bg-overlay {
     color: var(--cat-mauve);
 }
 
-/* Zei Cat ASCII Art & Companion Styling */
+/* Zei Cat Image & Companion Styling */
 .ascii-cat-container {
     display: flex;
     justify-content: center;
@@ -1022,32 +1061,10 @@ body[data-theme="latte"] .bg-overlay {
     min-height: 140px;
 }
 
-.cat-ascii {
-    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-    font-size: 1.6rem;
-    line-height: 1.35;
-    color: var(--cat-text);
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    text-shadow:
-        0 0 12px var(--accent-glow),
-        0 0 30px var(--cat-mauve);
-    filter: drop-shadow(0 0 15px var(--accent-glow));
-    animation: catFloat 3.5s ease-in-out infinite alternate;
-    transition: transform 0.25s ease;
-    user-select: none;
-}
-
-.ascii-cat-container:hover .cat-ascii {
-    transform: scale(1.06);
-}
-
 .cat-image {
     display: block;
-    width: 220px;
+    width: 125px;
     height: auto;
-    max-height: 180px;
     object-fit: contain;
     filter: drop-shadow(0 0 10px var(--accent-glow)) drop-shadow(0 0 25px var(--cat-mauve));
     animation: catFloat 3.5s ease-in-out infinite alternate;
@@ -1107,34 +1124,11 @@ body[data-theme="latte"] .bg-overlay {
     margin: auto 0;
 }
 
-/* Zei's Exact ASCII Cat */
-.ascii-cat-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.cat-image {
-    width: 220px;
-    height: auto;
-    background: transparent;
-    filter: drop-shadow(0 0 16px var(--cat-mauve));
-    user-select: none;
-    cursor: pointer;
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
 .cat-image.animal-giraffe { width: 150px; }
 .cat-image.animal-panda { width: 170px; }
 .cat-image.animal-fox { width: 160px; }
 .cat-image.animal-dog { width: 150px; }
 .cat-image.animal-whale { width: 160px; }
-
-.cat-image:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.7));
-}
 
 /* Bongo Cat SVG Container */
 .bongo-container {
