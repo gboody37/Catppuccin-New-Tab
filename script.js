@@ -1581,15 +1581,18 @@ function mainInit() {
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
 
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+        // Ensure activeParticleColor is correctly loaded from current parsed document styles
+        updateParticleColor();
+
+        let width = canvas.width = window.innerWidth || 800;
+        let height = canvas.height = window.innerHeight || 600;
 
         window.addEventListener('resize', () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         });
 
-        const stars = Array.from({ length: 50 }, () => ({
+        const stars = Array.from({ length: 80 }, () => ({
             x: Math.random() * width,
             y: Math.random() * height,
             radius: Math.random() * 2 + 0.5,
@@ -1599,19 +1602,27 @@ function mainInit() {
         }));
 
         function animate() {
+            // Dynamic check in case resize event didn't trigger correctly or window started at 0
+            if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+
             ctx.clearRect(0, 0, width, height);
 
             stars.forEach(s => {
                 s.alpha += s.speed;
                 s.y += s.vy;
-                if (s.y < 0) {
+
+                // Reset position if particle goes off-screen or bounds change
+                if (s.y < 0 || s.y > height || s.x > width) {
                     s.y = height;
                     s.x = Math.random() * width;
                 }
 
                 const opacity = (Math.sin(s.alpha) + 1) / 2 * 0.7 + 0.2;
-                ctx.fillStyle = activeParticleColor;
-                ctx.globalAlpha = opacity * 0.6;
+                ctx.fillStyle = activeParticleColor || '#b4bfe7';
+                ctx.globalAlpha = opacity * 0.7; // slightly brighter
                 ctx.beginPath();
                 ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
                 ctx.fill();
