@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Catppuccin Bongo New Tab",
-  "version": "2.0.1",
-  "description": "Fix date loading text and ensure instant date rendering on startup.",
+  "version": "2.1.0",
+  "description": "v2.1: City/Country Timezone clock selector in Settings (Amman, Riyadh, Dubai, London, New York, etc.), automatic weather fallback (Amman, Jordan), and guaranteed bookmarks rendering.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

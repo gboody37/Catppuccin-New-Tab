@@ -52,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
         companion: localStorage.getItem('catCompanion') || 'cat', // Default to Zei Cat!
         hasBgImage: localStorage.getItem('hasBgImage') === 'true',
         soundEnabled: localStorage.getItem('soundEnabled') === 'true',
+        clockFormat: localStorage.getItem('catClockFormat') || '24',
+        timezone: localStorage.getItem('catTimezone') || 'auto',
         searchEngine: localStorage.getItem('searchEngine') || 'google',
         shortcuts: JSON.parse(localStorage.getItem('shortcuts')) || [
             { id: '1', title: 'YouTube', url: 'https://youtube.com', icon: 'youtube' },
@@ -375,8 +377,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateClock() {
         const now = new Date();
-        const rawHours = now.getHours();
-        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const timeZoneOption = (state.timezone && state.timezone !== 'auto') ? { timeZone: state.timezone } : {};
+
+        let rawHours, minutes;
+        if (state.timezone && state.timezone !== 'auto') {
+            try {
+                const formatter = new Intl.DateTimeFormat('en-US', { ...timeZoneOption, hour: 'numeric', minute: '2-digit', hour12: false });
+                const parts = formatter.formatToParts(now);
+                const hPart = parts.find(p => p.type === 'hour');
+                const mPart = parts.find(p => p.type === 'minute');
+                rawHours = parseInt(hPart ? hPart.value : now.getHours(), 10);
+                minutes = mPart ? mPart.value : String(now.getMinutes()).padStart(2, '0');
+            } catch (e) {
+                rawHours = now.getHours();
+                minutes = String(now.getMinutes()).padStart(2, '0');
+            }
+        } else {
+            rawHours = now.getHours();
+            minutes = String(now.getMinutes()).padStart(2, '0');
+        }
 
         if (timeDisplay) {
             if (state.clockFormat === '12') {
@@ -390,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (dateDisplay) {
-            const options = { weekday: 'long', month: 'short', day: 'numeric' };
+            const options = { weekday: 'long', month: 'short', day: 'numeric', ...timeZoneOption };
             dateDisplay.textContent = now.toLocaleDateString(undefined, options);
         }
 
@@ -592,40 +611,23 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        setTimeout(() => {
-            if (!navigator.geolocation) return;
+        // Try geolocation, fallback to Amman, Jordan if not granted
+        if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 async (pos) => {
                     try {
                         const lat = pos.coords.latitude;
                         const lon = pos.coords.longitude;
-                        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m,precipitation`);
-                        const data = await res.json();
-                        if (data.current_weather) {
-                            const temp = `${Math.round(data.current_weather.temperature)}°C`;
-                            const city = 'Local Weather';
-                            if (weatherTemp) weatherTemp.textContent = temp;
-                            if (weatherCity) weatherCity.textContent = city;
-                            if (weatherPopupCity) weatherPopupCity.textContent = city;
-
-                            const code = data.current_weather.weathercode;
-                            if (weatherCondition) weatherCondition.textContent = weatherCodeMap[code] || 'Clear Sky';
-                            if (weatherWind) weatherWind.textContent = `${data.current_weather.windspeed} km/h`;
-                            if (weatherHumidity && data.hourly && data.hourly.relativehumidity_2m) {
-                                weatherHumidity.textContent = `${data.hourly.relativehumidity_2m[0]}%`;
-                            }
-                            if (weatherRain && data.hourly && data.hourly.precipitation) {
-                                weatherRain.textContent = `${data.hourly.precipitation[0]} mm`;
-                            }
-
-                            localStorage.setItem('catWeather', JSON.stringify({ temp, city }));
-                        }
-                    } catch (e) {}
+                        await fetchWeatherByCoords(lat, lon, 'Local Weather', '');
+                    } catch (e) {
+                        fetchWeatherByCity('Amman, Jordan');
+                    }
                 },
-                () => {},
-                { timeout: 1500, maximumAge: 600000 }
+                () => {
+                    fetchWeatherByCity('Amman, Jordan');
+                },
+                { timeout: 5000 }
             );
-        }, 100);
     }
     initWeather();
 
@@ -842,13 +844,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let draggedItemIndex = null;
 
     function renderShortcuts() {
+        if (!shortcutsGrid) return;
+        if (!Array.isArray(state.shortcuts) || state.shortcuts.length === 0) {
+            state.shortcuts = [
+                { id: '1', title: 'YouTube', url: 'https://youtube.com', icon: 'youtube' },
+                { id: '2', title: 'GitHub', url: 'https://github.com', icon: 'github' },
+                { id: '3', title: 'Reddit', url: 'https://reddit.com', icon: 'reddit' },
+                { id: '4', title: 'Gemini', url: 'https://gemini.google.com', icon: 'gemini' },
+                { id: '5', title: 'Twitter', url: 'https://x.com', icon: 'twitter' },
+                { id: '6', title: 'Kick', url: 'https://kick.com', icon: 'kick' }
+            ];
+            localStorage.setItem('shortcuts', JSON.stringify(state.shortcuts));
+        }
         shortcutsGrid.innerHTML = '';
         state.shortcuts.forEach((sc, index) => {
             const item = document.createElement('a');
             item.className = 'shortcut-item';
             item.href = sc.url;
             item.title = sc.title;
-            item.dataset.icon = sc.icon;
+            item.dataset.icon = sc.icon || 'link';
             item.draggable = true;
 
             // Drag and Drop Event Handlers
@@ -1243,11 +1257,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     state.clockFormat = localStorage.getItem('catClockFormat') || '24';
 
+    const settingTimezone = document.getElementById('settingTimezone');
+
     function openSettingsModal() {
         if (!settingsModalOverlay) return;
         if (settingCompanionSelect) settingCompanionSelect.value = state.companion;
         if (settingTheme) settingTheme.value = state.theme;
         if (settingClockFormat) settingClockFormat.value = state.clockFormat;
+        if (settingTimezone) settingTimezone.value = state.timezone;
         if (settingSoundToggle) settingSoundToggle.checked = state.soundEnabled;
         if (settingBgToggle) settingBgToggle.checked = state.hasBgImage;
         if (settingWeatherCity) settingWeatherCity.value = localStorage.getItem('catWeatherCity') || '';
@@ -1298,9 +1315,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Apply Theme
             applyTheme(settingTheme.value);
 
-            // Apply Clock Format
+            // Apply Clock Format & Timezone
             state.clockFormat = settingClockFormat.value;
             localStorage.setItem('catClockFormat', state.clockFormat);
+            if (settingTimezone) {
+                state.timezone = settingTimezone.value;
+                localStorage.setItem('catTimezone', state.timezone);
+            }
             updateClock();
 
             // Apply Sound
