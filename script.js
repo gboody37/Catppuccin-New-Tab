@@ -149,6 +149,12 @@ function mainInit() {
     // ==========================================
     // THEME CONTROLLER (9 Aesthetic Themes)
     // ==========================================
+    let activeParticleColor = '#b4bfe7';
+    function updateParticleColor() {
+        const style = getComputedStyle(document.documentElement);
+        const lavender = (style.getPropertyValue('--cat-lavender') || '').trim() || (style.getPropertyValue('--cat-pink') || '').trim() || '#b4bfe7';
+        activeParticleColor = lavender;
+    }
     const themeDropdownBtn = document.getElementById('themeDropdownBtn');
     const themeSelectorDropdown = document.querySelector('.theme-selector-dropdown');
     const themeActiveDot = document.getElementById('themeActiveDot');
@@ -189,6 +195,8 @@ function mainInit() {
 
         const settingThemeSelect = document.getElementById('settingTheme');
         if (settingThemeSelect) settingThemeSelect.value = themeName;
+
+        updateParticleColor();
     }
 
     applyTheme(state.theme);
@@ -1593,9 +1601,6 @@ function mainInit() {
         function animate() {
             ctx.clearRect(0, 0, width, height);
 
-            const style = getComputedStyle(document.documentElement);
-            const lavender = style.getPropertyValue('--cat-lavender').trim() || '#b4bfe7';
-
             stars.forEach(s => {
                 s.alpha += s.speed;
                 s.y += s.vy;
@@ -1605,7 +1610,7 @@ function mainInit() {
                 }
 
                 const opacity = (Math.sin(s.alpha) + 1) / 2 * 0.7 + 0.2;
-                ctx.fillStyle = lavender;
+                ctx.fillStyle = activeParticleColor;
                 ctx.globalAlpha = opacity * 0.6;
                 ctx.beginPath();
                 ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
