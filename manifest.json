@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Catppuccin Bongo New Tab",
-  "version": "2.1.2",
-  "description": "Fix script initialization for instant DOM execution.",
+  "version": "2.4.1",
+  "description": "A premium glassmorphic new tab extension featuring animal companions, 15 customizable themes, and live weather forecast.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
