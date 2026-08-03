@@ -378,26 +378,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const rawHours = now.getHours();
         const minutes = String(now.getMinutes()).padStart(2, '0');
 
-        if (state.clockFormat === '12') {
-            const displayHours = rawHours % 12 || 12;
-            const ampm = rawHours >= 12 ? 'PM' : 'AM';
-            timeDisplay.textContent = `${displayHours}:${minutes} ${ampm}`;
-        } else {
-            const hours = String(rawHours).padStart(2, '0');
-            timeDisplay.textContent = `${hours}:${minutes}`;
+        if (timeDisplay) {
+            if (state.clockFormat === '12') {
+                const displayHours = rawHours % 12 || 12;
+                const ampm = rawHours >= 12 ? 'PM' : 'AM';
+                timeDisplay.textContent = `${displayHours}:${minutes} ${ampm}`;
+            } else {
+                const hours = String(rawHours).padStart(2, '0');
+                timeDisplay.textContent = `${hours}:${minutes}`;
+            }
         }
 
-        const options = { weekday: 'long', month: 'short', day: 'numeric' };
-        dateDisplay.textContent = now.toLocaleDateString(undefined, options);
+        if (dateDisplay) {
+            const options = { weekday: 'long', month: 'short', day: 'numeric' };
+            dateDisplay.textContent = now.toLocaleDateString(undefined, options);
+        }
 
-        const hourNum = rawHours;
-        let greeting = 'Good Evening ✨';
-        if (hourNum >= 5 && hourNum < 12) greeting = 'Good Morning ✨';
-        else if (hourNum >= 12 && hourNum < 18) greeting = 'Good Afternoon ☀️';
-        else if (hourNum >= 18 && hourNum < 22) greeting = 'Good Evening 🌙';
-        else greeting = 'Night Owl Mode 🦉';
+        if (greetingDisplay) {
+            const hourNum = rawHours;
+            let greeting = 'Good Evening ✨';
+            if (hourNum >= 5 && hourNum < 12) greeting = 'Good Morning ✨';
+            else if (hourNum >= 12 && hourNum < 18) greeting = 'Good Afternoon ☀️';
+            else if (hourNum >= 18 && hourNum < 22) greeting = 'Good Evening 🌙';
+            else greeting = 'Night Owl Mode 🦉';
 
-        greetingDisplay.textContent = greeting;
+            greetingDisplay.textContent = greeting;
+        }
     }
 
     updateClock();

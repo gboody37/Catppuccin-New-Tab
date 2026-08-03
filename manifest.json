@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Catppuccin Bongo New Tab",
-  "version": "2.0.0",
-  "description": "Major Update v2.0: Expandable Pixel Animals (Cat, Frog, Giraffe, Dog, Bunny, Owl, Fox, Panda), YouTube & GIF live backgrounds, Nighttab-style Visual Icon Picker, search engine in searchbar, and factual satellite weather.",
+  "version": "2.0.1",
+  "description": "Fix date loading text and ensure instant date rendering on startup.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
