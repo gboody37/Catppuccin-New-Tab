@@ -26,6 +26,20 @@ document.addEventListener('DOMContentLoaded', () => {
         news: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>`,
         terminal: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10zm-12-7l4 3-4 3v-2l1.33-1L8 12.33V11zm9 5h-5v-1h5v1z"/></svg>`,
         link: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>`,
+        twitch: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>`,
+        spotify: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.376 0 0 5.377 0 12s5.376 12 12 12 12-5.377 12-12S18.624 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.18-.1.2-1.2-.42-.18-.6.42-1.2 1.02-1.38C9.3 6.18 16.38 6.42 20.88 9.06c.54.3.72 1.02.42 1.56-.3.48-1.02.72-1.56.42z"/></svg>`,
+        facebook: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`,
+        tiktok: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.82.56-1.31 1.56-1.27 2.56.02.86.43 1.71 1.11 2.22.86.66 2.05.78 3.07.41.97-.34 1.74-1.2 1.96-2.2.06-.41.05-.83.05-1.25V.02z"/></svg>`,
+        chatgpt: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M22.28 12.87c.2-1.07.03-2.19-.5-3.17-.79-1.47-2.24-2.42-3.89-2.58-.33-1.04-.97-1.94-1.85-2.58-1.43-1.04-3.32-1.27-4.97-.61-.83-.71-1.86-1.13-2.95-1.2-1.78-.11-3.49.67-4.49 2.05-1.01.12-1.97.58-2.73 1.3-1.24 1.17-1.77 2.9-1.39 4.56-.91.56-1.57 1.46-1.86 2.52-.47 1.73.06 3.57 1.37 4.79.13 1.07.6 2.08 1.34 2.87 1.21 1.28 3.01 1.86 4.75 1.5.71.82 1.67 1.39 2.74 1.62 1.75.38 3.56-.2 4.78-1.5.99-.07 1.94-.48 2.71-1.17 1.27-1.14 1.85-2.88 1.51-4.57.94-.52 1.64-1.4 1.97-2.47z"/></svg>`,
+        globe: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`,
+        star: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`,
+        heart: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`,
+        bookmark: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>`,
+        tv: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>`,
+        drive: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M7.71 3.5L1.15 15l3.43 6h13.14l3.43-6L14.57 3.5H7.71zm.86 1.5h6.86l5.14 9H15.14l-6.57-9zm-6.28 11l2.57-4.5 3.43 6H2.29zm8.57 0l3.43-6 5.14 9H10.86z"/></svg>`,
+        translate: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>`,
+        gaming: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H9v2H7v-2H5v-2h2V9h2v2h2v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>`,
+        shopping: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-9.83-3.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7.42c-.14 0-.25-.11-.25-.25z"/></svg>`,
         soundOn: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`,
         soundOff: `<svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>`
     };
@@ -35,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     const state = {
         theme: localStorage.getItem('catTheme') || 'mocha',
-        mode: localStorage.getItem('catMode') || 'ascii', // Default to Zei ASCII Mode!
+        companion: localStorage.getItem('catCompanion') || 'cat', // Default to Zei Cat!
         hasBgImage: localStorage.getItem('hasBgImage') === 'true',
         soundEnabled: localStorage.getItem('soundEnabled') === 'true',
         searchEngine: localStorage.getItem('searchEngine') || 'google',
@@ -56,48 +70,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // MODE CONTROLLER (ASCII vs Bongo vs No Cat)
+    // ANIMAL COMPANION CONTROLLER
     // ==========================================
     const asciiCatContainer = document.getElementById('asciiCatContainer');
-    const bongoCatContainer = document.getElementById('bongoCatContainer');
-    const modeAsciiBtn = document.getElementById('modeAsciiBtn');
-    const modeBongoBtn = document.getElementById('modeBongoBtn');
-    const modeNoneBtn = document.getElementById('modeNoneBtn');
+    const settingCompanionSelect = document.getElementById('settingCompanion');
 
-    function applyMode(modeName) {
-        state.mode = modeName;
-        localStorage.setItem('catMode', modeName);
+    const animalGraphics = {
+        cat: `<img id="catImage" class="cat-image" alt="Zei Cat" src="zei_cat_exact.png">`,
+        frog: `<svg class="pixel-animal-svg" viewBox="0 0 160 120" style="width: 140px; height: 100px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><path fill="none" stroke="var(--cat-mauve)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 40,80 Q 20,80 20,60 Q 20,40 40,40 Q 50,20 70,20 Q 80,20 80,40 Q 80,20 90,20 Q 110,20 120,40 Q 140,40 140,60 Q 140,80 120,80 Z"/><circle cx="50" cy="35" r="8" fill="var(--cat-mauve)"/><circle cx="110" cy="35" r="8" fill="var(--cat-mauve)"/><circle cx="50" cy="35" r="3" fill="var(--cat-base)"/><circle cx="110" cy="35" r="3" fill="var(--cat-base)"/><path d="M 60,60 Q 80,75 100,60" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><ellipse cx="35" cy="55" rx="6" ry="4" fill="var(--cat-pink)" opacity="0.6"/><ellipse cx="125" cy="55" rx="6" ry="4" fill="var(--cat-pink)" opacity="0.6"/></svg>`,
+        giraffe: `<svg class="pixel-animal-svg" viewBox="0 0 160 160" style="width: 140px; height: 130px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><path fill="none" stroke="var(--cat-mauve)" stroke-width="3" stroke-linecap="round" d="M 60,150 L 60,70 L 40,50 Q 30,50 30,35 Q 30,20 45,20 L 70,25 Q 85,25 90,40 L 80,80 L 80,150"/><circle cx="45" cy="15" r="3" fill="var(--cat-mauve)"/><line x1="45" y1="20" x2="45" y2="15" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="58" cy="15" r="3" fill="var(--cat-mauve)"/><line x1="55" y1="22" x2="58" y2="15" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="45" cy="32" r="3" fill="var(--cat-mauve)"/><ellipse cx="70" cy="90" rx="5" ry="8" fill="var(--cat-mauve)" opacity="0.7"/><ellipse cx="65" cy="115" rx="6" ry="9" fill="var(--cat-mauve)" opacity="0.7"/></svg>`,
+        dog: `<svg class="pixel-animal-svg" viewBox="0 0 160 120" style="width: 140px; height: 100px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><path fill="none" stroke="var(--cat-mauve)" stroke-width="3" stroke-linecap="round" d="M 40,90 Q 30,60 45,35 Q 50,15 65,15 Q 80,15 85,35 L 115,35 Q 130,35 130,55 Q 130,75 110,75 L 40,90 Z"/><polygon points="45,35 30,10 60,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><polygon points="85,35 100,10 70,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="52" cy="45" r="4" fill="var(--cat-mauve)"/><circle cx="78" cy="45" r="4" fill="var(--cat-mauve)"/><polygon points="65,55 60,62 70,62" fill="var(--cat-mauve)"/></svg>`,
+        bunny: `<svg class="pixel-animal-svg" viewBox="0 0 160 140" style="width: 140px; height: 120px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><path fill="none" stroke="var(--cat-mauve)" stroke-width="3" stroke-linecap="round" d="M 50,120 Q 35,80 50,60 Q 30,10 45,10 Q 60,10 60,50 Q 75,50 85,10 Q 100,10 90,50 Q 110,60 95,80 Q 110,120 50,120 Z"/><ellipse cx="50" cy="28" rx="4" ry="12" fill="var(--cat-pink)" opacity="0.5"/><ellipse cx="80" cy="28" rx="4" ry="12" fill="var(--cat-pink)" opacity="0.5"/><circle cx="55" cy="70" r="4" fill="var(--cat-mauve)"/><circle cx="85" cy="70" r="4" fill="var(--cat-mauve)"/><path d="M 67,78 L 73,78 L 70,83 Z" fill="var(--cat-pink)"/></svg>`,
+        owl: `<svg class="pixel-animal-svg" viewBox="0 0 160 140" style="width: 130px; height: 110px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><ellipse cx="80" cy="70" rx="45" ry="50" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><polygon points="45,30 35,10 60,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><polygon points="115,30 125,10 100,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="60" cy="65" r="16" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="100" cy="65" r="16" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="60" cy="65" r="6" fill="var(--cat-mauve)"/><circle cx="100" cy="65" r="6" fill="var(--cat-mauve)"/><polygon points="80,75 75,85 85,85" fill="var(--cat-peach)"/></svg>`,
+        fox: `<svg class="pixel-animal-svg" viewBox="0 0 160 130" style="width: 140px; height: 110px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><polygon points="80,110 30,40 130,40" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><polygon points="30,40 15,5 55,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><polygon points="130,40 145,5 105,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="55" cy="55" r="5" fill="var(--cat-mauve)"/><circle cx="105" cy="55" r="5" fill="var(--cat-mauve)"/><polygon points="80,110 73,98 87,98" fill="var(--cat-mauve)"/></svg>`,
+        panda: `<svg class="pixel-animal-svg" viewBox="0 0 160 130" style="width: 140px; height: 110px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><circle cx="80" cy="65" r="45" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="45" cy="30" r="14" fill="var(--cat-mauve)"/><circle cx="115" cy="30" r="14" fill="var(--cat-mauve)"/><ellipse cx="62" cy="62" rx="10" ry="14" fill="var(--cat-mauve)" transform="rotate(-15 62 62)"/><ellipse cx="98" cy="62" rx="10" ry="14" fill="var(--cat-mauve)" transform="rotate(15 98 62)"/><circle cx="62" cy="62" r="4" fill="var(--cat-base)"/><circle cx="98" cy="62" r="4" fill="var(--cat-base)"/><ellipse cx="80" cy="80" rx="6" ry="4" fill="var(--cat-mauve)"/></svg>`,
+        none: ``
+    };
 
-        if (modeName === 'ascii') {
-            if (asciiCatContainer) asciiCatContainer.classList.remove('hidden');
-            if (bongoCatContainer) bongoCatContainer.classList.add('hidden');
-            if (modeAsciiBtn) modeAsciiBtn.classList.add('active');
-            if (modeBongoBtn) modeBongoBtn.classList.remove('active');
-            if (modeNoneBtn) modeNoneBtn.classList.remove('active');
-        } else if (modeName === 'bongo') {
+    function applyCompanion(companionKey) {
+        if (!animalGraphics[companionKey]) companionKey = 'cat';
+        state.companion = companionKey;
+        localStorage.setItem('catCompanion', companionKey);
+
+        if (companionKey === 'none') {
             if (asciiCatContainer) asciiCatContainer.classList.add('hidden');
-            if (bongoCatContainer) bongoCatContainer.classList.remove('hidden');
-            if (modeBongoBtn) modeBongoBtn.classList.add('active');
-            if (modeAsciiBtn) modeAsciiBtn.classList.remove('active');
-            if (modeNoneBtn) modeNoneBtn.classList.remove('active');
         } else {
-            // 'none' mode: hide both cats!
-            if (asciiCatContainer) asciiCatContainer.classList.add('hidden');
-            if (bongoCatContainer) bongoCatContainer.classList.add('hidden');
-            if (modeNoneBtn) modeNoneBtn.classList.add('active');
-            if (modeAsciiBtn) modeAsciiBtn.classList.remove('active');
-            if (modeBongoBtn) modeBongoBtn.classList.remove('active');
+            if (asciiCatContainer) {
+                asciiCatContainer.innerHTML = animalGraphics[companionKey];
+                asciiCatContainer.classList.remove('hidden');
+            }
         }
 
-        const settingCatModeSelect = document.getElementById('settingCatMode');
-        if (settingCatModeSelect) settingCatModeSelect.value = modeName;
+        if (settingCompanionSelect) settingCompanionSelect.value = companionKey;
     }
 
-    applyMode(state.mode);
-
-    if (modeAsciiBtn) modeAsciiBtn.addEventListener('click', () => applyMode('ascii'));
-    if (modeBongoBtn) modeBongoBtn.addEventListener('click', () => applyMode('bongo'));
-    if (modeNoneBtn) modeNoneBtn.addEventListener('click', () => applyMode('none'));
+    applyCompanion(state.companion);
 
     // ==========================================
     // ZEI EXACT CAT PICTURE CONTROLLER
@@ -914,16 +921,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const iconPickerGrid = document.getElementById('iconPickerGrid');
+    const previewIconBox = document.getElementById('previewIconBox');
+    const previewTitle = document.getElementById('previewTitle');
+
+    const availablePickerIcons = [
+        'youtube', 'github', 'reddit', 'gemini', 'perplexity', 'twitter',
+        'kick', 'discord', 'netflix', 'instagram', 'steam', 'amazon',
+        'wikipedia', 'mail', 'code', 'anime', 'music', 'news',
+        'terminal', 'twitch', 'spotify', 'facebook', 'tiktok', 'chatgpt',
+        'globe', 'star', 'heart', 'bookmark', 'tv', 'drive',
+        'translate', 'gaming', 'shopping', 'google', 'duckduckgo', 'link'
+    ];
+
+    function renderIconPickerGrid() {
+        if (!iconPickerGrid) return;
+        iconPickerGrid.innerHTML = '';
+
+        availablePickerIcons.forEach(iconKey => {
+            if (!svgIcons[iconKey]) return;
+            const item = document.createElement('div');
+            item.className = `icon-picker-item ${shortcutIcon.value === iconKey ? 'active' : ''}`;
+            item.dataset.icon = iconKey;
+            item.title = iconKey.toUpperCase();
+            item.innerHTML = svgIcons[iconKey];
+
+            item.addEventListener('click', () => {
+                shortcutIcon.value = iconKey;
+                document.querySelectorAll('.icon-picker-item').forEach(el => el.classList.remove('active'));
+                item.classList.add('active');
+                updateIconPreview();
+            });
+
+            iconPickerGrid.appendChild(item);
+        });
+    }
+
     function updateIconPreview() {
         const iconKey = shortcutIcon.value || 'link';
-        const previewBox = document.getElementById('iconPreviewBox');
-        if (previewBox && svgIcons[iconKey]) {
-            previewBox.innerHTML = svgIcons[iconKey];
+        const titleText = shortcutTitle.value.trim() || 'Shortcut';
+        if (previewIconBox && svgIcons[iconKey]) {
+            previewIconBox.innerHTML = svgIcons[iconKey];
+        }
+        if (previewTitle) {
+            previewTitle.textContent = titleText;
+        }
+
+        if (iconPickerGrid) {
+            document.querySelectorAll('.icon-picker-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.icon === iconKey);
+            });
         }
     }
 
-    if (shortcutIcon) {
-        shortcutIcon.addEventListener('change', updateIconPreview);
+    if (shortcutTitle) {
+        shortcutTitle.addEventListener('input', updateIconPreview);
     }
 
     function openAddShortcutModal() {
@@ -932,6 +984,7 @@ document.addEventListener('DOMContentLoaded', () => {
         shortcutTitle.value = '';
         shortcutUrl.value = '';
         shortcutIcon.value = 'youtube';
+        renderIconPickerGrid();
         updateIconPreview();
         modalOverlay.classList.add('open');
     }
@@ -942,6 +995,7 @@ document.addEventListener('DOMContentLoaded', () => {
         shortcutTitle.value = sc.title;
         shortcutUrl.value = sc.url;
         shortcutIcon.value = sc.icon || 'link';
+        renderIconPickerGrid();
         updateIconPreview();
         modalOverlay.classList.add('open');
     }
@@ -1072,6 +1126,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) {}
     }
 
+    const bgYoutube = document.getElementById('bgYoutube');
+
+    function extractYoutubeId(url) {
+        if (!url) return null;
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : null;
+    }
+
     function applyCustomBackground(type, dataUrl) {
         if (!type || !dataUrl) {
             bgWallpaper.style.backgroundImage = "url('catppuccin_wallpaper.jpg')";
@@ -1080,22 +1143,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 bgVideo.src = '';
                 bgVideo.classList.add('hidden');
             }
+            if (bgYoutube) {
+                bgYoutube.src = '';
+                bgYoutube.classList.add('hidden');
+            }
             bgWallpaper.classList.remove('hidden');
             return;
         }
 
-        if (type === 'video') {
+        const ytId = extractYoutubeId(dataUrl);
+
+        if (ytId) {
             bgWallpaper.classList.add('hidden');
+            if (bgVideo) {
+                bgVideo.pause();
+                bgVideo.src = '';
+                bgVideo.classList.add('hidden');
+            }
+            if (bgYoutube) {
+                bgYoutube.src = `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}&controls=0&showinfo=0&autohide=1&modestbranding=1`;
+                bgYoutube.classList.remove('hidden');
+            }
+        } else if (type === 'video') {
+            bgWallpaper.classList.add('hidden');
+            if (bgYoutube) {
+                bgYoutube.src = '';
+                bgYoutube.classList.add('hidden');
+            }
             if (bgVideo) {
                 bgVideo.src = dataUrl;
                 bgVideo.classList.remove('hidden');
                 bgVideo.play().catch(() => {});
             }
         } else {
+            // image / gif / wallpaper
             if (bgVideo) {
                 bgVideo.pause();
                 bgVideo.src = '';
                 bgVideo.classList.add('hidden');
+            }
+            if (bgYoutube) {
+                bgYoutube.src = '';
+                bgYoutube.classList.add('hidden');
             }
             bgWallpaper.style.backgroundImage = `url("${dataUrl}")`;
             bgWallpaper.classList.remove('hidden');
@@ -1150,12 +1239,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openSettingsModal() {
         if (!settingsModalOverlay) return;
-        settingCatMode.value = state.mode;
-        settingTheme.value = state.theme;
-        settingClockFormat.value = state.clockFormat;
-        settingSoundToggle.checked = state.soundEnabled;
-        settingBgToggle.checked = state.hasBgImage;
-        settingWeatherCity.value = localStorage.getItem('catWeatherCity') || '';
+        if (settingCompanionSelect) settingCompanionSelect.value = state.companion;
+        if (settingTheme) settingTheme.value = state.theme;
+        if (settingClockFormat) settingClockFormat.value = state.clockFormat;
+        if (settingSoundToggle) settingSoundToggle.checked = state.soundEnabled;
+        if (settingBgToggle) settingBgToggle.checked = state.hasBgImage;
+        if (settingWeatherCity) settingWeatherCity.value = localStorage.getItem('catWeatherCity') || '';
 
         settingsModalOverlay.classList.add('open');
     }
@@ -1197,8 +1286,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Apply Cat Mode
-            applyMode(settingCatMode.value);
+            // Apply Companion
+            if (settingCompanionSelect) applyCompanion(settingCompanionSelect.value);
 
             // Apply Theme
             applyTheme(settingTheme.value);

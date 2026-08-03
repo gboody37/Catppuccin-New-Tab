@@ -352,8 +352,24 @@ body {
     transition: opacity 0.5s ease;
 }
 
+.bg-youtube {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    min-width: 177.77vh;
+    min-height: 56.25vw;
+    transform: translate(-50%, -50%);
+    z-index: -4;
+    pointer-events: none;
+    opacity: 0.9;
+    transition: opacity 0.5s ease;
+}
+
 body:not(.has-bg-image) .bg-wallpaper,
-body:not(.has-bg-image) .bg-video {
+body:not(.has-bg-image) .bg-video,
+body:not(.has-bg-image) .bg-youtube {
     opacity: 0 !important;
     pointer-events: none;
 }
@@ -1167,17 +1183,21 @@ a.shortcut-item,
 a.shortcut-item:visited,
 a.shortcut-item:link {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
+    justify-content: center;
+    gap: 0.45rem;
     background: var(--cat-surface0);
     border: 1px solid var(--cat-surface1);
-    padding: 0.6rem 1rem;
-    border-radius: 20px;
+    padding: 0.95rem 0.8rem;
+    border-radius: 18px;
     color: var(--cat-text) !important;
     text-decoration: none !important;
     font-size: 0.9rem;
     font-weight: 500;
     position: relative;
+    width: 90px;
+    height: 90px;
     transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -1189,14 +1209,19 @@ a.shortcut-item:link {
 }
 
 .shortcut-icon .svg-icon {
-    width: 18px;
-    height: 18px;
+    width: 32px;
+    height: 32px;
 }
 
 .shortcut-title {
     color: var(--cat-subtext1) !important;
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 76px;
 }
 
 .shortcut-item:hover .shortcut-title {
@@ -1204,11 +1229,16 @@ a.shortcut-item:link {
 }
 
 .shortcut-actions {
+    position: absolute;
+    top: 4px;
+    right: 4px;
     display: flex;
-    gap: 0.25rem;
+    gap: 0.15rem;
     opacity: 0;
+    background: rgba(17, 17, 27, 0.75);
+    border-radius: 8px;
+    padding: 2px;
     transition: opacity 0.2s ease;
-    margin-left: 0.3rem;
 }
 
 .shortcut-item:hover .shortcut-actions {
@@ -1831,4 +1861,77 @@ input:checked + .slider:before {
 .btn-secondary:hover {
     background: var(--cat-surface2);
     color: var(--cat-mauve);
+}
+
+/* Nighttab Visual Icon Picker Grid */
+.icon-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 0.5rem;
+    background: var(--cat-base);
+    border: 1px solid var(--cat-surface1);
+    border-radius: 12px;
+    margin-top: 0.4rem;
+}
+
+.icon-picker-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem;
+    background: var(--cat-surface0);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--cat-subtext0);
+    transition: all 0.15s ease;
+}
+
+.icon-picker-item:hover, .icon-picker-item.active {
+    background: var(--cat-surface1);
+    color: var(--cat-mauve);
+    border-color: var(--cat-mauve);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.shortcut-preview-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.85rem 1rem;
+    background: var(--cat-surface0);
+    border: 1.5px dashed var(--cat-mauve);
+    border-radius: 18px;
+    width: 90px;
+    height: 90px;
+    margin: 0.4rem auto 0 auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.preview-icon-box {
+    color: var(--cat-mauve);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-icon-box .svg-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.preview-title {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--cat-text);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 76px;
 }

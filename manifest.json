@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Catppuccin Bongo New Tab",
-  "version": "1.8.0",
-  "description": "A sleek, minimal Catppuccin-themed New Tab page featuring Zei's Cat, Bongo Cat, No Cat mode, 9 aesthetic color themes with floating star particles, search engine switcher, Gemini AI integration, real-time satellite factual weather, and focus audio.",
+  "version": "2.0.0",
+  "description": "Major Update v2.0: Expandable Pixel Animals (Cat, Frog, Giraffe, Dog, Bunny, Owl, Fox, Panda), YouTube & GIF live backgrounds, Nighttab-style Visual Icon Picker, search engine in searchbar, and factual satellite weather.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

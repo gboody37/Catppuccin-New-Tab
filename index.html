@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Animated Video / Wallpaper / Canvas & Overlay -->
+    <!-- Animated Video / YouTube / Wallpaper / Canvas & Overlay -->
+    <iframe id="bgYoutube" class="bg-youtube hidden" frameborder="0" allow="autoplay; encrypted-media"></iframe>
     <video id="bgVideo" class="bg-video hidden" autoplay loop muted playsinline></video>
     <div class="bg-wallpaper" id="bgWallpaper"></div>
     <canvas id="bgCanvas"></canvas>
@@ -44,21 +45,7 @@
                     </div>
                 </div>
             </div>
-
             <div class="header-right">
-                <!-- Mode Toggle (Zei ASCII Cat, Bongo Cat, or No Cat) -->
-                <div class="mode-selector">
-                    <button class="mode-btn active" id="modeAsciiBtn" title="Zei's Cat Mode">
-                        <span class="mode-tag">ASCII Cat</span>
-                    </button>
-                    <button class="mode-btn" id="modeBongoBtn" title="Bongo Cat Mode">
-                        <span class="mode-tag">Bongo Cat</span>
-                    </button>
-                    <button class="mode-btn" id="modeNoneBtn" title="Hide Cat Companion">
-                        <span class="mode-tag">No Cat</span>
-                    </button>
-                </div>
-
                 <!-- Weather Widget & Detailed Popup Card -->
                 <div class="weather-widget-container">
                     <div class="weather-widget" id="weatherWidget" title="Click for detailed forecast">
@@ -67,16 +54,17 @@
                         </span>
                         <div class="weather-info">
                             <span class="weather-temp" id="weatherTemp">--°C</span>
-                            <span class="weather-city" id="weatherCity">Loading...</span>
+                            <span class="weather-city" id="weatherCity">Detecting...</span>
                         </div>
                     </div>
-                    <!-- Detailed Weather Forecast Popup Card -->
+
+                    <!-- Detailed Weather Popup Card -->
                     <div class="weather-popup-card" id="weatherPopupCard">
                         <div class="weather-popup-header">
-                            <h4 id="weatherPopupCity">Weather Details</h4>
+                            <h4 id="weatherPopupCity">Catppuccin City</h4>
                             <span class="weather-condition-tag" id="weatherCondition">Clear Sky</span>
                         </div>
-                        <div class="weather-details-grid">
+                        <div class="weather-popup-details">
                             <div class="weather-detail-item">
                                 <span class="detail-label">Humidity</span>
                                 <span class="detail-val" id="weatherHumidity">--%</span>
@@ -95,57 +83,12 @@
 
                 <!-- Header Tools Controls -->
                 <div class="header-tools">
-                    <!-- Ambient Sound Generator Tool -->
-                    <div class="ambient-tool-wrapper">
-                        <button class="tool-btn" id="toggleAmbientAudioBtn" title="Ambient Focus Sound Generator (Rain/Campfire/Wind)">
-                            <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-                        </button>
-                        <div class="ambient-menu" id="ambientMenu">
-                            <div class="ambient-option active" data-sound="none">Off</div>
-                            <div class="ambient-option" data-sound="rain">Cozy Rain</div>
-                            <div class="ambient-option" data-sound="campfire">Crackling Campfire</div>
-                            <div class="ambient-option" data-sound="wind">Soft Breeze</div>
-                        </div>
-                    </div>
-
-                    <button class="tool-btn" id="toggleSoundBtn" title="Toggle Typing Sound">
-                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-                    </button>
                     <button class="tool-btn" id="toggleWallpaperBtn" title="Toggle Wallpaper Image">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                     </button>
                     <button class="tool-btn" id="toggleNotesBtn" title="Quick Notes">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
                     </button>
-                    <!-- Search Engine Selector Dropdown -->
-                    <div class="engine-dropdown header-engine-dropdown">
-                        <button type="button" class="tool-btn engine-current" id="engineBtn" title="Select Active Search Engine">
-                            <span id="engineIcon"></span>
-                        </button>
-                        <div class="engine-menu" id="engineMenu">
-                            <div class="engine-option active" data-engine="google">
-                                <span class="opt-icon" data-icon="google"></span> Google
-                            </div>
-                            <div class="engine-option" data-engine="duckduckgo">
-                                <span class="opt-icon" data-icon="duckduckgo"></span> DuckDuckGo
-                            </div>
-                            <div class="engine-option" data-engine="youtube">
-                                <span class="opt-icon" data-icon="youtube"></span> YouTube
-                            </div>
-                            <div class="engine-option" data-engine="github">
-                                <span class="opt-icon" data-icon="github"></span> GitHub
-                            </div>
-                            <div class="engine-option" data-engine="reddit">
-                                <span class="opt-icon" data-icon="reddit"></span> Reddit
-                            </div>
-                            <div class="engine-option" data-engine="perplexity">
-                                <span class="opt-icon" data-icon="perplexity"></span> Perplexity AI
-                            </div>
-                            <div class="engine-option" data-engine="gemini">
-                                <span class="opt-icon" data-icon="gemini"></span> Gemini AI
-                            </div>
-                        </div>
-                    </div>
                     <button class="tool-btn" id="openSettingsBtn" title="Settings">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>
                     </button>
@@ -228,9 +171,38 @@
                 <div class="greeting-display" id="greetingDisplay">Welcome back</div>
             </div>
 
-            <!-- Clean Search Bar -->
+            <!-- Search Bar with Engine Switcher Dropdown -->
             <div class="search-container">
                 <form id="searchForm" class="search-form">
+                    <div class="engine-dropdown">
+                        <button type="button" class="engine-current" id="engineBtn" title="Switch Search Engine">
+                            <span id="engineIcon"></span>
+                            <svg class="svg-icon arrow-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                        </button>
+                        <div class="engine-menu" id="engineMenu">
+                            <div class="engine-option active" data-engine="google">
+                                <span class="opt-icon" data-icon="google"></span> Google
+                            </div>
+                            <div class="engine-option" data-engine="duckduckgo">
+                                <span class="opt-icon" data-icon="duckduckgo"></span> DuckDuckGo
+                            </div>
+                            <div class="engine-option" data-engine="youtube">
+                                <span class="opt-icon" data-icon="youtube"></span> YouTube
+                            </div>
+                            <div class="engine-option" data-engine="github">
+                                <span class="opt-icon" data-icon="github"></span> GitHub
+                            </div>
+                            <div class="engine-option" data-engine="reddit">
+                                <span class="opt-icon" data-icon="reddit"></span> Reddit
+                            </div>
+                            <div class="engine-option" data-engine="perplexity">
+                                <span class="opt-icon" data-icon="perplexity"></span> Perplexity AI
+                            </div>
+                            <div class="engine-option" data-engine="gemini">
+                                <span class="opt-icon" data-icon="gemini"></span> Gemini AI
+                            </div>
+                        </div>
+                    </div>
                     <input type="text" id="searchInput" class="search-input" placeholder="Search or type a URL..." autocomplete="off" autofocus>
                     
                     <button type="submit" class="search-submit-btn" title="Search">
@@ -284,31 +256,16 @@
                     <input type="url" id="shortcutUrl" placeholder="https://github.com" required>
                 </div>
                 <div class="form-group">
-                    <label for="shortcutIcon">Icon Selection & Live Preview</label>
-                    <div class="icon-select-row" style="display: flex; gap: 0.8rem; align-items: center;">
-                        <select id="shortcutIcon" style="flex: 1; background: var(--cat-base); color: var(--cat-text); border: 1px solid var(--cat-surface0); padding: 0.65rem; border-radius: 10px;">
-                            <option value="youtube">YouTube</option>
-                            <option value="github">GitHub</option>
-                            <option value="reddit">Reddit</option>
-                            <option value="gemini">Gemini AI</option>
-                            <option value="twitter">Twitter / X</option>
-                            <option value="kick">Kick</option>
-                            <option value="google">Google Search</option>
-                            <option value="discord">Discord</option>
-                            <option value="netflix">Netflix</option>
-                            <option value="instagram">Instagram</option>
-                            <option value="steam">Steam</option>
-                            <option value="amazon">Amazon</option>
-                            <option value="wikipedia">Wikipedia</option>
-                            <option value="mail">Gmail / Email</option>
-                            <option value="code">Developer / Code</option>
-                            <option value="anime">Anime / AniList</option>
-                            <option value="music">Music & Audio</option>
-                            <option value="news">News & Blogs</option>
-                            <option value="terminal">Terminal / Shell</option>
-                            <option value="link">Generic Link</option>
-                        </select>
-                        <div id="iconPreviewBox" class="icon-preview-box" title="Selected Icon Preview"></div>
+                    <label>Select Icon (Nighttab Style)</label>
+                    <input type="hidden" id="shortcutIcon" value="youtube">
+                    <div class="icon-picker-grid" id="iconPickerGrid"></div>
+                </div>
+
+                <div class="form-group flex-col align-center">
+                    <label>Shortcut Card Preview</label>
+                    <div class="shortcut-preview-card" id="shortcutPreviewCard">
+                        <div class="preview-icon-box" id="previewIconBox"></div>
+                        <span class="preview-title" id="previewTitle">YouTube</span>
                     </div>
                 </div>
                 <div class="modal-actions">
@@ -340,18 +297,24 @@
                         </button>
                         <button type="button" class="btn-cancel" id="clearBgBtn">Reset to Default</button>
                     </div>
-                    <input type="url" id="settingBgUrlInput" class="setting-input w-full" placeholder="Or paste image / video web URL (https://...)">
+                    <input type="url" id="settingBgUrlInput" class="setting-input w-full" placeholder="Paste YouTube link (youtube.com/watch?v=...), GIF link, or image/video web URL...">
                 </div>
 
                 <div class="setting-item">
                     <div class="setting-info">
-                        <label for="settingCatMode">Cat Companion Mode</label>
-                        <span class="setting-desc">Switch between Zei's ASCII Cat and Bongo Cat</span>
+                        <label for="settingCompanion">Pixel Animal Companion</label>
+                        <span class="setting-desc">Select your favorite aesthetic pixel line-art companion</span>
                     </div>
-                    <select id="settingCatMode" class="setting-select">
-                        <option value="ascii">Zei's ASCII Cat</option>
-                        <option value="bongo">Bongo Cat</option>
-                        <option value="none">No Cat (Hidden)</option>
+                    <select id="settingCompanion" class="setting-select">
+                        <option value="cat">🐱 Zei's Cat</option>
+                        <option value="frog">🐸 Pepe Frog</option>
+                        <option value="giraffe">🦒 Giraffe</option>
+                        <option value="dog">🐶 Shiba Dog</option>
+                        <option value="bunny">🐰 Cute Bunny</option>
+                        <option value="owl">🦉 Night Owl</option>
+                        <option value="fox">🦊 Cozy Fox</option>
+                        <option value="panda">🐼 Pixel Panda</option>
+                        <option value="none">🚫 None (Hidden)</option>
                     </select>
                 </div>
 
