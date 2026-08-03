@@ -1012,7 +1012,7 @@ body[data-theme="latte"] .bg-overlay {
     color: var(--cat-mauve);
 }
 
-/* Zei Cat Image Styling */
+/* Zei Cat ASCII Art & Companion Styling */
 .ascii-cat-container {
     display: flex;
     justify-content: center;
@@ -1020,6 +1020,27 @@ body[data-theme="latte"] .bg-overlay {
     padding: 0.8rem 0 0.3rem 0;
     cursor: pointer;
     min-height: 140px;
+}
+
+.cat-ascii {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 1.6rem;
+    line-height: 1.35;
+    color: var(--cat-text);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    text-shadow:
+        0 0 12px var(--accent-glow),
+        0 0 30px var(--cat-mauve);
+    filter: drop-shadow(0 0 15px var(--accent-glow));
+    animation: catFloat 3.5s ease-in-out infinite alternate;
+    transition: transform 0.25s ease;
+    user-select: none;
+}
+
+.ascii-cat-container:hover .cat-ascii {
+    transform: scale(1.06);
 }
 
 .cat-image {

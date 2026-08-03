@@ -102,7 +102,10 @@ function mainInit() {
     const settingCompanionSelect = document.getElementById('settingCompanion');
 
     const animalGraphics = {
-        cat: `<img id="catImage" class="cat-image" alt="Zei Cat" src="animal_cat.png">`,
+        cat: `<pre class="cat-ascii">/\\_/\\
+( ˙ · ˙ )
+|  ~  |
+じしf_,)ノ</pre>`,
         giraffe: `<img id="catImage" class="cat-image animal-giraffe" alt="Giraffe" src="animal_giraffe.png">`,
         panda: `<img id="catImage" class="cat-image animal-panda" alt="Pixel Panda" src="animal_panda.png">`,
         dog: `<img id="catImage" class="cat-image animal-dog" alt="Line-Art Dog" src="animal_dog.png">`,
