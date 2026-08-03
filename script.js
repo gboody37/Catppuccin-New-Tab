@@ -110,14 +110,21 @@ function mainInit() {
         none: ``
     };
 
+    const bongoCatContainer = document.getElementById('bongoCatContainer');
+
     function applyCompanion(companionKey) {
-        if (!animalGraphics[companionKey]) companionKey = 'cat';
+        if (!animalGraphics[companionKey] && companionKey !== 'bongo') companionKey = 'cat';
         state.companion = companionKey;
         syncStateSave('catCompanion', companionKey);
 
         if (companionKey === 'none') {
             if (asciiCatContainer) asciiCatContainer.classList.add('hidden');
+            if (bongoCatContainer) bongoCatContainer.classList.add('hidden');
+        } else if (companionKey === 'bongo') {
+            if (asciiCatContainer) asciiCatContainer.classList.add('hidden');
+            if (bongoCatContainer) bongoCatContainer.classList.remove('hidden');
         } else {
+            if (bongoCatContainer) bongoCatContainer.classList.add('hidden');
             if (asciiCatContainer) {
                 asciiCatContainer.innerHTML = animalGraphics[companionKey];
                 asciiCatContainer.classList.remove('hidden');

@@ -537,7 +537,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: -3;
+    z-index: 1;
     opacity: 0.9;
     transition: opacity 0.5s ease;
 }
@@ -549,7 +549,7 @@ body {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
-    z-index: -4;
+    z-index: 1;
     opacity: 0.9;
     transition: opacity 0.5s ease;
 }
@@ -563,7 +563,7 @@ body {
     min-width: 177.77vh;
     min-height: 56.25vw;
     transform: translate(-50%, -50%);
-    z-index: -4;
+    z-index: 1;
     pointer-events: none;
     opacity: 0.9;
     transition: opacity 0.5s ease;
@@ -584,7 +584,7 @@ body:not(.has-bg-image) .bg-youtube {
     width: 100vw;
     height: 100vh;
     background: radial-gradient(circle at center, rgba(17, 17, 27, 0.2) 0%, rgba(17, 17, 27, 0.65) 100%);
-    z-index: -2;
+    z-index: 2;
     pointer-events: none;
 }
 
@@ -599,7 +599,7 @@ body[data-theme="latte"] .bg-overlay {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 1;
+    z-index: 3;
     pointer-events: none;
     transition: opacity 0.5s ease;
 }
@@ -614,7 +614,7 @@ body[data-theme="latte"] .bg-overlay {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    z-index: 2;
+    z-index: 10;
 }
 
 /* ==========================================
