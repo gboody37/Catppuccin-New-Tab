@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Catppuccin Bongo New Tab",
-  "version": "2.1.1",
-  "description": "Fix JavaScript null pointer exceptions to restore clock, weather, search engine, shortcuts grid, and settings modals.",
+  "version": "2.1.2",
+  "description": "Fix script initialization for instant DOM execution.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

@@ -1,5 +1,5 @@
 // Catppuccin New Tab Logic (ASCII Cat & Bongo Cat)
-document.addEventListener('DOMContentLoaded', () => {
+function mainInit() {
     // ==========================================
     // SVG ICON MAP
     // ==========================================
@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         soundEnabled: localStorage.getItem('soundEnabled') === 'true',
         clockFormat: localStorage.getItem('catClockFormat') || '24',
         timezone: localStorage.getItem('catTimezone') || 'auto',
+        shortcutShape: localStorage.getItem('catShortcutShape') || 'oval',
         searchEngine: localStorage.getItem('searchEngine') || 'google',
         shortcuts: JSON.parse(localStorage.getItem('shortcuts')) || [
             { id: '1', title: 'YouTube', url: 'https://youtube.com', icon: 'youtube' },
@@ -65,6 +66,29 @@ document.addEventListener('DOMContentLoaded', () => {
         ],
         notes: localStorage.getItem('catNotes') || ''
     };
+
+    function syncStateSave(key, val) {
+        try {
+            if (typeof val === 'object') {
+                localStorage.setItem(key, JSON.stringify(val));
+            } else {
+                localStorage.setItem(key, val);
+            }
+        } catch(e) {}
+        try {
+            if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+                chrome.storage.local.set({ [key]: val });
+            }
+        } catch(e) {}
+    }
+
+    function applyShortcutShape(shape) {
+        if (!['oval', 'rounded', 'circle', 'square'].includes(shape)) shape = 'oval';
+        state.shortcutShape = shape;
+        syncStateSave('catShortcutShape', shape);
+        document.documentElement.setAttribute('data-shortcut-shape', shape);
+    }
+    applyShortcutShape(state.shortcutShape);
 
     document.querySelectorAll('.opt-icon').forEach(el => {
         const iconKey = el.dataset.icon;
@@ -78,21 +102,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const settingCompanionSelect = document.getElementById('settingCompanion');
 
     const animalGraphics = {
-        cat: `<img id="catImage" class="cat-image" alt="Zei Cat" src="zei_cat_exact.png">`,
-        frog: `<svg class="pixel-animal-svg" viewBox="0 0 160 120" style="width: 140px; height: 100px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><path fill="none" stroke="var(--cat-mauve)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 40,80 Q 20,80 20,60 Q 20,40 40,40 Q 50,20 70,20 Q 80,20 80,40 Q 80,20 90,20 Q 110,20 120,40 Q 140,40 140,60 Q 140,80 120,80 Z"/><circle cx="50" cy="35" r="8" fill="var(--cat-mauve)"/><circle cx="110" cy="35" r="8" fill="var(--cat-mauve)"/><circle cx="50" cy="35" r="3" fill="var(--cat-base)"/><circle cx="110" cy="35" r="3" fill="var(--cat-base)"/><path d="M 60,60 Q 80,75 100,60" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><ellipse cx="35" cy="55" rx="6" ry="4" fill="var(--cat-pink)" opacity="0.6"/><ellipse cx="125" cy="55" rx="6" ry="4" fill="var(--cat-pink)" opacity="0.6"/></svg>`,
-        giraffe: `<svg class="pixel-animal-svg" viewBox="0 0 160 160" style="width: 140px; height: 130px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><path fill="none" stroke="var(--cat-mauve)" stroke-width="3" stroke-linecap="round" d="M 60,150 L 60,70 L 40,50 Q 30,50 30,35 Q 30,20 45,20 L 70,25 Q 85,25 90,40 L 80,80 L 80,150"/><circle cx="45" cy="15" r="3" fill="var(--cat-mauve)"/><line x1="45" y1="20" x2="45" y2="15" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="58" cy="15" r="3" fill="var(--cat-mauve)"/><line x1="55" y1="22" x2="58" y2="15" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="45" cy="32" r="3" fill="var(--cat-mauve)"/><ellipse cx="70" cy="90" rx="5" ry="8" fill="var(--cat-mauve)" opacity="0.7"/><ellipse cx="65" cy="115" rx="6" ry="9" fill="var(--cat-mauve)" opacity="0.7"/></svg>`,
-        dog: `<svg class="pixel-animal-svg" viewBox="0 0 160 120" style="width: 140px; height: 100px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><path fill="none" stroke="var(--cat-mauve)" stroke-width="3" stroke-linecap="round" d="M 40,90 Q 30,60 45,35 Q 50,15 65,15 Q 80,15 85,35 L 115,35 Q 130,35 130,55 Q 130,75 110,75 L 40,90 Z"/><polygon points="45,35 30,10 60,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><polygon points="85,35 100,10 70,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="52" cy="45" r="4" fill="var(--cat-mauve)"/><circle cx="78" cy="45" r="4" fill="var(--cat-mauve)"/><polygon points="65,55 60,62 70,62" fill="var(--cat-mauve)"/></svg>`,
-        bunny: `<svg class="pixel-animal-svg" viewBox="0 0 160 140" style="width: 140px; height: 120px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><path fill="none" stroke="var(--cat-mauve)" stroke-width="3" stroke-linecap="round" d="M 50,120 Q 35,80 50,60 Q 30,10 45,10 Q 60,10 60,50 Q 75,50 85,10 Q 100,10 90,50 Q 110,60 95,80 Q 110,120 50,120 Z"/><ellipse cx="50" cy="28" rx="4" ry="12" fill="var(--cat-pink)" opacity="0.5"/><ellipse cx="80" cy="28" rx="4" ry="12" fill="var(--cat-pink)" opacity="0.5"/><circle cx="55" cy="70" r="4" fill="var(--cat-mauve)"/><circle cx="85" cy="70" r="4" fill="var(--cat-mauve)"/><path d="M 67,78 L 73,78 L 70,83 Z" fill="var(--cat-pink)"/></svg>`,
-        owl: `<svg class="pixel-animal-svg" viewBox="0 0 160 140" style="width: 130px; height: 110px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><ellipse cx="80" cy="70" rx="45" ry="50" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><polygon points="45,30 35,10 60,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><polygon points="115,30 125,10 100,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="60" cy="65" r="16" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="100" cy="65" r="16" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="60" cy="65" r="6" fill="var(--cat-mauve)"/><circle cx="100" cy="65" r="6" fill="var(--cat-mauve)"/><polygon points="80,75 75,85 85,85" fill="var(--cat-peach)"/></svg>`,
-        fox: `<svg class="pixel-animal-svg" viewBox="0 0 160 130" style="width: 140px; height: 110px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><polygon points="80,110 30,40 130,40" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><polygon points="30,40 15,5 55,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><polygon points="130,40 145,5 105,25" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="55" cy="55" r="5" fill="var(--cat-mauve)"/><circle cx="105" cy="55" r="5" fill="var(--cat-mauve)"/><polygon points="80,110 73,98 87,98" fill="var(--cat-mauve)"/></svg>`,
-        panda: `<svg class="pixel-animal-svg" viewBox="0 0 160 130" style="width: 140px; height: 110px; filter: drop-shadow(0 0 10px var(--cat-mauve));"><circle cx="80" cy="65" r="45" fill="none" stroke="var(--cat-mauve)" stroke-width="3"/><circle cx="45" cy="30" r="14" fill="var(--cat-mauve)"/><circle cx="115" cy="30" r="14" fill="var(--cat-mauve)"/><ellipse cx="62" cy="62" rx="10" ry="14" fill="var(--cat-mauve)" transform="rotate(-15 62 62)"/><ellipse cx="98" cy="62" rx="10" ry="14" fill="var(--cat-mauve)" transform="rotate(15 98 62)"/><circle cx="62" cy="62" r="4" fill="var(--cat-base)"/><circle cx="98" cy="62" r="4" fill="var(--cat-base)"/><ellipse cx="80" cy="80" rx="6" ry="4" fill="var(--cat-mauve)"/></svg>`,
+        cat: `<img id="catImage" class="cat-image" alt="Zei Cat" src="animal_cat.png">`,
+        giraffe: `<img id="catImage" class="cat-image animal-giraffe" alt="Giraffe" src="animal_giraffe.png">`,
+        panda: `<img id="catImage" class="cat-image animal-panda" alt="Pixel Panda" src="animal_panda.png">`,
+        dog: `<img id="catImage" class="cat-image animal-dog" alt="Line-Art Dog" src="animal_dog.png">`,
+        whale: `<img id="catImage" class="cat-image animal-whale" alt="Minimalist Whale" src="animal_whale.png">`,
         none: ``
     };
 
     function applyCompanion(companionKey) {
         if (!animalGraphics[companionKey]) companionKey = 'cat';
         state.companion = companionKey;
-        localStorage.setItem('catCompanion', companionKey);
+        syncStateSave('catCompanion', companionKey);
 
         if (companionKey === 'none') {
             if (asciiCatContainer) asciiCatContainer.classList.add('hidden');
@@ -107,14 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     applyCompanion(state.companion);
-
-    // ==========================================
-    // ZEI EXACT CAT PICTURE CONTROLLER
-    // ==========================================
-    const catImage = document.getElementById('catImage');
-    if (catImage) {
-        catImage.src = 'zei_cat_exact.png';
-    }
 
     function reactAsciiCat() {
         playTypeSound();
@@ -144,7 +157,13 @@ document.addEventListener('DOMContentLoaded', () => {
         'cozy-orange': 'Cozy Orange',
         'samurai-red': 'Samurai Red',
         'sky-blue': 'Sky Blue',
-        'dark-blue': 'Dark Blue'
+        'dark-blue': 'Dark Blue',
+        'cyberpunk': 'Cyberpunk Neon',
+        'dracula': 'Dracula Dark',
+        'nord': 'Nordic Frost',
+        'sakura': 'Sakura Rose Gold',
+        'toxic': 'Toxic Poison Green',
+        'midnight-lavender': 'Midnight Lavender'
     };
 
     function applyTheme(themeName) {
@@ -491,8 +510,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (data.current_weather) {
                 const temp = `${Math.round(data.current_weather.temperature)}°C`;
-                const displayName = cityName;
-                const fullLocation = countryName ? `${cityName}, ${countryName}` : cityName;
+                const displayName = countryName ? `${cityName}, ${countryName}` : cityName;
+                const fullLocation = displayName;
 
                 if (weatherTemp) weatherTemp.textContent = temp;
                 if (weatherCity) weatherCity.textContent = displayName;
@@ -640,7 +659,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 { timeout: 5000 }
             );
+        } else {
+            fetchWeatherByCity('Amman, Jordan');
+        }
     }
+
     initWeather();
 
     // ==========================================
@@ -767,7 +790,7 @@ document.addEventListener('DOMContentLoaded', () => {
         perplexity: { name: 'Perplexity', iconKey: 'perplexity', url: 'https://www.perplexity.ai/search?q=' }
     };
 
-    const headerEngineDropdown = document.querySelector('.header-engine-dropdown');
+    const engineDropdown = document.querySelector('.engine-dropdown');
 
     function setEngine(engineKey) {
         if (!engines[engineKey]) engineKey = 'google';
@@ -780,8 +803,8 @@ document.addEventListener('DOMContentLoaded', () => {
             opt.classList.toggle('active', opt.dataset.engine === engineKey);
         });
 
-        if (headerEngineDropdown) headerEngineDropdown.classList.remove('open');
         if (engineMenu) engineMenu.classList.remove('open');
+        if (engineDropdown) engineDropdown.classList.remove('open');
     }
 
     setEngine(state.searchEngine);
@@ -789,13 +812,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (engineBtn) {
         engineBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (headerEngineDropdown) headerEngineDropdown.classList.toggle('open');
+            if (engineMenu) engineMenu.classList.toggle('open');
+            if (engineDropdown) engineDropdown.classList.toggle('open');
         });
     }
 
     document.addEventListener('click', (e) => {
-        if (headerEngineDropdown && !headerEngineDropdown.contains(e.target)) {
-            headerEngineDropdown.classList.remove('open');
+        if (engineMenu && !engineMenu.contains(e.target) && e.target !== engineBtn) {
+            engineMenu.classList.remove('open');
+        }
+        if (engineDropdown && !engineDropdown.contains(e.target)) {
+            engineDropdown.classList.remove('open');
         }
     });
 
@@ -848,10 +875,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     const shortcutsGrid = document.getElementById('shortcutsGrid');
     const addShortcutBtn = document.getElementById('addShortcutBtn');
-    const modalOverlay = document.getElementById('modalOverlay');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const addShortcutForm = document.getElementById('addShortcutForm');
-    const shortcutModalTitle = document.getElementById('shortcutModalTitle');
+    const modalOverlay = document.getElementById('shortcutModalOverlay') || document.getElementById('modalOverlay');
+    const closeModalBtn = document.getElementById('closeShortcutModalBtn') || document.getElementById('closeModalBtn');
+    const addShortcutForm = document.getElementById('shortcutForm') || document.getElementById('addShortcutForm');
+    const shortcutModalTitle = document.querySelector('#shortcutModalOverlay .modal-title') || document.getElementById('shortcutModalTitle');
     const shortcutEditId = document.getElementById('shortcutEditId');
     const shortcutTitle = document.getElementById('shortcutTitle');
     const shortcutUrl = document.getElementById('shortcutUrl');
@@ -1176,7 +1203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function applyCustomBackground(type, dataUrl) {
         if (!type || !dataUrl) {
-            bgWallpaper.style.backgroundImage = "url('catppuccin_wallpaper.jpg')";
+            bgWallpaper.style.backgroundImage = 'none';
             if (bgVideo) {
                 bgVideo.pause();
                 bgVideo.src = '';
@@ -1186,7 +1213,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 bgYoutube.src = '';
                 bgYoutube.classList.add('hidden');
             }
-            bgWallpaper.classList.remove('hidden');
+            bgWallpaper.classList.add('hidden');
             return;
         }
 
@@ -1276,14 +1303,130 @@ document.addEventListener('DOMContentLoaded', () => {
 
     state.clockFormat = localStorage.getItem('catClockFormat') || '24';
 
-    const settingTimezone = document.getElementById('settingTimezone');
+    const settingTheme = document.getElementById('settingTheme');
+    const settingClockFormat = document.getElementById('settingClockFormat');
+    const settingSoundToggle = document.getElementById('settingSoundToggle');
+    const settingBgToggle = document.getElementById('settingBgToggle');
+    const settingWeatherCity = document.getElementById('settingWeatherCity');
+    const settingTimezoneInput = document.getElementById('settingTimezoneInput');
+    const timezoneSearchResults = document.getElementById('timezoneSearchResults');
+    const settingShortcutShape = document.getElementById('settingShortcutShape');
+    let tzSearchTimer = null;
+
+    const predefinedTimezones = [
+        { city: 'Amman', country: 'Jordan', tz: 'Asia/Amman', label: 'Amman, Jordan (GMT+3)' },
+        { city: 'Riyadh', country: 'Saudi Arabia', tz: 'Asia/Riyadh', label: 'Riyadh, Saudi Arabia (GMT+3)' },
+        { city: 'Mecca', country: 'Saudi Arabia', tz: 'Asia/Riyadh', label: 'Mecca, Saudi Arabia (GMT+3)' },
+        { city: 'Jeddah', country: 'Saudi Arabia', tz: 'Asia/Riyadh', label: 'Jeddah, Saudi Arabia (GMT+3)' },
+        { city: 'Dubai', country: 'United Arab Emirates', tz: 'Asia/Dubai', label: 'Dubai, UAE (GMT+4)' },
+        { city: 'Abu Dhabi', country: 'United Arab Emirates', tz: 'Asia/Dubai', label: 'Abu Dhabi, UAE (GMT+4)' },
+        { city: 'Cairo', country: 'Egypt', tz: 'Africa/Cairo', label: 'Cairo, Egypt (GMT+3)' },
+        { city: 'Alexandria', country: 'Egypt', tz: 'Africa/Cairo', label: 'Alexandria, Egypt (GMT+3)' },
+        { city: 'London', country: 'United Kingdom', tz: 'Europe/London', label: 'London, UK (GMT+1)' },
+        { city: 'Paris', country: 'France', tz: 'Europe/Paris', label: 'Paris, France (CET)' },
+        { city: 'Berlin', country: 'Germany', tz: 'Europe/Berlin', label: 'Berlin, Germany (CET)' },
+        { city: 'Istanbul', country: 'Turkey', tz: 'Europe/Istanbul', label: 'Istanbul, Turkey (GMT+3)' },
+        { city: 'New York', country: 'United States', tz: 'America/New_York', label: 'New York, US (EST)' },
+        { city: 'Los Angeles', country: 'United States', tz: 'America/Los_Angeles', label: 'Los Angeles, US (PST)' },
+        { city: 'Chicago', country: 'United States', tz: 'America/Chicago', label: 'Chicago, US (CST)' },
+        { city: 'Toronto', country: 'Canada', tz: 'America/Toronto', label: 'Toronto, Canada (EST)' },
+        { city: 'Tokyo', country: 'Japan', tz: 'Asia/Tokyo', label: 'Tokyo, Japan (JST)' },
+        { city: 'Seoul', country: 'South Korea', tz: 'Asia/Seoul', label: 'Seoul, South Korea (KST)' },
+        { city: 'Sydney', country: 'Australia', tz: 'Australia/Sydney', label: 'Sydney, Australia (AEST)' },
+        { city: 'Moscow', country: 'Russia', tz: 'Europe/Moscow', label: 'Moscow, Russia (MSK)' },
+        { city: 'Auto / Local Time', country: 'Device', tz: 'auto', label: 'Auto (Local Device Time)' }
+    ];
+
+    if (settingTimezoneInput && timezoneSearchResults) {
+        settingTimezoneInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            clearTimeout(tzSearchTimer);
+
+            if (!query) {
+                timezoneSearchResults.classList.remove('open');
+                timezoneSearchResults.innerHTML = '';
+                return;
+            }
+
+            tzSearchTimer = setTimeout(async () => {
+                try {
+                    const matches = predefinedTimezones.filter(item => 
+                        item.city.toLowerCase().includes(query) || 
+                        item.country.toLowerCase().includes(query) ||
+                        item.label.toLowerCase().includes(query)
+                    );
+
+                    const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=6&language=en&format=json`);
+                    const data = await res.json();
+                    
+                    let apiResults = [];
+                    if (data && data.results) {
+                        apiResults = data.results.map(r => ({
+                            city: r.name,
+                            country: r.country || '',
+                            tz: r.timezone || 'auto',
+                            label: `${r.name}${r.country ? ', ' + r.country : ''} (${r.timezone || 'Local'})`
+                        }));
+                    }
+
+                    const allResults = [...matches, ...apiResults];
+                    const uniqueResults = [];
+                    const seen = new Set();
+                    allResults.forEach(r => {
+                        if (!seen.has(r.label)) {
+                            seen.add(r.label);
+                            uniqueResults.push(r);
+                        }
+                    });
+
+                    if (uniqueResults.length > 0) {
+                        timezoneSearchResults.innerHTML = '';
+                        uniqueResults.slice(0, 8).forEach(item => {
+                            const choice = document.createElement('div');
+                            choice.className = 'weather-choice-option';
+                            choice.innerHTML = `
+                                <div class="weather-choice-details">
+                                    <span class="weather-choice-name">${item.city}</span>
+                                    <span class="weather-choice-sub">${item.country || ''}</span>
+                                </div>
+                                <span class="weather-choice-country">${item.tz}</span>
+                            `;
+                            
+                            choice.addEventListener('click', () => {
+                                settingTimezoneInput.value = item.label;
+                                state.timezone = item.tz;
+                                localStorage.setItem('catTimezone', item.tz);
+                                localStorage.setItem('catTimezoneLabel', item.label);
+                                timezoneSearchResults.classList.remove('open');
+                                updateClock();
+                            });
+
+                            timezoneSearchResults.appendChild(choice);
+                        });
+                        timezoneSearchResults.classList.add('open');
+                    } else {
+                        timezoneSearchResults.classList.remove('open');
+                    }
+                } catch (err) {
+                    timezoneSearchResults.classList.remove('open');
+                }
+            }, 250);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!timezoneSearchResults.contains(e.target) && e.target !== settingTimezoneInput) {
+                timezoneSearchResults.classList.remove('open');
+            }
+        });
+    }
 
     function openSettingsModal() {
         if (!settingsModalOverlay) return;
         if (settingCompanionSelect) settingCompanionSelect.value = state.companion;
         if (settingTheme) settingTheme.value = state.theme;
         if (settingClockFormat) settingClockFormat.value = state.clockFormat;
-        if (settingTimezone) settingTimezone.value = state.timezone;
+        if (settingTimezoneInput) settingTimezoneInput.value = localStorage.getItem('catTimezoneLabel') || state.timezone || '';
+        if (settingShortcutShape) settingShortcutShape.value = state.shortcutShape;
         if (settingSoundToggle) settingSoundToggle.checked = state.soundEnabled;
         if (settingBgToggle) settingBgToggle.checked = state.hasBgImage;
         if (settingWeatherCity) settingWeatherCity.value = localStorage.getItem('catWeatherCity') || '';
@@ -1297,6 +1440,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (openSettingsBtn) openSettingsBtn.addEventListener('click', openSettingsModal);
     if (closeSettingsModalBtn) closeSettingsModalBtn.addEventListener('click', closeSettingsModal);
+
+    const settingsCancelBtn = document.getElementById('settingsCancelBtn');
+    if (settingsCancelBtn) settingsCancelBtn.addEventListener('click', closeSettingsModal);
 
     if (settingsModalOverlay) {
         settingsModalOverlay.addEventListener('click', (e) => {
@@ -1334,12 +1480,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Apply Theme
             applyTheme(settingTheme.value);
 
-            // Apply Clock Format & Timezone
+            // Apply Clock Format & Timezone & Shortcut Shape
             state.clockFormat = settingClockFormat.value;
             localStorage.setItem('catClockFormat', state.clockFormat);
-            if (settingTimezone) {
-                state.timezone = settingTimezone.value;
-                localStorage.setItem('catTimezone', state.timezone);
+            if (settingTimezoneInput && settingTimezoneInput.value.trim()) {
+                const inputVal = settingTimezoneInput.value.trim();
+                localStorage.setItem('catTimezoneLabel', inputVal);
+            }
+            if (settingShortcutShape) {
+                applyShortcutShape(settingShortcutShape.value);
             }
             updateClock();
 
@@ -1462,4 +1611,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initBgCanvas();
-});
+}
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mainInit);
+} else {
+    mainInit();
+}

@@ -22,7 +22,7 @@
         <!-- Top Bar Header -->
         <header class="top-header">
             <div class="header-left">
-                <!-- Theme Palette Dropdown Switcher (9 Themes) -->
+                <!-- Theme Palette Dropdown Switcher (15 Themes) -->
                 <div class="theme-selector-dropdown">
                     <button class="theme-dropdown-btn" id="themeDropdownBtn" title="Change Theme Palette">
                         <span class="theme-active-dot" id="themeActiveDot"></span>
@@ -42,6 +42,12 @@
                         <div class="theme-option" data-flavor="samurai-red"><span class="dot samurai-dot"></span> Samurai Red</div>
                         <div class="theme-option" data-flavor="sky-blue"><span class="dot sky-dot"></span> Sky Blue</div>
                         <div class="theme-option" data-flavor="dark-blue"><span class="dot darkblue-dot"></span> Dark Blue</div>
+                        <div class="theme-option" data-flavor="cyberpunk"><span class="dot cyberpunk-dot"></span> Cyberpunk Neon</div>
+                        <div class="theme-option" data-flavor="dracula"><span class="dot dracula-dot"></span> Dracula Dark</div>
+                        <div class="theme-option" data-flavor="nord"><span class="dot nord-dot"></span> Nordic Frost</div>
+                        <div class="theme-option" data-flavor="sakura"><span class="dot sakura-dot"></span> Sakura Rose Gold</div>
+                        <div class="theme-option" data-flavor="toxic"><span class="dot toxic-dot"></span> Toxic Poison Green</div>
+                        <div class="theme-option" data-flavor="midnight-lavender"><span class="dot lavender-dot"></span> Midnight Lavender</div>
                     </div>
                 </div>
             </div>
@@ -83,14 +89,27 @@
 
                 <!-- Header Tools Controls -->
                 <div class="header-tools">
-                    <button class="tool-btn" id="toggleWallpaperBtn" title="Toggle Wallpaper Image">
+                    <!-- Live Photo / Video Background Toggle Button -->
+                    <button class="icon-btn-circle" id="toggleWallpaperBtn" title="Toggle Custom Background Wallpaper / Video">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                     </button>
-                    <button class="tool-btn" id="toggleNotesBtn" title="Quick Notes">
-                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                    </button>
-                    <button class="tool-btn" id="openSettingsBtn" title="Settings">
-                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>
+
+                    <!-- Ambient Focus Audio Tool Toggle Button -->
+                    <div class="ambient-tool-wrapper">
+                        <button class="icon-btn-circle" id="toggleAmbientAudioBtn" title="Ambient Focus Sound Audio Machine (Rain / Campfire / Wind)">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        </button>
+                        <div class="ambient-menu" id="ambientMenu">
+                            <div class="ambient-option active" data-sound="none">Off</div>
+                            <div class="ambient-option" data-sound="rain">Cozy Rain</div>
+                            <div class="ambient-option" data-sound="campfire">Crackling Campfire</div>
+                            <div class="ambient-option" data-sound="wind">Soft Breeze</div>
+                        </div>
+                    </div>
+
+                    <!-- Extension Settings Modal Trigger Button -->
+                    <button class="icon-btn-circle" id="openSettingsBtn" title="Extension Settings & Customization">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
                     </button>
                 </div>
             </div>
@@ -98,9 +117,9 @@
 
         <!-- Main Content Center -->
         <main class="main-content">
-            <!-- Zei's Exact Cat Picture -->
+            <!-- Zei's Exact Cat Image (Transparent PNG) -->
             <div class="ascii-cat-container" id="asciiCatContainer">
-                <img id="catImage" class="cat-image" alt="Cat Companion" src="zei_cat_exact.png">
+                <img id="catImage" class="cat-image" alt="Zei Cat" src="animal_cat.png">
             </div>
 
             <!-- Bongo Cat SVG Animation -->
@@ -211,48 +230,36 @@
                 </form>
             </div>
 
-            <!-- Quick Links / Shortcuts Grid with Drag-and-Drop -->
-            <div class="shortcuts-section">
+            <!-- Shortcuts Grid (Nighttab Style) -->
+            <section class="shortcuts-section">
                 <div class="shortcuts-grid" id="shortcutsGrid"></div>
-                <button class="add-shortcut-btn" id="addShortcutBtn" title="Add New Shortcut">
+                <button type="button" class="add-shortcut-btn" id="addShortcutBtn" title="Add New Shortcut">
                     <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                 </button>
-            </div>
+            </section>
         </main>
 
         <footer class="bottom-footer">
-            <div class="quote-container" id="quoteContainer">
+            <div class="quote-container">
                 <span class="quote-text" id="quoteText">"Simplicity is the soul of efficiency."</span>
                 <span class="quote-author" id="quoteAuthor">- Austin Freeman</span>
             </div>
         </footer>
     </div>
 
-
-
-    <!-- Quick Notes Sidebar Drawer -->
-    <div class="notes-drawer" id="notesDrawer">
-        <div class="notes-header">
-            <h3><svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg> Scratchpad</h3>
-            <button class="close-notes-btn" id="closeNotesBtn">
-                <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-            </button>
-        </div>
-        <textarea id="notesTextarea" placeholder="Jot down quick thoughts... Saved automatically!"></textarea>
-    </div>
-
-    <!-- Modal for Adding / Editing Shortcut -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-card">
-            <h3 id="shortcutModalTitle">Add Shortcut</h3>
-            <form id="addShortcutForm">
+    <!-- Modals -->
+    <!-- Add Shortcut Modal -->
+    <div class="modal-overlay" id="shortcutModalOverlay">
+        <div class="modal-content">
+            <h3 class="modal-title">Add Shortcut</h3>
+            <form id="shortcutForm">
                 <input type="hidden" id="shortcutEditId" value="">
                 <div class="form-group">
-                    <label for="shortcutTitle">Title</label>
-                    <input type="text" id="shortcutTitle" placeholder="e.g. GitHub" required>
+                    <label for="shortcutTitle">Shortcut Name</label>
+                    <input type="text" id="shortcutTitle" placeholder="e.g. GitHub" required autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label for="shortcutUrl">URL</label>
+                    <label for="shortcutUrl">URL Address</label>
                     <input type="url" id="shortcutUrl" placeholder="https://github.com" required>
                 </div>
                 <div class="form-group">
@@ -269,77 +276,92 @@
                     </div>
                 </div>
                 <div class="modal-actions">
-                    <button type="button" class="btn-cancel" id="closeModalBtn">Cancel</button>
-                    <button type="submit" class="btn-save" id="saveShortcutBtn">Save Shortcut</button>
+                    <button type="button" class="btn-cancel" id="closeShortcutModalBtn">Cancel</button>
+                    <button type="submit" class="btn-save">Add Shortcut</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Full Settings Modal Overlay -->
+    <!-- Settings Modal -->
     <div class="modal-overlay" id="settingsModalOverlay">
-        <div class="modal-card settings-card">
-            <div class="modal-header">
-                <h3><svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg> Settings</h3>
-                <button class="close-modal-btn" id="closeSettingsModalBtn">&times;</button>
+        <div class="settings-modal-card">
+            <div class="settings-modal-header">
+                <h3 class="settings-modal-title">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:22px;height:22px"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.488.488 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.63-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                    Settings
+                </h3>
+                <button type="button" class="settings-close-btn" id="closeSettingsModalBtn" title="Close">
+                    <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                </button>
             </div>
-            <div class="settings-body">
-                <!-- Custom Image/Video Background Section -->
-                <div class="setting-item flex-col align-start">
-                    <div class="setting-info w-full">
-                        <label>Custom Background Wallpaper / Video</label>
-                        <span class="setting-desc">Upload a custom image, GIF, or MP4/WebM video from your PC (Star particles will stay floating on top!)</span>
+
+            <div class="settings-scroll-body">
+                <!-- Custom Background -->
+                <div class="setting-card setting-card--full">
+                    <div class="setting-card-header">
+                        <span class="setting-card-label">Custom Background Media</span>
+                        <span class="setting-card-desc">Upload a file or paste a YouTube / GIF / image URL</span>
                     </div>
-                    <div class="setting-action-row">
-                        <input type="file" id="settingBgFileInput" accept="image/*,video/*" class="hidden">
-                        <button type="button" class="btn-secondary" id="triggerBgUploadBtn">
-                            <svg class="svg-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg> Upload Image / Video File
-                        </button>
-                        <button type="button" class="btn-cancel" id="clearBgBtn">Reset to Default</button>
+                    <div class="setting-card-body">
+                        <div class="bg-upload-row">
+                            <label for="settingBgFileInput" class="btn-upload" id="triggerBgUploadBtn">
+                                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
+                                Upload File
+                            </label>
+                            <input type="file" id="settingBgFileInput" class="sr-only" accept="image/*,video/*">
+                            <button type="button" class="btn-ghost" id="clearBgBtn">Reset</button>
+                        </div>
+                        <input type="url" id="settingBgUrlInput" class="setting-input" placeholder="Paste URL (youtube.com/watch?v=..., .gif, .jpg)...">
                     </div>
-                    <input type="url" id="settingBgUrlInput" class="setting-input w-full" placeholder="Paste YouTube link (youtube.com/watch?v=...), GIF link, or image/video web URL...">
                 </div>
 
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <label for="settingCompanion">Pixel Animal Companion</label>
-                        <span class="setting-desc">Select your favorite aesthetic pixel line-art companion</span>
+                <!-- Companion -->
+                <div class="setting-card">
+                    <div class="setting-card-left">
+                        <span class="setting-card-label">Pixel Animal Companion</span>
+                        <span class="setting-card-desc">Choose your line-art companion</span>
                     </div>
                     <select id="settingCompanion" class="setting-select">
-                        <option value="cat">🐱 Zei's Cat</option>
-                        <option value="frog">🐸 Pepe Frog</option>
-                        <option value="giraffe">🦒 Giraffe</option>
-                        <option value="dog">🐶 Shiba Dog</option>
-                        <option value="bunny">🐰 Cute Bunny</option>
-                        <option value="owl">🦉 Night Owl</option>
-                        <option value="fox">🦊 Cozy Fox</option>
-                        <option value="panda">🐼 Pixel Panda</option>
-                        <option value="none">🚫 None (Hidden)</option>
+                        <option value="cat">Zei's Cat</option>
+                        <option value="giraffe">Giraffe</option>
+                        <option value="panda">Pixel Panda</option>
+                        <option value="dog">Line-Art Dog</option>
+                        <option value="whale">Minimalist Whale</option>
+                        <option value="none">None (Hidden)</option>
                     </select>
                 </div>
 
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <label for="settingTheme">Color Palette Theme</label>
-                        <span class="setting-desc">Select your preferred aesthetic theme</span>
+                <!-- Theme -->
+                <div class="setting-card">
+                    <div class="setting-card-left">
+                        <span class="setting-card-label">Color Palette Theme</span>
+                        <span class="setting-card-desc">Select your preferred aesthetic</span>
                     </div>
                     <select id="settingTheme" class="setting-select">
                         <option value="mocha">Mocha (Dark Catppuccin)</option>
                         <option value="macchiato">Macchiato (Medium Dark)</option>
                         <option value="frappe">Frappé (Soft Dark)</option>
                         <option value="latte">Latte (Light)</option>
-                        <option value="forest-green">🌲 Forest Green</option>
-                        <option value="cozy-orange">🍊 Cozy Orange</option>
-                        <option value="samurai-red">⚔️ Samurai Red</option>
-                        <option value="sky-blue">☁️ Sky Blue</option>
-                        <option value="dark-blue">🌌 Dark Blue</option>
+                        <option value="forest-green">Forest Green</option>
+                        <option value="cozy-orange">Cozy Orange</option>
+                        <option value="samurai-red">Samurai Red</option>
+                        <option value="sky-blue">Sky Blue</option>
+                        <option value="dark-blue">Dark Blue</option>
+                        <option value="cyberpunk">Cyberpunk Neon</option>
+                        <option value="dracula">Dracula Dark</option>
+                        <option value="nord">Nordic Frost</option>
+                        <option value="sakura">Sakura Rose Gold</option>
+                        <option value="toxic">Toxic Poison Green</option>
+                        <option value="midnight-lavender">Midnight Lavender</option>
                     </select>
                 </div>
 
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <label for="settingClockFormat">Clock Format</label>
-                        <span class="setting-desc">Display time in 24-hour or 12-hour (AM/PM)</span>
+                <!-- Clock Format -->
+                <div class="setting-card">
+                    <div class="setting-card-left">
+                        <span class="setting-card-label">Clock Format</span>
+                        <span class="setting-card-desc">24-hour or 12-hour (AM/PM)</span>
                     </div>
                     <select id="settingClockFormat" class="setting-select">
                         <option value="24">24-Hour (15:30)</option>
@@ -347,29 +369,39 @@
                     </select>
                 </div>
 
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <label for="settingTimezone">Clock Timezone (City / Country)</label>
-                        <span class="setting-desc">Set clock to match a specific city or country timezone</span>
+                <!-- Timezone Search -->
+                <div class="setting-card setting-card--full">
+                    <div class="setting-card-header">
+                        <span class="setting-card-label">Clock Timezone</span>
+                        <span class="setting-card-desc">Type a city or country to find your timezone</span>
                     </div>
-                    <select id="settingTimezone" class="setting-select">
-                        <option value="auto">Auto (Local Device Time)</option>
-                        <option value="Asia/Amman">🇯🇴 Amman, Jordan (GMT+3)</option>
-                        <option value="Asia/Riyadh">🇸🇦 Riyadh, Saudi Arabia (GMT+3)</option>
-                        <option value="Asia/Dubai">🇦🇪 Dubai, UAE (GMT+4)</option>
-                        <option value="Africa/Cairo">🇪🇬 Cairo, Egypt (GMT+3)</option>
-                        <option value="Europe/London">🇬🇧 London, UK (GMT+1)</option>
-                        <option value="America/New_York">🇺🇸 New York, US (EST)</option>
-                        <option value="America/Los_Angeles">🇺🇸 Los Angeles, US (PST)</option>
-                        <option value="Asia/Tokyo">🇯🇵 Tokyo, Japan (JST)</option>
-                        <option value="Europe/Paris">🇫🇷 Paris, France (CET)</option>
+                    <div class="setting-card-body">
+                        <div class="weather-search-wrapper">
+                            <input type="text" id="settingTimezoneInput" class="setting-input" placeholder="e.g. Amman, Riyadh, London, Tokyo..." autocomplete="off">
+                            <div class="weather-search-results" id="timezoneSearchResults"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shortcut Shape -->
+                <div class="setting-card">
+                    <div class="setting-card-left">
+                        <span class="setting-card-label">Bookmark Card Shape</span>
+                        <span class="setting-card-desc">Oval, Rounded, Circle, or Square</span>
+                    </div>
+                    <select id="settingShortcutShape" class="setting-select">
+                        <option value="oval">Oval / Capsule</option>
+                        <option value="rounded">Rounded Box</option>
+                        <option value="circle">Circle</option>
+                        <option value="square">Square</option>
                     </select>
                 </div>
 
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <label for="settingSoundToggle">Keyboard Sound Effects</label>
-                        <span class="setting-desc">Synthesized mechanical switch audio on keypress</span>
+                <!-- Sound Toggle -->
+                <div class="setting-card">
+                    <div class="setting-card-left">
+                        <span class="setting-card-label">Keyboard Sound Effects</span>
+                        <span class="setting-card-desc">Mechanical switch audio on keypress</span>
                     </div>
                     <label class="switch-toggle">
                         <input type="checkbox" id="settingSoundToggle">
@@ -377,10 +409,11 @@
                     </label>
                 </div>
 
-                <div class="setting-item">
-                    <div class="setting-info">
-                        <label for="settingBgToggle">Enable Background Media Layer</label>
-                        <span class="setting-desc">Show background wallpaper/video image layer</span>
+                <!-- Background Toggle -->
+                <div class="setting-card">
+                    <div class="setting-card-left">
+                        <span class="setting-card-label">Background Media Layer</span>
+                        <span class="setting-card-desc">Show wallpaper/video overlay</span>
                     </div>
                     <label class="switch-toggle">
                         <input type="checkbox" id="settingBgToggle">
@@ -388,19 +421,27 @@
                     </label>
                 </div>
 
-                <div class="setting-item flex-col align-start">
-                    <div class="setting-info w-full">
-                        <label for="settingWeatherCity">Weather Location</label>
-                        <span class="setting-desc">Type to pick from multiple choice location results, or leave blank for auto-detect</span>
+                <!-- Weather Location -->
+                <div class="setting-card setting-card--full">
+                    <div class="setting-card-header">
+                        <span class="setting-card-label">Weather Location</span>
+                        <span class="setting-card-desc">Type to search, or leave blank for auto-detect</span>
                     </div>
-                    <div class="weather-search-wrapper w-full">
-                        <input type="text" id="settingWeatherCity" class="setting-input w-full" placeholder="Type city or country (e.g. Riyadh, Jordan, London)..." autocomplete="off">
-                        <div class="weather-search-results" id="weatherSearchResults"></div>
+                    <div class="setting-card-body">
+                        <div class="weather-search-wrapper">
+                            <input type="text" id="settingWeatherCity" class="setting-input" placeholder="e.g. Riyadh, Jordan, London..." autocomplete="off">
+                            <div class="weather-search-results" id="weatherSearchResults"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-actions">
-                <button type="button" class="btn-save" id="saveSettingsBtn">Save & Apply</button>
+
+            <div class="settings-modal-footer">
+                <button type="button" class="btn-settings-cancel" id="settingsCancelBtn">Cancel</button>
+                <button type="button" class="btn-settings-save" id="saveSettingsBtn">
+                    <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    Save &amp; Apply
+                </button>
             </div>
         </div>
     </div>

@@ -272,6 +272,162 @@
     --accent-glow: rgba(99, 102, 241, 0.45);
 }
 
+/* Theme: Cyberpunk Neon */
+[data-theme="cyberpunk"] {
+    --cat-rosewater: #ff79c6;
+    --cat-mauve:     #ff007f;
+    --cat-red:       #ff0055;
+    --cat-peach:     #ffb86c;
+    --cat-yellow:    #ffe600;
+    --cat-green:     #00ff66;
+    --cat-teal:      #00f3ff;
+    --cat-sky:       #00d8ff;
+    --cat-text:      #ffffff;
+    --cat-subtext1:  #e0e0ff;
+    --cat-subtext0:  #a0a0ff;
+    --cat-surface2:  #2d1b4e;
+    --cat-surface1:  #1d1235;
+    --cat-surface0:  #140b26;
+    --cat-base:      #0c0618;
+    --cat-mantle:    #080410;
+    --cat-crust:     #040208;
+
+    --bg-glass: rgba(12, 6, 24, 0.85);
+    --bg-glass-card: rgba(29, 18, 53, 0.65);
+    --border-glass: rgba(255, 0, 127, 0.4);
+    --accent-glow: rgba(255, 0, 127, 0.5);
+}
+
+/* Theme: Dracula Dark */
+[data-theme="dracula"] {
+    --cat-rosewater: #f8f8f2;
+    --cat-mauve:     #bd93f9;
+    --cat-red:       #ff5555;
+    --cat-peach:     #ffb86c;
+    --cat-yellow:    #f1fa8c;
+    --cat-green:     #50fa7b;
+    --cat-teal:      #8be9fd;
+    --cat-sky:       #8be9fd;
+    --cat-text:      #f8f8f2;
+    --cat-subtext1:  #6272a4;
+    --cat-subtext0:  #44475a;
+    --cat-surface2:  #44475a;
+    --cat-surface1:  #343746;
+    --cat-surface0:  #282a36;
+    --cat-base:      #1e1f29;
+    --cat-mantle:    #191a21;
+    --cat-crust:     #14151b;
+
+    --bg-glass: rgba(30, 31, 41, 0.85);
+    --bg-glass-card: rgba(52, 55, 70, 0.6);
+    --border-glass: rgba(189, 147, 249, 0.35);
+    --accent-glow: rgba(189, 147, 249, 0.45);
+}
+
+/* Theme: Nordic Frost */
+[data-theme="nord"] {
+    --cat-rosewater: #eceff4;
+    --cat-mauve:     #88c0d0;
+    --cat-red:       #bf616a;
+    --cat-peach:     #d08770;
+    --cat-yellow:    #ebcb8b;
+    --cat-green:     #a3be8c;
+    --cat-teal:      #8fbcbb;
+    --cat-sky:       #81a1c1;
+    --cat-text:      #eceff4;
+    --cat-subtext1:  #e5e9f0;
+    --cat-subtext0:  #d8dee9;
+    --cat-surface2:  #4c566a;
+    --cat-surface1:  #434c5e;
+    --cat-surface0:  #3b4252;
+    --cat-base:      #2e3440;
+    --cat-mantle:    #272c36;
+    --cat-crust:     #21252e;
+
+    --bg-glass: rgba(46, 52, 64, 0.85);
+    --bg-glass-card: rgba(67, 76, 94, 0.6);
+    --border-glass: rgba(136, 192, 208, 0.35);
+    --accent-glow: rgba(136, 192, 208, 0.45);
+}
+
+/* Theme: Sakura Rose Gold 🌸 */
+[data-theme="sakura"] {
+    --cat-rosewater: #f2cdcd;
+    --cat-mauve:     #f4b8e4;
+    --cat-red:       #e8a2af;
+    --cat-peach:     #f5a97f;
+    --cat-yellow:    #f9e2af;
+    --cat-green:     #a6da95;
+    --cat-teal:      #8bd5ca;
+    --cat-sky:       #91d7e3;
+    --cat-text:      #fff0f5;
+    --cat-subtext1:  #e6c8da;
+    --cat-subtext0:  #c29bb3;
+    --cat-surface2:  #4f2b45;
+    --cat-surface1:  #3d2135;
+    --cat-surface0:  #2e1828;
+    --cat-base:      #23121e;
+    --cat-mantle:    #1b0d17;
+    --cat-crust:     #140810;
+
+    --bg-glass: rgba(35, 18, 30, 0.88);
+    --bg-glass-card: rgba(61, 33, 53, 0.65);
+    --border-glass: rgba(244, 184, 228, 0.35);
+    --accent-glow: rgba(244, 184, 228, 0.45);
+}
+
+/* Theme: Toxic Poison */
+[data-theme="toxic"] {
+    --cat-rosewater: #d7fcb0;
+    --cat-mauve:     #39ff14;
+    --cat-red:       #ff0055;
+    --cat-peach:     #ff9900;
+    --cat-yellow:    #ccff00;
+    --cat-green:     #39ff14;
+    --cat-teal:      #00ff9f;
+    --cat-sky:       #00f0ff;
+    --cat-text:      #f0fff0;
+    --cat-subtext1:  #a6f2a6;
+    --cat-subtext0:  #5cb85c;
+    --cat-surface2:  #1b3a1e;
+    --cat-surface1:  #122614;
+    --cat-surface0:  #0b1a0d;
+    --cat-base:      #060f08;
+    --cat-mantle:    #030904;
+    --cat-crust:     #010402;
+
+    --bg-glass: rgba(6, 15, 8, 0.88);
+    --bg-glass-card: rgba(18, 38, 20, 0.65);
+    --border-glass: rgba(57, 255, 20, 0.4);
+    --accent-glow: rgba(57, 255, 20, 0.5);
+}
+
+/* Theme: Midnight Lavender */
+[data-theme="midnight-lavender"] {
+    --cat-rosewater: #f5e0dc;
+    --cat-mauve:     #ddb6f2;
+    --cat-red:       #f38ba8;
+    --cat-peach:     #fab387;
+    --cat-yellow:    #f9e2af;
+    --cat-green:     #a6e3a1;
+    --cat-teal:      #94e2d5;
+    --cat-sky:       #89dceb;
+    --cat-text:      #f8f0fc;
+    --cat-subtext1:  #d8c6e2;
+    --cat-subtext0:  #a692b6;
+    --cat-surface2:  #3b2d4a;
+    --cat-surface1:  #291e35;
+    --cat-surface0:  #1e1428;
+    --cat-base:      #140c1d;
+    --cat-mantle:    #0d0714;
+    --cat-crust:     #07030a;
+
+    --bg-glass: rgba(20, 12, 29, 0.85);
+    --bg-glass-card: rgba(41, 30, 53, 0.65);
+    --border-glass: rgba(221, 182, 242, 0.35);
+    --accent-glow: rgba(221, 182, 242, 0.45);
+}
+
 /* ==========================================
    GLOBAL BASE STYLES
    ========================================== */
@@ -780,6 +936,17 @@ body[data-theme="latte"] .bg-overlay {
 .macchiato-dot { background: #c6a0f6; }
 .frappe-dot { background: #ca9ee6; }
 .latte-dot { background: #8839ef; }
+.forest-dot { background: #50fa7b; }
+.orange-dot { background: #ff9e64; }
+.samurai-dot { background: #ff4d6d; }
+.sky-dot { background: #38bdf8; }
+.darkblue-dot { background: #6366f1; }
+.cyberpunk-dot { background: #ff007f; }
+.dracula-dot { background: #bd93f9; }
+.nord-dot { background: #88c0d0; }
+.sakura-dot { background: #f4b8e4; }
+.toxic-dot { background: #39ff14; }
+.lavender-dot { background: #ddb6f2; }
 
 /* Weather Widget */
 .weather-widget {
@@ -879,13 +1046,13 @@ body[data-theme="latte"] .bg-overlay {
     gap: 0.4rem;
 }
 
-.tool-btn {
+.icon-btn-circle {
     background: var(--cat-surface0);
-    border: none;
-    color: var(--cat-subtext1);
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
+    border: 1px solid var(--cat-surface1);
+    color: var(--cat-text);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -893,10 +1060,12 @@ body[data-theme="latte"] .bg-overlay {
     transition: all 0.2s ease;
 }
 
-.tool-btn:hover {
-    background: var(--cat-mauve);
-    color: var(--cat-crust);
-    transform: translateY(-2px);
+.icon-btn-circle:hover {
+    background: var(--cat-surface1);
+    border-color: var(--cat-mauve);
+    color: var(--cat-mauve);
+    box-shadow: 0 0 14px var(--accent-glow);
+    transform: scale(1.08);
 }
 
 .tool-btn.active-sound {
@@ -915,6 +1084,35 @@ body[data-theme="latte"] .bg-overlay {
     align-items: center;
     gap: 1.8rem;
     margin: auto 0;
+}
+
+/* Zei's Exact ASCII Cat */
+.ascii-cat-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.cat-image {
+    width: 220px;
+    height: auto;
+    background: transparent;
+    filter: drop-shadow(0 0 16px var(--cat-mauve));
+    user-select: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.cat-image.animal-giraffe { width: 150px; }
+.cat-image.animal-panda { width: 170px; }
+.cat-image.animal-fox { width: 160px; }
+.cat-image.animal-dog { width: 150px; }
+.cat-image.animal-whale { width: 160px; }
+
+.cat-image:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.7));
 }
 
 /* Bongo Cat SVG Container */
@@ -1199,6 +1397,49 @@ a.shortcut-item:link {
     width: 90px;
     height: 90px;
     transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Shortcut Shape Settings (Oval / Capsule v1.6, Rounded, Circle, Square) */
+html[data-shortcut-shape="oval"] .shortcut-item,
+html[data-shortcut-shape="oval"] a.shortcut-item,
+html[data-shortcut-shape="oval"] .add-shortcut-btn {
+    flex-direction: row !important;
+    border-radius: 9999px !important;
+    padding: 0.55rem 1.15rem !important;
+    width: auto !important;
+    height: 46px !important;
+    gap: 0.55rem !important;
+}
+
+html[data-shortcut-shape="oval"] .shortcut-icon .svg-icon {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+html[data-shortcut-shape="oval"] .shortcut-title {
+    max-width: 120px !important;
+    font-size: 0.88rem !important;
+}
+
+html[data-shortcut-shape="circle"] .shortcut-item,
+html[data-shortcut-shape="circle"] .add-shortcut-btn {
+    border-radius: 50% !important;
+    width: 90px !important;
+    height: 90px !important;
+}
+
+html[data-shortcut-shape="square"] .shortcut-item,
+html[data-shortcut-shape="square"] .add-shortcut-btn {
+    border-radius: 8px !important;
+    width: 90px !important;
+    height: 90px !important;
+}
+
+html[data-shortcut-shape="rounded"] .shortcut-item,
+html[data-shortcut-shape="rounded"] .add-shortcut-btn {
+    border-radius: 18px !important;
+    width: 90px !important;
+    height: 90px !important;
 }
 
 .shortcut-icon {
@@ -1545,9 +1786,6 @@ a.shortcut-item:link {
     background: var(--cat-pink);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px var(--accent-glow);
-}    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
 }
 
 .modal-overlay.open .modal-card {
@@ -1656,58 +1894,299 @@ a.shortcut-item:link {
     color: var(--cat-text);
 }
 
-/* Settings Modal Styling */
-.settings-card {
-    max-width: 540px;
-    width: 90%;
-}
+/* ==========================================
+   SETTINGS MODAL — Premium Glassmorphic
+   ========================================== */
 
-.settings-body {
+.settings-modal-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(28px) saturate(1.6);
+    -webkit-backdrop-filter: blur(28px) saturate(1.6);
+    border: 1px solid var(--border-glass);
+    border-radius: 24px;
+    width: 94%;
+    max-width: 520px;
+    max-height: 85vh;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
-    margin: 1.5rem 0;
-    max-height: 60vh;
-    overflow-y: auto;
-    padding-right: 0.5rem;
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+        0 1px 0 rgba(255, 255, 255, 0.06) inset;
+    animation: settingsSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
 }
 
-.setting-item {
+@keyframes settingsSlideIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Header */
+.settings-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--cat-surface1);
+}
+
+.settings-modal-title {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--cat-text);
+    margin: 0;
+}
+
+.settings-modal-title .svg-icon {
+    color: var(--cat-mauve);
+}
+
+.settings-close-btn {
+    background: var(--cat-surface0);
+    border: 1px solid var(--cat-surface1);
+    color: var(--cat-subtext0);
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.settings-close-btn:hover {
+    background: var(--cat-red);
+    border-color: var(--cat-red);
+    color: var(--cat-crust);
+    transform: scale(1.05);
+}
+
+/* Scrollable body */
+.settings-scroll-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1rem 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.settings-scroll-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.settings-scroll-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.settings-scroll-body::-webkit-scrollbar-thumb {
+    background: var(--cat-surface2);
+    border-radius: 10px;
+}
+
+.settings-scroll-body::-webkit-scrollbar-thumb:hover {
+    background: var(--cat-mauve);
+}
+
+/* Setting card — single row layout */
+.setting-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    padding: 0.8rem 1rem;
+    padding: 0.75rem 1rem;
     background: var(--cat-surface0);
     border: 1px solid var(--cat-surface1);
     border-radius: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.setting-info {
+.setting-card:hover {
+    border-color: var(--cat-surface2);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Full-width card variant (background, timezone, weather) */
+.setting-card--full {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+}
+
+.setting-card-left {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.15rem;
+    flex: 1;
+    min-width: 0;
 }
 
-.setting-info label {
+.setting-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.setting-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.setting-card-label {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--cat-text);
+    line-height: 1.3;
 }
 
-.setting-desc {
-    font-size: 0.8rem;
+.setting-card-desc {
+    font-size: 0.75rem;
     color: var(--cat-subtext0);
+    line-height: 1.35;
 }
 
+/* File upload row */
+.bg-upload-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.btn-upload {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--cat-mauve);
+    color: var(--cat-crust);
+    border: none;
+    padding: 0.5rem 0.9rem;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-upload:hover {
+    background: var(--cat-pink);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 1px solid var(--cat-surface2);
+    color: var(--cat-subtext0);
+    padding: 0.5rem 0.8rem;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-ghost:hover {
+    border-color: var(--cat-red);
+    color: var(--cat-red);
+    background: rgba(255, 70, 70, 0.08);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Select & input */
 .setting-select, .setting-input {
     background: var(--cat-base);
     color: var(--cat-text);
     border: 1px solid var(--cat-surface2);
-    padding: 0.5rem 0.8rem;
+    padding: 0.5rem 0.75rem;
     border-radius: 10px;
     font-family: inherit;
+    font-size: 0.84rem;
+    outline: none;
+    transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.setting-card:not(.setting-card--full) .setting-select {
+    width: auto;
+    min-width: 160px;
+    flex-shrink: 0;
+}
+
+.setting-select:focus, .setting-input:focus {
+    border-color: var(--cat-mauve);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* Footer */
+.settings-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--cat-surface1);
+}
+
+.btn-settings-cancel {
+    background: var(--cat-surface0);
+    border: 1px solid var(--cat-surface1);
+    color: var(--cat-subtext0);
+    padding: 0.55rem 1.1rem;
+    border-radius: 10px;
     font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-settings-cancel:hover {
+    background: var(--cat-surface1);
+    color: var(--cat-text);
+}
+
+.btn-settings-save {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--cat-mauve);
+    border: none;
+    color: var(--cat-crust);
+    padding: 0.55rem 1.2rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.01em;
+}
+
+.btn-settings-save:hover {
+    background: var(--cat-pink);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--accent-glow);
 }
 
 /* Multiple Choice Weather Search Dropdown */
@@ -1769,13 +2248,14 @@ a.shortcut-item:link {
 .weather-choice-sub {
     font-size: 0.75rem;
     color: var(--cat-subtext0);
-}    outline: none;
-    transition: all 0.2s ease;
 }
 
-.setting-select:focus, .setting-input:focus {
-    border-color: var(--cat-mauve);
-    box-shadow: 0 0 10px var(--accent-glow);
+.weather-choice-country {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--cat-mauve);
+    flex-shrink: 0;
+    margin-left: auto;
 }
 
 /* Switch Toggle Component */
