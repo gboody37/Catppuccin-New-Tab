@@ -1649,14 +1649,6 @@ function mainInit() {
 
             ctx.clearRect(0, 0, width, height);
 
-            // Test draw a bright neon red box in the top-left corner to verify visibility
-            ctx.fillStyle = '#ff0055';
-            ctx.globalAlpha = 1.0;
-            ctx.shadowBlur = 12;
-            ctx.shadowColor = '#ff0055';
-            ctx.fillRect(30, 30, 80, 80);
-            ctx.shadowBlur = 0; // Reset shadow
-
             stars.forEach(s => {
                 s.alpha += s.speed;
                 s.y += s.vy;
