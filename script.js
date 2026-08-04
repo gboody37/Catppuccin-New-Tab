@@ -51,6 +51,7 @@ function mainInit() {
         theme: localStorage.getItem('catTheme') || 'mocha',
         companion: localStorage.getItem('catCompanion') || 'cat', // Default to Zei Cat!
         hasBgImage: localStorage.getItem('hasBgImage') === 'true',
+        hasParticles: localStorage.getItem('catParticlesEnabled') !== 'false',
         soundEnabled: localStorage.getItem('soundEnabled') === 'true',
         clockFormat: localStorage.getItem('catClockFormat') || '24',
         timezone: localStorage.getItem('catTimezone') || 'auto',
@@ -248,6 +249,15 @@ function mainInit() {
         }
     }
     applyWallpaperState();
+
+    function applyParticlesState() {
+        if (state.hasParticles) {
+            document.body.classList.remove('particles-disabled');
+        } else {
+            document.body.classList.add('particles-disabled');
+        }
+    }
+    applyParticlesState();
 
     if (toggleWallpaperBtn) {
         toggleWallpaperBtn.addEventListener('click', () => {
@@ -1340,6 +1350,7 @@ function mainInit() {
     const settingClockFormat = document.getElementById('settingClockFormat');
     const settingSoundToggle = document.getElementById('settingSoundToggle');
     const settingBgToggle = document.getElementById('settingBgToggle');
+    const settingParticlesToggle = document.getElementById('settingParticlesToggle');
     const settingTimezoneInput = document.getElementById('settingTimezoneInput');
     const timezoneSearchResults = document.getElementById('timezoneSearchResults');
     const settingShortcutShape = document.getElementById('settingShortcutShape');
@@ -1461,6 +1472,7 @@ function mainInit() {
         if (settingShortcutShape) settingShortcutShape.value = state.shortcutShape;
         if (settingSoundToggle) settingSoundToggle.checked = state.soundEnabled;
         if (settingBgToggle) settingBgToggle.checked = state.hasBgImage;
+        if (settingParticlesToggle) settingParticlesToggle.checked = state.hasParticles;
         if (settingWeatherCity) settingWeatherCity.value = localStorage.getItem('catWeatherCity') || '';
 
         settingsModalOverlay.classList.add('open');
@@ -1533,6 +1545,13 @@ function mainInit() {
             state.hasBgImage = settingBgToggle.checked;
             localStorage.setItem('hasBgImage', state.hasBgImage);
             applyWallpaperState();
+
+            // Apply Particles State
+            if (settingParticlesToggle) {
+                state.hasParticles = settingParticlesToggle.checked;
+                localStorage.setItem('catParticlesEnabled', state.hasParticles);
+                applyParticlesState();
+            }
 
             // Apply Custom Weather City
             const cityInput = settingWeatherCity.value.trim();

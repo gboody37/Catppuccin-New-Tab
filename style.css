@@ -608,6 +608,12 @@ body[data-theme="latte"] .bg-overlay {
     display: block !important;
 }
 
+body.particles-disabled #bgCanvas {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
 .app-container {
     position: relative;
     width: 100%;
