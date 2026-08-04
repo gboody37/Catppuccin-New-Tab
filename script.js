@@ -1593,9 +1593,18 @@ function mainInit() {
     // ANIMATED CANVAS BACKGROUND
     // ==========================================
     function initBgCanvas() {
+        console.log("Catppuccin Extension: initBgCanvas called!");
         const canvas = document.getElementById('bgCanvas');
-        if (!canvas) return;
+        if (!canvas) {
+            console.error("Catppuccin Extension: Canvas element #bgCanvas not found!");
+            return;
+        }
         const ctx = canvas.getContext('2d');
+        if (!ctx) {
+            console.error("Catppuccin Extension: Canvas 2D context failed to initialize!");
+            return;
+        }
+        console.log("Catppuccin Extension: Canvas element found and context initialized.");
 
         // Ensure activeParticleColor is correctly loaded from current parsed document styles
         updateParticleColor();
@@ -1606,6 +1615,7 @@ function mainInit() {
         window.addEventListener('resize', () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
+            console.log("Catppuccin Extension: Window resized! Canvas dimension updated:", width, "x", height);
         });
 
         const stars = Array.from({ length: 100 }, () => ({
@@ -1616,8 +1626,16 @@ function mainInit() {
             speed: Math.random() * 0.012 + 0.004,
             vy: -(Math.random() * 0.25 + 0.08)
         }));
+        console.log("Catppuccin Extension: Generated stars:", stars.length);
+
+        let frameCount = 0;
 
         function animate() {
+            frameCount++;
+            if (frameCount === 10) {
+                console.log("Catppuccin Extension: animate loop running! Frame count reached 10. Dimensions:", width, "x", height, "Active color:", activeParticleColor);
+            }
+
             // Dynamic check in case resize event didn't trigger correctly or window started at 0
             if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
                 width = canvas.width = window.innerWidth;
@@ -1625,6 +1643,14 @@ function mainInit() {
             }
 
             ctx.clearRect(0, 0, width, height);
+
+            // Test draw a bright neon red box in the top-left corner to verify visibility
+            ctx.fillStyle = '#ff0055';
+            ctx.globalAlpha = 1.0;
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = '#ff0055';
+            ctx.fillRect(30, 30, 80, 80);
+            ctx.shadowBlur = 0; // Reset shadow
 
             stars.forEach(s => {
                 s.alpha += s.speed;
