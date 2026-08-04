@@ -150,10 +150,26 @@ function mainInit() {
     // THEME CONTROLLER (9 Aesthetic Themes)
     // ==========================================
     let activeParticleColor = '#b4bfe7';
-    function updateParticleColor() {
-        const style = getComputedStyle(document.documentElement);
-        const lavender = (style.getPropertyValue('--cat-lavender') || '').trim() || (style.getPropertyValue('--cat-pink') || '').trim() || '#b4bfe7';
-        activeParticleColor = lavender;
+    function updateParticleColor(themeName) {
+        const themeParticleColors = {
+            'mocha': '#b4bfe7',
+            'macchiato': '#b7bdf8',
+            'frappe': '#babbf1',
+            'latte': '#7287fd',
+            'forest-green': '#a6e3a1',
+            'cozy-orange': '#fab387',
+            'samurai-red': '#ff4d6d',
+            'sky-blue': '#89dceb',
+            'dark-blue': '#89b4fa',
+            'cyberpunk': '#ff007f',
+            'dracula': '#bd93f9',
+            'nord': '#88c0d0',
+            'sakura': '#ff85a1',
+            'hot-pink': '#ff007f',
+            'toxic': '#39ff14',
+            'midnight-lavender': '#ddb6f2'
+        };
+        activeParticleColor = themeParticleColors[themeName || state.theme] || '#b4bfe7';
     }
     const themeDropdownBtn = document.getElementById('themeDropdownBtn');
     const themeSelectorDropdown = document.querySelector('.theme-selector-dropdown');
@@ -196,7 +212,7 @@ function mainInit() {
         const settingThemeSelect = document.getElementById('settingTheme');
         if (settingThemeSelect) settingThemeSelect.value = themeName;
 
-        updateParticleColor();
+        updateParticleColor(themeName);
     }
 
     applyTheme(state.theme);
@@ -1592,13 +1608,13 @@ function mainInit() {
             height = canvas.height = window.innerHeight;
         });
 
-        const stars = Array.from({ length: 80 }, () => ({
+        const stars = Array.from({ length: 100 }, () => ({
             x: Math.random() * width,
             y: Math.random() * height,
-            radius: Math.random() * 2 + 0.5,
+            radius: Math.random() * 2.5 + 1.2,
             alpha: Math.random(),
-            speed: Math.random() * 0.015 + 0.005,
-            vy: -(Math.random() * 0.3 + 0.1)
+            speed: Math.random() * 0.012 + 0.004,
+            vy: -(Math.random() * 0.25 + 0.08)
         }));
 
         function animate() {
@@ -1620,13 +1636,21 @@ function mainInit() {
                     s.x = Math.random() * width;
                 }
 
-                const opacity = (Math.sin(s.alpha) + 1) / 2 * 0.7 + 0.2;
+                const opacity = (Math.sin(s.alpha) + 1) / 2 * 0.6 + 0.4;
                 ctx.fillStyle = activeParticleColor || '#b4bfe7';
-                ctx.globalAlpha = opacity * 0.7; // slightly brighter
+                ctx.globalAlpha = opacity * 0.8;
+                
+                // Add beautiful glowing shadow to particles
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = activeParticleColor || '#b4bfe7';
+
                 ctx.beginPath();
                 ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
                 ctx.fill();
             });
+
+            // Reset shadow so it doesn't leak to other canvas drawings
+            ctx.shadowBlur = 0;
 
             requestAnimationFrame(animate);
         }
