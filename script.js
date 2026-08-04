@@ -1541,7 +1541,7 @@ function mainInit() {
             // Apply Sound
             state.soundEnabled = settingSoundToggle.checked;
             localStorage.setItem('soundEnabled', state.soundEnabled);
-            updateSoundIcon();
+            updateSoundBtnUI();
 
             // Apply Wallpaper Layer
             state.hasBgImage = settingBgToggle.checked;
