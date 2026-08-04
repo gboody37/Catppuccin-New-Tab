@@ -608,7 +608,7 @@ body[data-theme="latte"] .bg-overlay {
     display: block !important;
 }
 
-body.particles-disabled #bgCanvas {
+#bgCanvas.disabled {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;

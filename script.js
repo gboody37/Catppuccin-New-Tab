@@ -251,10 +251,12 @@ function mainInit() {
     applyWallpaperState();
 
     function applyParticlesState() {
+        const canvas = document.getElementById('bgCanvas');
+        if (!canvas) return;
         if (state.hasParticles) {
-            document.body.classList.remove('particles-disabled');
+            canvas.classList.remove('disabled');
         } else {
-            document.body.classList.add('particles-disabled');
+            canvas.classList.add('disabled');
         }
     }
     applyParticlesState();
