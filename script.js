@@ -1146,6 +1146,7 @@ function mainInit() {
         addShortcutForm.reset();
         modalOverlay.classList.remove('open');
     });
+    }
 
     // ==========================================
     // SETTINGS MODAL CONTROLLER
@@ -1339,7 +1340,6 @@ function mainInit() {
     const settingClockFormat = document.getElementById('settingClockFormat');
     const settingSoundToggle = document.getElementById('settingSoundToggle');
     const settingBgToggle = document.getElementById('settingBgToggle');
-    const settingWeatherCity = document.getElementById('settingWeatherCity');
     const settingTimezoneInput = document.getElementById('settingTimezoneInput');
     const timezoneSearchResults = document.getElementById('timezoneSearchResults');
     const settingShortcutShape = document.getElementById('settingShortcutShape');
@@ -1564,15 +1564,20 @@ function mainInit() {
     const closeNotesBtn = document.getElementById('closeNotesBtn');
     const notesTextarea = document.getElementById('notesTextarea');
 
-    notesTextarea.value = state.notes;
+    if (notesTextarea) {
+        notesTextarea.value = state.notes;
+        notesTextarea.addEventListener('input', (e) => {
+            state.notes = e.target.value;
+            localStorage.setItem('catNotes', state.notes);
+        });
+    }
 
-    toggleNotesBtn.addEventListener('click', () => notesDrawer.classList.toggle('open'));
-    closeNotesBtn.addEventListener('click', () => notesDrawer.classList.remove('open'));
-
-    notesTextarea.addEventListener('input', (e) => {
-        state.notes = e.target.value;
-        localStorage.setItem('catNotes', state.notes);
-    });
+    if (toggleNotesBtn && notesDrawer) {
+        toggleNotesBtn.addEventListener('click', () => notesDrawer.classList.toggle('open'));
+    }
+    if (closeNotesBtn && notesDrawer) {
+        closeNotesBtn.addEventListener('click', () => notesDrawer.classList.remove('open'));
+    }
 
     // ==========================================
     // QUOTE OF THE DAY
@@ -1685,7 +1690,6 @@ function mainInit() {
     }
 
     initBgCanvas();
-}
 }
 
 if (document.readyState === 'loading') {
